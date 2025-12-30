@@ -1,6 +1,5 @@
 import { createApp } from 'vue';
-import App from './App.vue';
+import StarterApp from './StarterApp.vue';
 import '../../RatioKit.scss';
 
-createApp(App).mount('#app');
-
+createApp(StarterApp).mount('#app');

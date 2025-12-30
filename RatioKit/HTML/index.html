@@ -15,13 +15,14 @@
 	</script>
 	<!-- プレビュー表示用：RatioKitの全スタイルを読み込み -->
 	<link rel="stylesheet" href="css/RatioKit.css">
+    <!-- 更新確認用タイムスタンプ: 2025-12-31 19:15 -->
 </head>
 
 <body class="bg-white text-gray-900">
         <header
                 class="into fixed w-full min-h-[var(--head)] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
 		<h1 class="mr-auto mb-0 leading-none pt-1">
-			HTML Gallery
+			HTML Preview
 		</h1>
 	</header>
 
@@ -56,7 +57,7 @@
 		</section>
 
 		<!-- Accordion Preview -->
-		<section class="wrapper into bg-green-100">
+		<section class="wrapper into bg-green-100 mt-12">
 			<div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
 				<h2 class="mr-auto mb-0 leading-none pt-1">Accordion</h2>
 			</div>
@@ -95,7 +96,7 @@
 		</section>
 
 		<!-- Panel Preview -->
-		<section class="">
+		<section class="mt-12">
 			<div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
 				<h2 class="mr-auto mb-0 leading-none pt-1">Panel</h2>
 			</div>
@@ -121,7 +122,7 @@
 		</section>
 
 		<!-- ImgText Preview -->
-		<section class="wrapper into bg-purple-100">
+		<section class="wrapper into bg-purple-100 mt-12">
 			<div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
 				<h2 class="mr-auto mb-0 leading-none pt-1">ImgText</h2>
 			</div>
@@ -148,7 +149,7 @@
 		</section>
 
 		<!-- Cards Preview -->
-		<section class="">
+		<section class="mt-12">
 			<div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
 				<h2 class="mr-auto mb-0 leading-none pt-1">Cards</h2>
 			</div>
@@ -173,7 +174,7 @@
 						<figure><img src="https://picsum.photos/id/10/400/250" alt="" /></figure>
 						<div>
 							<h4>Card 3</h4>
-							<p>col? でPCカラム数指定。max-mdで全種2カラム、max-xs(479px)で1カラムに</p>
+							<p>col? でPCカラム数指定. max-mdで全種2カラム、max-xs(479px)で1カラムに</p>
 						</div>
 					</div>
 				</div>
@@ -219,21 +220,21 @@
 					<div class="item has_img">
 						<figure><img src="https://picsum.photos/id/30/600/600" alt="" /></figure>
 						<div class="bg-black/50 text-white p-5 flex flex-col justify-center items-center">
-							<h4 class="text-white">Layer 1</h4>
+							<h4 class="text-white">Layer</h4>
 							<p>画像の上に重なるレイヤー構造です</p>
 						</div>
 					</div>
 					<div class="item has_img">
 						<figure><img src="https://picsum.photos/id/30/600/600" alt="" /></figure>
 						<div class="bg-black/50 text-white p-5 flex flex-col justify-center items-center self-center">
-							<h4 class="text-white">Layer 1</h4>
+							<h4 class="text-white">Layer</h4>
 							<p>画像の上に重なるレイヤー構造です</p>
 						</div>
 					</div>
 					<div class="item has_img">
 						<figure><img src="https://picsum.photos/id/30/600/600" alt="" /></figure>
 						<div class="bg-black/50 text-white p-5 flex flex-col justify-center items-center self-end">
-							<h4 class="text-white">Layer 1</h4>
+							<h4 class="text-white">Layer</h4>
 							<p>画像の上に重なるレイヤー構造です</p>
 						</div>
 					</div>
@@ -295,6 +296,14 @@
 			</div>
 		</section>
 	</main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-10 mt-20">
+      <div class="wrapper into text-center">
+        <p class="opacity-50 text-sm">&copy; 2026 RatioKit Project. All rights reserved.</p>
+        <p class="opacity-30 text-[10px] mt-4">Build: 2025-12-31 19:15</p>
+      </div>
+    </footer>
 </body>
 
 </html>
