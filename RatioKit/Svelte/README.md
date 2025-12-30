@@ -1,90 +1,101 @@
-# RatioKit
+# RatioKit - Vite & Tailwind v4 Optimized UI Components
 
-RatioKit は、React、Vue、Svelte の各フレームワークに対応した、レスポンシブなデザインと比率（Ratio）を重視した UI コンポーネントライブラリおよび SCSS テンプレートのプロジェクトです。
+RatioKit は、React, Vue 3, Svelte 5, および Pure HTML/CSS で共通のデザインを再現できる UI コンポーネント集です。
 
+**⚠️ 重要: 本パッケージのフレームワーク版（React/Vue/Svelte）は、Vite 6+ および Tailwind CSS v4 環境での利用を前提に最適化されています。**  
+Vite 以外のビルドツール（Webpack 等）や Tailwind v3 以前の環境では、設定の調整が必要になる場合があります。
 
+## ⚙️ 推奨環境
+- **Node.js**: v18.20 または v20.0 以上
+- **Build Tool**: Vite 6+
+- **CSS Engine**: Tailwind CSS v4
 
-## 主な機能と構成
+## ディレクトリ構成
 
-- **マルチフレームワーク対応**: React, Vue, Svelte 5 のそれぞれで利用可能な共通のコンポーネントセットを提供。
-- **Ratio-based Design**: 画像やレイアウトの比率を維持したまま柔軟にレスポンシブ対応が可能。
-- **Tailwind CSS v4 対応**: 最新の Tailwind CSS v4 環境での動作を想定した SCSS 設計。
-- **プレビュー機能**: Vite を使用して、各フレームワークのコンポーネントをブラウザ上で即座に確認可能。
+パッケージを展開すると、以下の構造になっています。各フレームワークディレクトリは、そのまま `npm install` して動かせる Vite プロジェクトになっています。
 
----
-
-# RatioKit Starter Kit (配布パッケージ詳細)
-
-このスターターキットは、React、Vue、Svelte 5、および HTML/CSS の各環境で RatioKit をすぐに試せるように構成されています。
-
-## 🚀 クイックスタート
-
-各フレームワークのディレクトリ（`React/`, `Vue/`, `Svelte/`）に入り、以下のコマンドを実行してください。
-
-```bash
-# 自動セットアップスクリプトを実行
-bash setup.sh
+```text
+RatioKit/
+├── React/              # React 18+ Vite プロジェクト (Tailwind v4)
+├── Vue/                # Vue 3 Vite プロジェクト (Tailwind v4)
+├── Svelte/             # Svelte 5 Vite プロジェクト (Tailwind v4)
+├── SharedStyles/       # HTML プレビュー用や共有 CSS 本体
+│   ├── RatioKit.css          # Tailwind用 (Layer構成)
+│   └── RatioKitSimple.css    # CMS/既存サイト用 (詳細度0)
+└── README.md           # このファイル
 ```
 
-または手動で：
+## 🚀 クイックスタート (Vite 環境)
+
+各フレームワークのディレクトリに移動し、Vite 開発サーバーを起動してください。
+
 ```bash
+cd React  # または Vue, Svelte
 npm install
 npm run dev
 ```
+※ ポートが競合する場合は `npm run dev -- --port 3001` のように指定してください。
 
-## 導入時の注意点と改善点
+## 📦 既存の Vite プロジェクトへの導入
 
-### 1. Tailwind CSS v4 への対応 (Vite 設定)
-最新の Tailwind CSS v4 (Rust エンジン) を使用している場合、環境によっては Vite の事前ビルドでエラーが発生することがあります。同梱の `vite.config.ts` には、これを回避するための設定が含まれています。
+### 1. 必要なパッケージのインストール
+Tailwind CSS v4 と Sass を使用するため、以下のインストールが必要です。
+
+```bash
+npm install -D sass @tailwindcss/vite
+```
+
+### 2. Vite の設定 (`vite.config.ts`)
+Tailwind CSS v4 を動作させるためにプラグインを登録してください。
 
 ```typescript
-// vite.config.ts
+import { defineConfig } from 'vite'
+import tailwindcss from '@tailwindcss/vite'
+// framework plugin (react/vue/svelte)
+
 export default defineConfig({
-  // ...
-  optimizeDeps: {
-    // Tailwind v4 / lightningcss のエラーを回避
-    exclude: ['@tailwindcss/oxide', 'lightningcss']
-  }
+  plugins: [
+    // react(), etc.
+    tailwindcss(),
+  ],
 })
 ```
 
-### 2. コンポーネントのインポート (エイリアス設定)
-ディレクトリ構造に依存せず、どこからでも簡単にコンポーネントを呼び出せるよう、`@ratiokit` というエイリアスを設定しています。
+### 3. ファイルのコピー
+各フォルダ内の `RatioKit` コンポーネントフォルダと `RatioKit.scss` をプロジェクトの `src` 配下（Svelte の場合は `src/lib`）にコピーしてください。
 
-```typescript
-// インポート例
-import { FlexRatio } from '@ratiokit';
+### 4. スタイルのインポート
+`main.ts` 等で `RatioKit.scss` をインポートします。
+**重要**: Tailwind v4 の `@import "tailwindcss";` を含む CSS ファイルの**後**に読み込むことで、Tailwind のユーティリティクラスによる上書きを確実に有効化できます。
+
+## 🎨 スタイル・デザインの制御
+
+### デザインシステムのカスタマイズ
+RatioKit は CSS 変数でデザインを管理しています。`:root` で以下の変数を上書きすることで、プロジェクト全体の色やサイズを簡単に変更できます。
+
+```css
+:root {
+  --mc: #2db542;    /* メインカラー */
+  --sc: #3194c9;    /* サブカラー */
+  --ac: #512db5;    /* アクセントカラー */
+  --head: 80px;     /* ヘッダーの高さ */
+  --gap: 30px;      /* 要素間の余白 */
+}
 ```
 
-### 3. スタイルのカプセル化 (Scoped CSS) について
-RatioKit の基本スタイルは `RatioKit.scss` というグローバルな CSS として提供されていますが、Vue や Svelte の `scoped` 属性を組み合わせて使用することも可能です。既存プロジェクトへの導入でスタイルの干渉を防ぎたい場合は、コンポーネント内で以下のように記述することを推奨します。
+### CSS 変数の使用方法
+Tailwind クラス内で RatioKit の変数を使用する場合は、以下のように記述します。
+- `min-h-[var(--head)]`
+- `gap-[var(--gap)]`
 
-## 📂 ディレクトリ構造
-- `src/components/RatioKit/` (or `lib/`): 各フレームワークのコンポーネント本体
-- `src/RatioKit.scss`: コアスタイル
-- `vite.config.ts`: 推奨設定済みの設定ファイル
+## 🧩 各フレームワーク特有の注意点
 
----
+### Svelte 5
+- **マウント方法**: Svelte 5 では `mount` 関数を使用した初期化が推奨されます。
+- **Snippet**: `PanelItem` や `CardItem` で画像を渡す際は `{#snippet figure()}` 構文を使用してください。
 
-## 📂 プロジェクト全体のディレクトリ構造
-
-- `RatioKit/`: 各フレームワーク（React, Vue, Svelte）のソースおよび最新の SCSS。
-- `public/RatioKit.zip`: 配布用スターターキット（各環境のREADME/setup.sh同梱）。
-- `css/`: コンパイル済み CSS ファイル。
-
-## プレビューの実行方法 (プロジェクト全体)
-
-Vite を使用して開発サーバーを起動し、各プレビューページにアクセスしてください。
-
-```bash
-npm install
-npx vite
-```
-
-## 🚀 コーディングエージェントを使ってバイブコーディングを行う時のサンプル
-
-> このREADMEを読んでください。これから Web サイトを [React / Vue / Svelte のいずれかを指定] で作成したいので、まずは配布パッケージに用意されているプレビュー画面を開発サーバーを立ち上げて正常に表示されることを確認してください。確認ができたらプレビュー用のURLを教えてください。
-
+### React / Vue
+- **TypeScript**: 提供されているコンポーネントは TypeScript 前提です。JavaScript 環境で利用する場合は拡張子を読み替えてください。
 
 ---
-**RatioKit** - 比率でデザインする、次世代のUIテンプレート
+&copy; 2026 RatioKit

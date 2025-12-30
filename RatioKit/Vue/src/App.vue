@@ -18,13 +18,13 @@ import {
 
 <template>
   <div class="bg-white text-gray-900">
-    <header class="into fixed w-full min-h-[var(--head)] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
+    <header class="into fixed w-full min-h-[--head] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
       <h1 class="mr-auto mb-0 leading-none pt-1">
         Vue Gallery
       </h1>
     </header>
 
-    <main class="py-[var(--head)] PX" id="contents">
+    <main class="py-[--head] PX" id="contents">
       <!-- FlexRatio Preview -->
       <section class="mt-8">
         <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
