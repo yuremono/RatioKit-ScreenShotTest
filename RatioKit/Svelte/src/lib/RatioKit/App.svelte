@@ -182,7 +182,7 @@ mount(App, { target: document.getElementById('app')! });`
 </scr` + `ipt>
 
 <div class="p-8">
-  <FlexRatio className="flex55 gap-8">
+  <FlexRatio class="flex55 mt-8">
     {#snippet children()}
       <div class="bg-gray-100 p-4">左側のコンテンツ</div>
       <div class="bg-gray-200 p-4">右側のコンテンツ</div>
