@@ -59,6 +59,37 @@ import { FlexRatio } from '@ratiokit';
 ### 3. スタイルのカプセル化 (Scoped CSS) について
 RatioKit の基本スタイルは `RatioKit.scss` というグローバルな CSS として提供されていますが、Vue や Svelte の `scoped` 属性を組み合わせて使用することも可能です。既存プロジェクトへの導入でスタイルの干渉を防ぎたい場合は、コンポーネント内で以下のように記述することを推奨します。
 
+## ⚠️ トラブルシューティング
+
+### Tailwind CSS のスタイルが適用されない場合
+
+#### 原因
+Tailwind CSS v4 を Vite で使用する場合、CSS ファイル内で明示的にインポートする必要があります。
+
+#### 解決方法
+`src/RatioKit.scss` の**先頭**（`@charset "utf-8";` の直後）に以下を追加してください：
+
+```scss
+@import "tailwindcss";
+```
+
+#### 注意事項
+この変更により Tailwind の Preflight（CSSリセット）が有効になります。既存のスタイルと競合する場合は、プロジェクトルートに `tailwind.config.js` を作成して無効化できます：
+
+```javascript
+export default {
+  corePlugins: {
+    preflight: false
+  }
+}
+```
+
+### インポートパスのエラーが出る場合
+`main.ts` 等で `RatioKit.scss` のパスが正しいか確認してください。フレームワークによってディレクトリ構造が異なります：
+
+- **React/Vue**: `import './RatioKit.scss';`（src直下）
+- **Svelte**: `import '../RatioKit.scss';`（src/lib配下から読み込む場合）
+
 ## 📂 ディレクトリ構造
 - `src/components/RatioKit/` (or `lib/`): 各フレームワークのコンポーネント本体
 - `src/RatioKit.scss`: コアスタイル
