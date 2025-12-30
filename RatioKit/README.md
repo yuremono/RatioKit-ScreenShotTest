@@ -87,10 +87,11 @@ export default defineConfig({
 
 ### エントリーポイントでのインポート確認
 
-各環境の `main.tsx` または `main.ts` で、`RatioKit.scss` がインポートされているか確認してください：
+各環境の `main.tsx` または `main.ts` で、以下の順序でインポートされているか確認してください：
 
 ```typescript
-import './RatioKit.scss';  // RatioKit スタイルの読み込み
+import './style.css';      // 1. Tailwind の読み込み (@import "tailwindcss" を含む)
+import './RatioKit.scss';  // 2. RatioKit スタイルの読み込み
 ```
 
 ## 📂 ディレクトリ構造

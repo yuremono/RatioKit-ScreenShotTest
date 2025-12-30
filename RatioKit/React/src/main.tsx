@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import './style.css';
 import './RatioKit.scss';
 import App from './App';
 
