@@ -6,7 +6,7 @@
    */
   interface Props {
     /** クラス名 (col3, colflex 等を指定) / Class name */
-    className?: string;
+    class?: string;
     /** インラインスタイル / Inline styles */
     style?: string | Record<string, any>;
     /** カード要素群 (CardItem 等を想定) / Child card elements */
@@ -14,7 +14,7 @@
   }
 
   let { 
-    className = "mb-0", 
+    class: className = "mb-0", 
     style = "", 
     children 
   }: Props = $props();

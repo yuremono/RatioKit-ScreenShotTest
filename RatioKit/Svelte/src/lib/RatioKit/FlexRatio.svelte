@@ -6,7 +6,7 @@
    */
   interface Props {
     /** クラス名 (flex55, flex46 等を指定) / Class name */
-    className?: string;
+    class?: string;
     /** インラインスタイル / Inline styles */
     style?: string | Record<string, any>;
     /** 子要素 (2つの直系子要素を想定) / Child elements */
@@ -14,7 +14,7 @@
   }
 
   let { 
-    className = "mb-0", 
+    class: className = "mb-0", 
     style = "", 
     children 
   }: Props = $props();
