@@ -13,6 +13,8 @@ Zip ファイルの構築には、プロジェクト内の以下の最新ファ�
 | `Dist/RatioKit/Vue/src/components/RatioKit/*` | `RatioKit/Vue/*` | Vue コンポーネント本体 |
 | `Dist/RatioKit/Svelte/src/lib/RatioKit/*` | `RatioKit/Svelte/*` | Svelte コンポーネント本体 |
 | `Dist/RatioKit/*/SnippetModal.css` | `RatioKit/SnippetModal.css` | プレビュー画面のスニペット用スタイル |
+| `Dist/RatioKit/*/index.html` | `RatioKit/*/starter-index.html` | Zip内の独立したプレビュー用HTML |
+| `Dist/RatioKit/*/src/App.*` | `RatioKit/*/StarterApp.*` | Zip内の独立したデモ用メインコンポーネント |
 
 ### 除外されるファイル
 *   `_10template.scss`: ローカルバックアップ用のため、配布パッケージからは除外されます。
