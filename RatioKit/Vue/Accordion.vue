@@ -45,3 +45,7 @@ const props = withDefaults(defineProps<Props>(), {
   </details>
 </template>
 
+
+<style scoped>
+/* このコンポーネント固有のスタイルが必要な場合はここに記述してください */
+</style>

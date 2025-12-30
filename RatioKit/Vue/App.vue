@@ -525,3 +525,7 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
     </section>
   </main>
 </template>
+
+<style scoped>
+/* このコンポーネント固有のスタイルが必要な場合はここに記述してください */
+</style>
