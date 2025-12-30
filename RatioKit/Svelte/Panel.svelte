@@ -4,11 +4,11 @@
    * 画像とテキストのセット（ステップ表示など）を管理する親コンポーネントです。
    */
   let { 
-    className = "mb-0", 
+    class: className = "mb-0", 
     style = {}, 
     children 
   } = $props<{
-    className?: string;
+    class?: string;
     style?: any;
     children?: import('svelte').Snippet;
   }>();
