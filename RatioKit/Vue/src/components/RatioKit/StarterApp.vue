@@ -26,7 +26,7 @@ import '../../RatioKit.scss';
 
     <main class="py-[var(--head)] PX" id="contents">
 
-      {/* FlexRatio Preview */}
+      <!-- FlexRatio Preview -->
       <section class="mt-8">
         <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
           <h2 class="mr-auto mb-0 leading-none pt-1">FlexRatio</h2>
@@ -54,7 +54,7 @@ import '../../RatioKit.scss';
         </div>
       </section>
 
-      {/* Accordion Preview */}
+      <!-- Accordion Preview -->
       <section class="wrapper into bg-green-100 mt-12">
         <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
           <h2 class="mr-auto mb-0 leading-none pt-1">Accordion</h2>
@@ -82,7 +82,7 @@ import '../../RatioKit.scss';
         </div>
       </section>
 
-      {/* Panel Preview */}
+      <!-- Panel Preview -->
       <section class="mt-12">
         <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
           <h2 class="mr-auto mb-0 leading-none pt-1">Panel</h2>
@@ -104,7 +104,7 @@ import '../../RatioKit.scss';
         </div>
       </section>
 
-      {/* ImgText Preview */}
+      <!-- ImgText Preview -->
       <section class="wrapper into bg-purple-100 mt-12">
         <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
           <h2 class="mr-auto mb-0 leading-none pt-1">ImgText</h2>
@@ -127,7 +127,7 @@ import '../../RatioKit.scss';
         </div>
       </section>
 
-      {/* Cards Preview */}
+      <!-- Cards Preview -->
       <section class="mt-12">
         <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
           <h2 class="mr-auto mb-0 leading-none pt-1">Cards</h2>
