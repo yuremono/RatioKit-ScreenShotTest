@@ -63,8 +63,8 @@ export const Cards: React.FC<CardsProps> = ({
  */
 export const CardItem: React.FC<CardItemProps> = ({ 
   className = "", 
-  style, 
-  figure, 
+  style,
+  figure,
   children
 }) => {
   return (

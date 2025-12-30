@@ -63,14 +63,20 @@ RatioKit の基本スタイルは `RatioKit.scss` というグローバルな CS
 
 ### Tailwind CSS のスタイルが適用されない場合
 
-#### 原因
-Tailwind CSS v4 を Vite で使用する場合、CSS ファイル内で明示的にインポートする必要があります。
+#### 症状
+配布パッケージを展開して開発サーバーを起動したが、Tailwind CSS のユーティリティクラス（`bg-gray-100`, `p-4` など）が効いていない。
 
-#### 解決方法
-`src/RatioKit.scss` の**先頭**（`@charset "utf-8";` の直後）に以下を追加してください：
+#### 原因と解決方法
+
+**原因**: Tailwind CSS v4 を Vite で使用する場合、CSS ファイル内で明示的にインポートする必要があります。
+
+**解決方法**: `src/RatioKit.scss` の**先頭**（`@charset "utf-8";` の直後）に以下を追加してください：
 
 ```scss
-@import "tailwindcss";
+@charset "utf-8";
+@import "tailwindcss";  // ← この行を追加
+
+// ... 以下、既存のコード
 ```
 
 #### 注意事項
@@ -84,11 +90,19 @@ export default {
 }
 ```
 
-### インポートパスのエラーが出る場合
-`main.ts` 等で `RatioKit.scss` のパスが正しいか確認してください。フレームワークによってディレクトリ構造が異なります：
+### エントリーポイントでのインポートエラー
 
-- **React/Vue**: `import './RatioKit.scss';`（src直下）
-- **Svelte**: `import '../RatioKit.scss';`（src/lib配下から読み込む場合）
+**React 環境**: `starter-main.tsx` または `main.tsx` で `RatioKit.scss` が正しくインポートされているか確認してください：
+
+```typescript
+import './RatioKit.scss';  // この行が必要
+```
+
+**Vue/Svelte 環境**: `main.ts` で同様に確認してください：
+
+```typescript
+import '../RatioKit.scss';  // パスはディレクトリ構造により異なります
+```
 
 ## 📂 ディレクトリ構造
 - `src/components/RatioKit/` (or `lib/`): 各フレームワークのコンポーネント本体
