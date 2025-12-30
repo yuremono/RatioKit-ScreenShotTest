@@ -1,0 +1,160 @@
+import React from 'react';
+import { 
+  FlexRatio, 
+  Accordion, 
+  Panel, 
+  PanelItem,
+  ImgText, 
+  Cards, 
+  CardItem 
+} from '@ratiokit';
+
+/**
+ * RatioKit Starter Kit - React Preview
+ * このファイルは配布用Zip内のプレビュー（Starter Kit）として使用されます。
+ * ギャラリー（公開用マニュアル）とは独立したデモページです。
+ */
+function App() {
+  return (
+    <div className="bg-white text-gray-900 min-h-screen font-sans">
+      {/* Header */}
+      <header className="into fixed w-full min-h-[var(--head)] py-4 left-0 top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 flex items-center">
+        <div className="flex items-center justify-between w-full">
+          <h1 className="text-2xl font-black tracking-tighter m-0">RatioKit <span className="text-blue-600">Starter</span></h1>
+          <nav className="hidden md:flex gap-8 font-bold text-sm">
+            <a href="#features" className="hover:text-blue-600 transition-colors">Features</a>
+            <a href="#demo" className="hover:text-blue-600 transition-colors">Demo</a>
+            <a href="https://github.com/yuremono/RatioKit-ScreenShotTest" target="_blank" rel="noreferrer" className="hover:text-blue-600 transition-colors">GitHub</a>
+          </nav>
+        </div>
+      </header>
+
+      {/* Hero Section */}
+      <main className="pt-[var(--head)]">
+        <section className="wrapper into py-20 bg-slate-50">
+          <div className="max-w-3xl">
+            <h2 className="text-5xl font-black mb-6 leading-tight">
+              比率でデザインする、<br />
+              次世代のUIテンプレート。
+            </h2>
+            <p className="text-xl text-gray-600 leading-relaxed mb-10">
+              RatioKitは、レスポンシブデザインの複雑さを「比率（Ratio）」で解決します。
+              React, Vue, Svelteに対応し、Tailwind CSS v4環境で最高のパフォーマンスを発揮します。
+            </p>
+            <div className="flex gap-4">
+              <a href="#demo" className="bg-blue-600 text-white px-8 py-4 rounded-full font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
+                デモを見る
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* Features - FlexRatio */}
+        <section id="features" className="wrapper into py-20">
+          <div className="mb-12">
+            <span className="text-blue-600 font-bold tracking-widest uppercase text-sm">FlexRatio</span>
+            <h2 className="text-3xl font-bold mt-2">柔軟な比率レイアウト</h2>
+          </div>
+          
+          <FlexRatio className="flex64 gap-12 AIC">
+            <div>
+              <h3 className="text-2xl font-bold mb-4">6:4 の黄金比レイアウト</h3>
+              <p className="text-gray-600 leading-loose">
+                <code>flex64</code> クラスを指定するだけで、デスクトップでは完璧な比率で配置され、
+                モバイルでは自動的に最適化されたスタックレイアウトに切り替わります。
+              </p>
+            </div>
+            <figure className="rounded-2xl overflow-hidden shadow-2xl">
+              <img src="https://picsum.photos/id/160/800/600" alt="Demo" />
+            </figure>
+          </FlexRatio>
+        </section>
+
+        {/* Components Demo - Cards */}
+        <section id="demo" className="wrapper into py-20 bg-gray-50 rounded-[3rem] my-20">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl font-bold">主要コンポーネント</h2>
+            <p className="text-gray-500 mt-4">これらはすべて、配布パッケージに含まれる標準コンポーネントです。</p>
+          </div>
+
+          <Cards className="col3 gap-8">
+            <CardItem className="item sheet p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+              <figure className="rounded-xl overflow-hidden mb-4">
+                <img src="https://picsum.photos/id/101/400/300" alt="Card" />
+              </figure>
+              <h4 className="text-xl font-bold">Responsive Cards</h4>
+              <p className="text-gray-600 text-sm">カラム数を指定するだけで、デバイスサイズに合わせて最適化されます。</p>
+            </CardItem>
+            <CardItem className="item sheet p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+              <figure className="rounded-xl overflow-hidden mb-4">
+                <img src="https://picsum.photos/id/102/400/300" alt="Card" />
+              </figure>
+              <h4 className="text-xl font-bold">Ratio Control</h4>
+              <p className="text-gray-600 text-sm">画像の比率を保ったまま、美しくコンテンツを表示可能です。</p>
+            </CardItem>
+            <CardItem className="item sheet p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+              <figure className="rounded-xl overflow-hidden mb-4">
+                <img src="https://picsum.photos/id/103/400/300" alt="Card" />
+              </figure>
+              <h4 className="text-xl font-bold">Tailwind v4 Ready</h4>
+              <p className="text-gray-600 text-sm">最新のTailwindエンジンoxideに完全対応しています。</p>
+            </CardItem>
+          </Cards>
+        </section>
+
+        {/* Accordion & Panel */}
+        <section className="wrapper into py-20">
+          <FlexRatio className="flex55 gap-16">
+            <div>
+              <h3 className="text-2xl font-bold mb-8">よくある質問</h3>
+              <div className="space-y-4">
+                <Accordion className="accordion is_qa">
+                  <summary>商用利用は可能ですか？</summary>
+                  <div>
+                    <p>はい、RatioKitは商用プロジェクトでも自由にご利用いただけます。</p>
+                  </div>
+                </Accordion>
+                <Accordion className="accordion is_qa">
+                  <summary>対応しているフレームワークは？</summary>
+                  <div>
+                    <p>React, Vue 3, Svelte 5 に対応しています。また純粋なHTML/CSS版も提供しています。</p>
+                  </div>
+                </Accordion>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-2xl font-bold mb-8">導入の流れ</h3>
+              <Panel className="is_flow img20">
+                <PanelItem className="item">
+                  <div>
+                    <h4 className="font-bold"><span className="text-blue-600 mr-2">01</span>ダウンロード</h4>
+                    <p className="text-sm text-gray-500">Zipファイルを解凍してプロジェクトに配置します。</p>
+                  </div>
+                  <figure><img src="https://picsum.photos/id/201/200/200" alt="Step" className="rounded-lg" /></figure>
+                </PanelItem>
+                <PanelItem className="item">
+                  <div>
+                    <h4 className="font-bold"><span className="text-blue-600 mr-2">02</span>セットアップ</h4>
+                    <p className="text-sm text-gray-500">SCSSをインポートし、変数をカスタマイズします。</p>
+                  </div>
+                  <figure><img src="https://picsum.photos/id/202/200/200" alt="Step" className="rounded-lg" /></figure>
+                </PanelItem>
+              </Panel>
+            </div>
+          </FlexRatio>
+        </section>
+      </main>
+
+      {/* Footer */}
+      <footer className="bg-slate-900 text-white py-20 mt-20">
+        <div className="wrapper into text-center">
+          <h2 className="text-3xl font-bold mb-8">RatioKit Starter Kit</h2>
+          <p className="opacity-50 text-sm">&copy; 2026 RatioKit Project. All rights reserved.</p>
+        </div>
+      </footer>
+    </div>
+  );
+}
+
+export default App;
+
