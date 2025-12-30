@@ -1,17 +1,23 @@
 import React from 'react';
 
+/**
+ * FlexRatio プレフィックス (flex28, flex37, flex46, flex55, flex64, flex73, flex82)
+ */
+export type FlexRatioPattern = 'flex28' | 'flex37' | 'flex46' | 'flex55' | 'flex64' | 'flex73' | 'flex82';
+
 export interface FlexRatioProps {
   /** 
-   * モディファイアクラス（flex55, bp-sm 等）
+   * モディファイアクラス (flex55, bp-sm 等)
+   * RatioKit の比率クラスを指定します。
    * @default "mb-0"
    */
-  className?: string;
+  className?: FlexRatioPattern | string;
   /** 
    * インラインスタイル
    */
   style?: React.CSSProperties;
   /** 
-   * 子要素（原則2つ）
+   * 子要素（原則2つの直系子要素を想定）
    */
   children: React.ReactNode;
 }

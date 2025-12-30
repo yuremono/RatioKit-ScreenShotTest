@@ -17,7 +17,7 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    exclude: ['@tailwindcss/oxide', '@tailwindcss/blobs']
+    exclude: ['@tailwindcss/oxide', '@tailwindcss/blobs', 'lightningcss']
   },
   server: {
     fs: {

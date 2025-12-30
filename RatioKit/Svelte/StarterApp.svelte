@@ -1,11 +1,13 @@
 <script lang="ts">
-  import ImgText from '@ratiokit/ImgText.svelte';
-  import FlexRatio from '@ratiokit/FlexRatio.svelte';
-  import Accordion from '@ratiokit/Accordion.svelte';
-  import Cards from '@ratiokit/Cards.svelte';
-  import CardItem from '@ratiokit/CardItem.svelte';
-  import Panel from '@ratiokit/Panel.svelte';
-  import PanelItem from '@ratiokit/PanelItem.svelte';
+  import { 
+    FlexRatio, 
+    Accordion, 
+    Panel, 
+    PanelItem,
+    ImgText, 
+    Cards, 
+    CardItem 
+  } from '@ratiokit';
 
   /**
    * RatioKit Starter Kit - Svelte Preview
@@ -29,15 +31,15 @@
 
   <!-- Hero Section -->
   <main class="pt-[var(--head)]">
-    <section class="wrapper into py-20 bg-orange-50/20">
+    <section class="wrapper into py-20 bg-slate-50">
       <div class="max-w-3xl">
         <h2 class="text-5xl font-black mb-6 leading-tight">
-          Svelte 5 で体験する、<br />
-          究極の速記性と反応性。
+          比率でデザインする、<br />
+          次世代のUIテンプレート。
         </h2>
         <p class="text-xl text-gray-600 leading-relaxed mb-10">
-          RatioKit は Svelte 5 の <code>Runes</code> と <code>Snippets</code> に最適化。
-          コンパイル後のランタイムフットプリントを最小限に抑え、驚くほど高速なUIを実現します。
+          RatioKitは、レスポンシブデザインの複雑さを「比率（Ratio）」で解決します。
+          React, Vue, Svelteに対応し、Tailwind CSS v4環境で最高のパフォーマンスを発揮します。
         </p>
         <div class="flex gap-4">
           <a href="#demo" class="bg-orange-600 text-white px-8 py-4 rounded-full font-bold hover:bg-orange-700 transition-colors shadow-lg shadow-orange-200">
@@ -50,22 +52,22 @@
     <!-- Features - FlexRatio -->
     <section id="features" class="wrapper into py-20">
       <div class="mb-12">
-        <span class="text-orange-600 font-bold tracking-widest uppercase text-sm">Snippets</span>
-        <h2 class="text-3xl font-bold mt-2">パワフルな Snippet 連携</h2>
+        <span class="text-orange-600 font-bold tracking-widest uppercase text-sm">FlexRatio</span>
+        <h2 class="text-3xl font-bold mt-2">柔軟な比率レイアウト</h2>
       </div>
       
-      <FlexRatio className="flex37 gap-12 AIC">
+      <FlexRatio className="flex64 gap-12 AIC">
         {#snippet children()}
-          <figure class="rounded-2xl overflow-hidden shadow-2xl">
-            <img src="https://picsum.photos/id/190/800/600" alt="Svelte Demo" />
-          </figure>
           <div>
-            <h3 class="text-2xl font-bold mb-4">簡潔なコンポーネント構文</h3>
+            <h3 class="text-2xl font-bold mb-4">6:4 の黄金比レイアウト</h3>
             <p class="text-gray-600 leading-loose">
-              Svelte 5 の Snippet 機能を活用し、マークアップを疎結合に保ちながらも、
-              直感的で強力なコンポーネント操作が可能です。
+              <code>flex64</code> クラスを指定するだけで、デスクトップでは完璧な比率で配置され、
+              モバイルでは自動的に最適化されたスタックレイアウトに切り替わります。
             </p>
           </div>
+          <figure class="rounded-2xl overflow-hidden shadow-2xl">
+            <img src="https://picsum.photos/id/160/800/600" alt="Demo" />
+          </figure>
         {/snippet}
       </FlexRatio>
     </section>
@@ -73,20 +75,21 @@
     <!-- Components Demo - Cards -->
     <section id="demo" class="wrapper into py-20 bg-gray-50 rounded-[3rem] my-20">
       <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-gray-800">Components Demo</h2>
+        <h2 class="text-4xl font-bold text-gray-800">主要コンポーネント</h2>
+        <p class="text-gray-500 mt-4">これらはすべて、配布パッケージに含まれる標準コンポーネントです。</p>
       </div>
 
-      <Cards className="col3 gap-10">
+      <Cards className="col3 gap-8">
         {#each Array(3) as _, i}
-          <CardItem className="item sheet p-8 bg-white rounded-3xl shadow-sm border border-gray-100 hover:scale-[1.02] transition-transform">
+          <CardItem className="item sheet p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
             {#snippet figure()}
-              <figure class="rounded-2xl overflow-hidden mb-6">
-                <img src="https://picsum.photos/id/{140 + i}/400/300" alt="Svelte Item" />
+              <figure class="rounded-xl overflow-hidden mb-4">
+                <img src="https://picsum.photos/id/{101 + i}/400/300" alt="Item" />
               </figure>
             {/snippet}
-            <h4 class="text-xl font-black">Feature Item {i + 1}</h4>
-            <p class="text-gray-500 mt-2 text-sm leading-relaxed">
-              Svelteの <code>{#each}</code> ブロックとの相性も抜群です。
+            <h4 class="text-xl font-bold">Item {i + 1}</h4>
+            <p class="text-gray-600 text-sm">
+              比率を保ったまま、デバイスサイズに合わせて最適化されます。
             </p>
           </CardItem>
         {/each}
@@ -95,56 +98,55 @@
 
     <!-- Accordion & Panel -->
     <section class="wrapper into py-20">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-20">
-        <div>
-          <h3 class="text-2xl font-bold mb-8">Accordion Demo</h3>
-          <div class="space-y-4">
-            <Accordion className="accordion">
-              {#snippet summary()}Svelte 5 の Snippet で実装されていますか？{/snippet}
-              <div>
-                <p>はい、すべてのスロット部分は <code>Snippet</code> として定義されており、より現代的な Svelte 開発が可能です。</p>
-              </div>
-            </Accordion>
-            <Accordion className="accordion is_qa">
-              {#snippet summary()}TypeScript での開発は可能ですか？{/snippet}
-              <div>
-                <p>もちろんです。すべてのコンポーネントは TypeScript で記述されています。</p>
-              </div>
-            </Accordion>
+      <FlexRatio className="flex55 gap-16">
+        {#snippet children()}
+          <div>
+            <h3 class="text-2xl font-bold mb-8">よくある質問</h3>
+            <div class="space-y-4">
+              <Accordion title="商用利用は可能ですか？" className="accordion is_qa">
+                <div>
+                  <p>はい、RatioKitは商用プロジェクトでも自由にご利用いただけます。</p>
+                </div>
+              </Accordion>
+              <Accordion title="対応しているフレームワークは？" className="accordion is_qa">
+                <div>
+                  <p>React, Vue 3, Svelte 5 に対応しています。また純粋なHTML/CSS版も提供しています。</p>
+                </div>
+              </Accordion>
+            </div>
           </div>
-        </div>
-        
-        <div>
-          <h3 class="text-2xl font-bold mb-8">Panel Step Flow</h3>
-          <Panel className="is_flow img20">
-            <PanelItem className="item">
-              {#snippet figure()}
-                <figure><img src="https://picsum.photos/id/220/200/200" alt="Step" class="rounded-xl" /></figure>
-              {/snippet}
-              <div>
-                <h4 class="font-bold text-orange-600 uppercase tracking-tighter">Step 01</h4>
-                <p class="text-gray-600">スターターキットを展開。</p>
-              </div>
-            </PanelItem>
-            <PanelItem className="item">
-              {#snippet figure()}
-                <figure><img src="https://picsum.photos/id/221/200/200" alt="Step" class="rounded-xl" /></figure>
-              {/snippet}
-              <div>
-                <h4 class="font-bold text-orange-600 uppercase tracking-tighter">Step 02</h4>
-                <p class="text-gray-600">すぐに開発を開始できます。</p>
-              </div>
-            </PanelItem>
-          </Panel>
-        </div>
-      </div>
+          <div>
+            <h3 class="text-2xl font-bold mb-8">導入の流れ</h3>
+            <Panel className="is_flow img20">
+              <PanelItem className="item">
+                {#snippet figure()}
+                  <figure><img src="https://picsum.photos/id/201/200/200" alt="Step" class="rounded-lg" /></figure>
+                {/snippet}
+                <div>
+                  <h4 class="font-bold"><span class="text-orange-600 mr-2">01</span>ダウンロード</h4>
+                  <p class="text-sm text-gray-500">Zipファイルを解凍してプロジェクトに配置します。</p>
+                </div>
+              </PanelItem>
+              <PanelItem className="item">
+                {#snippet figure()}
+                  <figure><img src="https://picsum.photos/id/202/200/200" alt="Step" class="rounded-lg" /></figure>
+                {/snippet}
+                <div>
+                  <h4 class="font-bold"><span class="text-orange-600 mr-2">02</span>セットアップ</h4>
+                  <p class="text-sm text-gray-500">SCSSをインポートし、変数をカスタマイズします。</p>
+                </div>
+              </PanelItem>
+            </Panel>
+          </div>
+        {/snippet}
+      </FlexRatio>
     </section>
   </main>
 
   <!-- Footer -->
-  <footer class="bg-orange-950 text-white py-20 mt-20">
+  <footer class="bg-slate-900 text-white py-20 mt-20">
     <div class="wrapper into text-center">
-      <h2 class="text-3xl font-bold mb-8 italic">RatioKit Svelte 5 Starter</h2>
+      <h2 class="text-3xl font-bold mb-8">RatioKit Starter Kit</h2>
       <p class="opacity-50 text-sm">&copy; 2026 RatioKit Project. All rights reserved.</p>
     </div>
   </footer>
@@ -153,4 +155,3 @@
 <style>
   /* Svelte 固有のスタイル */
 </style>
-

@@ -132,12 +132,22 @@ export const FlexRatio: React.FC<FlexRatioProps> = ({
         content: `import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+import path from 'path'
 
 export default defineConfig({
   plugins: [
     react(),
     tailwindcss(),
   ],
+  resolve: {
+    alias: {
+      '@ratiokit': path.resolve(__dirname, './src/components/RatioKit'),
+    },
+  },
+  optimizeDeps: {
+    // 依存関係のエラー回避用
+    exclude: ['@tailwindcss/oxide', 'lightningcss']
+  }
 })`
       },
       {
