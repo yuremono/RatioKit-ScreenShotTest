@@ -11,147 +11,231 @@
 
   /**
    * RatioKit Starter Kit - Svelte Preview
-   * このファイルは配布用Zip内のプレビュー（Starter Kit）として使用されます。
-   * ギャラリー（公開用マニュアル）とは独立したデモページです。
+   * 配布用Zip内の独立したプレビュー（Starter Kit）
+   * HtmlPreview.htmlと同じカタログ内容を表示します
    */
 </script>
 
-<div class="bg-white text-gray-900 min-h-screen font-sans">
-  <!-- Header -->
-  <header class="into fixed w-full min-h-[var(--head)] py-4 left-0 top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 flex items-center">
-    <div class="flex items-center justify-between w-full">
-      <h1 class="text-2xl font-black tracking-tighter m-0">RatioKit <span class="text-orange-600">Starter</span></h1>
-      <nav class="hidden md:flex gap-8 font-bold text-sm">
-        <a href="#features" class="hover:text-orange-600 transition-colors">Features</a>
-        <a href="#demo" class="hover:text-orange-600 transition-colors">Demo</a>
-        <a href="https://github.com/yuremono/RatioKit-ScreenShotTest" target="_blank" rel="noreferrer" class="hover:text-orange-600 transition-colors">GitHub</a>
-      </nav>
-    </div>
+<div class="bg-white text-gray-900">
+  <header class="into fixed w-full min-h-[--head] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
+    <h1 class="mr-auto mb-0 leading-none pt-1">
+      Svelte Gallery
+    </h1>
   </header>
 
-  <!-- Hero Section -->
-  <main class="pt-[var(--head)]">
-    <section class="wrapper into py-20 bg-slate-50">
-      <div class="max-w-3xl">
-        <h2 class="text-5xl font-black mb-6 leading-tight">
-          比率でデザインする、<br />
-          次世代のUIテンプレート。
-        </h2>
-        <p class="text-xl text-gray-600 leading-relaxed mb-10">
-          RatioKitは、レスポンシブデザインの複雑さを「比率（Ratio）」で解決します。
-          React, Vue, Svelteに対応し、Tailwind CSS v4環境で最高のパフォーマンスを発揮します。
-        </p>
-        <div class="flex gap-4">
-          <a href="#demo" class="bg-orange-600 text-white px-8 py-4 rounded-full font-bold hover:bg-orange-700 transition-colors shadow-lg shadow-orange-200">
-            デモを見る
-          </a>
+  <main class="py-[--head] PX" id="contents">
+    <!-- FlexRatio Preview -->
+    <section class="mt-8">
+      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+        <h2 class="mr-auto mb-0 leading-none pt-1">FlexRatio</h2>
+      </div>
+      <div class="mt-6">
+        <h3>1. className="flex55 mt-3"</h3>
+        <div class="flex55 mt-3">
+          <div class="p-4 bg-gray-200">Left Content (50%)</div>
+          <div class="p-4 bg-gray-300">Right Content (50%)</div>
+        </div>
+      </div>
+      <div class="mt-6">
+        <h3>2. className="flex46 mt-3"</h3>
+        <div class="flex46 mt-3">
+          <div class="p-4 bg-blue-200">Left Content (40%)</div>
+          <div class="p-4 bg-blue-300">Right Content (60%)</div>
+        </div>
+      </div>
+      <div class="mt-6">
+        <h3>3. className="flex73 bp-sm mt-3"</h3>
+        <div class="flex73 bp-sm mt-3">
+          <div class="p-4 bg-green-100">Left Content(70%)</div>
+          <div class="p-4 bg-green-200">Right Content(30%)</div>
         </div>
       </div>
     </section>
 
-    <!-- Features - FlexRatio -->
-    <section id="features" class="wrapper into py-20">
-      <div class="mb-12">
-        <span class="text-orange-600 font-bold tracking-widest uppercase text-sm">FlexRatio</span>
-        <h2 class="text-3xl font-bold mt-2">柔軟な比率レイアウト</h2>
+    <!-- Accordion Preview -->
+    <section class="wrapper into bg-green-100">
+      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+        <h2 class="mr-auto mb-0 leading-none pt-1">Accordion</h2>
       </div>
-      
-      <FlexRatio className="flex64 gap-12 AIC">
-        {#snippet children()}
-          <div>
-            <h3 class="text-2xl font-bold mb-4">6:4 の黄金比レイアウト</h3>
-            <p class="text-gray-600 leading-loose">
-              <code>flex64</code> クラスを指定するだけで、デスクトップでは完璧な比率で配置され、
-              モバイルでは自動的に最適化されたスタックレイアウトに切り替わります。
-            </p>
-          </div>
-          <figure class="rounded-2xl overflow-hidden shadow-2xl">
-            <img src="https://picsum.photos/id/160/800/600" alt="Demo" />
-          </figure>
-        {/snippet}
-      </FlexRatio>
+      <div class="mt-6">
+        <h3>1. className="accordion mt-3"</h3>
+        <Accordion class="mt-3" title="クリックして詳細を表示（基本形）">
+          {#snippet children()}
+            <p>汎用的なアコーディオンですQ&A以外の用途（利用規約や補足説明など）に最適です</p>
+          {/snippet}
+        </Accordion>
+      </div>
+      <div class="mt-6">
+        <h3>2. className="accordion is_qa mt-3"</h3>
+        <Accordion class="is_qa mt-3" title="Q&Aスタイルの質問テキストです">
+          {#snippet children()}
+            <p>is_qaクラスを付与することで、Q&Aのアイコンが表示されます</p>
+          {/snippet}
+        </Accordion>
+      </div>
+      <div class="mt-6">
+        <h3>3. className="accordion is_qa mt-3"</h3>
+        <Accordion class="is_qa mt-3" title="画像付きの質問です">
+          {#snippet figure()}
+            <img src="https://picsum.photos/id/60/400/300" alt="" />
+          {/snippet}
+          {#snippet children()}
+            <p>回答部分に画像を表示する例ですPCでは横並び、スマホでは縦並びになります</p>
+          {/snippet}
+        </Accordion>
+      </div>
     </section>
 
-    <!-- Components Demo - Cards -->
-    <section id="demo" class="wrapper into py-20 bg-gray-50 rounded-[3rem] my-20">
-      <div class="text-center mb-16">
-        <h2 class="text-4xl font-bold text-gray-800">主要コンポーネント</h2>
-        <p class="text-gray-500 mt-4">これらはすべて、配布パッケージに含まれる標準コンポーネントです。</p>
+    <!-- Panel Preview -->
+    <section class="">
+      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+        <h2 class="mr-auto mb-0 leading-none pt-1">Panel</h2>
       </div>
-
-      <Cards className="col3 gap-8">
-        {#each Array(3) as _, i}
-          <CardItem className="item sheet p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+      <div class="mt-6">
+        <h3>1. className="panel is_flow img20 mt-3"</h3>
+        <Panel class="is_flow img20 mt-3">
+          <PanelItem class="has_img">
             {#snippet figure()}
-              <figure class="rounded-xl overflow-hidden mb-4">
-                <img src="https://picsum.photos/id/{101 + i}/400/300" alt="Item" />
-              </figure>
+              <img src="https://picsum.photos/id/103/400/300" alt="" />
             {/snippet}
-            <h4 class="text-xl font-bold">Item {i + 1}</h4>
-            <p class="text-gray-600 text-sm">
-              比率を保ったまま、デバイスサイズに合わせて最適化されます。
-            </p>
-          </CardItem>
-        {/each}
-      </Cards>
+            {#snippet children()}
+              <h4><span class="sub text-[--sc]">STEP 01</span>お問い合わせ</h4>
+              <p>is_flowクラスとimg20クラスを付与した例です</p>
+            {/snippet}
+          </PanelItem>
+          <PanelItem class="has_img is_rev">
+            {#snippet figure()}
+              <img src="https://picsum.photos/id/104/400/300" alt="" />
+            {/snippet}
+            {#snippet children()}
+              <h4><span class="sub text-[--sc]">STEP 02</span>ヒアリング</h4>
+              <p>お客様のご要望を詳しくお伺いし、最適なプランをご提案いたします</p>
+            {/snippet}
+          </PanelItem>
+        </Panel>
+      </div>
     </section>
 
-    <!-- Accordion & Panel -->
-    <section class="wrapper into py-20">
-      <FlexRatio className="flex55 gap-16">
-        {#snippet children()}
-          <div>
-            <h3 class="text-2xl font-bold mb-8">よくある質問</h3>
-            <div class="space-y-4">
-              <Accordion title="商用利用は可能ですか？" className="accordion is_qa">
-                <div>
-                  <p>はい、RatioKitは商用プロジェクトでも自由にご利用いただけます。</p>
+    <!-- ImgText Preview -->
+    <section class="wrapper into bg-purple-100">
+      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+        <h2 class="mr-auto mb-0 leading-none pt-1">ImgText</h2>
+      </div>
+      <div class="mt-6">
+        <ImgText class="has_img bp-sm mt-3">
+          {#snippet figure()}
+            <img src="https://picsum.photos/id/10/400/300" alt="" />
+          {/snippet}
+          {#snippet children()}
+            <h3>1. className="img_text bp-sm mt-3"</h3>
+            <p>基本ブレイクポイントはTailwindのmax-md(767px)<br />
+              bp-smクラスでmax-sm(639px)に変更できます
+            </p>
+          {/snippet}
+        </ImgText>
+      </div>
+      <div class="mt-6">
+        <ImgText class="has_img bp-sm img30 is_rev mt-3">
+          {#snippet figure()}
+            <img src="https://picsum.photos/id/20/400/300" alt="" />
+          {/snippet}
+          {#snippet children()}
+            <h3>2. className="img_text bp-sm img30 is_rev mt-3"</h3>
+            <p>画像30%指定かつ左右反転 </p>
+          {/snippet}
+        </ImgText>
+      </div>
+    </section>
+
+    <!-- Cards Preview -->
+    <section class="">
+      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+        <h2 class="mr-auto mb-0 leading-none pt-1">Cards</h2>
+      </div>
+      <div class="mt-6">
+        <h3>1. className="cards col3 justify-center mt-3"</h3>
+        <Cards class="col3 justify-center mt-3">
+          {#each Array(3) as _, i}
+            <CardItem class="has_img sheet" key={i}>
+              {#snippet figure()}
+                <img src="https://picsum.photos/id/10/400/250" alt="" />
+              {/snippet}
+              {#snippet children()}
+                <h4>Card {i + 1}</h4>
+                <p>col? でPCカラム数指定。max-mdで全種2カラム、max-xs(479px)で1カラムに</p>
+              {/snippet}
+            </CardItem>
+          {/each}
+        </Cards>
+      </div>
+
+      <div class="mt-6">
+        <h3 class="">2. className="cards col4 min2 justify-center mt-3"</h3>
+        <Cards class="col4 min2 justify-center mt-3">
+          {#each Array(4) as _, i}
+            <CardItem class="has_img board" key={i}>
+              {#snippet figure()}
+                <img src="https://picsum.photos/id/20/400/250" alt="" />
+              {/snippet}
+              {#snippet children()}
+                <h4>Card {i + 1}</h4>
+                <p>min2指定によりスマホサイズでも2列を維持します</p>
+              {/snippet}
+            </CardItem>
+          {/each}
+        </Cards>
+      </div>
+
+      <div class="mt-6">
+        <h3>3. className="cards col3 is_layer justify-center mt-3"</h3>
+        <Cards class="col3 is_layer justify-center mt-3">
+          {#each Array(3) as _, i}
+            <CardItem class="has_img" key={i}>
+              {#snippet figure()}
+                <img src="https://picsum.photos/id/30/600/600" alt="" />
+              {/snippet}
+              {#snippet children()}
+                <div class={`bg-black/50 text-white p-5 flex flex-col justify-center items-center ${i === 1 ? 'self-center' : i === 2 ? 'self-end' : ''}`}>
+                  <h4 class="text-white">Layer 1</h4>
+                  <p>画像の上に重なるレイヤー構造です</p>
                 </div>
-              </Accordion>
-              <Accordion title="対応しているフレームワークは？" className="accordion is_qa">
-                <div>
-                  <p>React, Vue 3, Svelte 5 に対応しています。また純粋なHTML/CSS版も提供しています。</p>
-                </div>
-              </Accordion>
-            </div>
-          </div>
-          <div>
-            <h3 class="text-2xl font-bold mb-8">導入の流れ</h3>
-            <Panel className="is_flow img20">
-              <PanelItem className="item">
-                {#snippet figure()}
-                  <figure><img src="https://picsum.photos/id/201/200/200" alt="Step" class="rounded-lg" /></figure>
-                {/snippet}
-                <div>
-                  <h4 class="font-bold"><span class="text-orange-600 mr-2">01</span>ダウンロード</h4>
-                  <p class="text-sm text-gray-500">Zipファイルを解凍してプロジェクトに配置します。</p>
-                </div>
-              </PanelItem>
-              <PanelItem className="item">
-                {#snippet figure()}
-                  <figure><img src="https://picsum.photos/id/202/200/200" alt="Step" class="rounded-lg" /></figure>
-                {/snippet}
-                <div>
-                  <h4 class="font-bold"><span class="text-orange-600 mr-2">02</span>セットアップ</h4>
-                  <p class="text-sm text-gray-500">SCSSをインポートし、変数をカスタマイズします。</p>
-                </div>
-              </PanelItem>
-            </Panel>
-          </div>
-        {/snippet}
-      </FlexRatio>
+              {/snippet}
+            </CardItem>
+          {/each}
+        </Cards>
+      </div>
+
+      <div class="mt-6">
+        <h3>4. className="cards colflex mt-3"</h3>
+        <Cards class="colflex mt-3">
+          {#each Array(3) as _, i}
+            <CardItem class="bg-gray-100 p-4 rounded" key={i}>
+              {#snippet children()}
+                <h4>Flexible {i + 1}</h4>
+                <p>均等に広がります</p>
+              {/snippet}
+            </CardItem>
+          {/each}
+        </Cards>
+      </div>
+
+      <div class="mt-6">
+        <h3>5. className="cards colfix" style="--itemW: 200px" </h3>
+        <Cards class="colfix mt-3 justify-center" style="--itemW: 200px">
+          {#each Array(4) as _, i}
+            <CardItem class="bg-gray-100 p-4 rounded" key={i}>
+              {#snippet children()}
+                <h4>Fixed {i + 1}</h4>
+                <p>--itemW:固定幅</p>
+              {/snippet}
+            </CardItem>
+          {/each}
+        </Cards>
+      </div>
     </section>
   </main>
-
-  <!-- Footer -->
-  <footer class="bg-slate-900 text-white py-20 mt-20">
-    <div class="wrapper into text-center">
-      <h2 class="text-3xl font-bold mb-8">RatioKit Starter Kit</h2>
-      <p class="opacity-50 text-sm">&copy; 2026 RatioKit Project. All rights reserved.</p>
-    </div>
-  </footer>
 </div>
 
 <style>
-  /* Svelte 固有のスタイル */
+/* スターターキット固有のスタイル */
 </style>

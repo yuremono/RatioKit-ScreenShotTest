@@ -46,7 +46,12 @@ find temp_zip -name "RatioKit.scss" -exec cp RatioKit/RatioKit.scss {} \;
 find temp_zip -name "RatioKitSimple.scss" -exec cp RatioKit/RatioKitSimple.scss {} \;
 cp RatioKit/SnippetModal.css temp_zip/Dist/RatioKit/SnippetModal.css
 
-# 3. 不要なバックアップファイルを削除
+# 3. HTMLスターターキットの同期
+mkdir -p temp_zip/Dist/RatioKit/HTML/css
+cp RatioKit/HTML/starter-index.html temp_zip/Dist/RatioKit/HTML/index.html
+cp css/RatioKit.css temp_zip/Dist/RatioKit/HTML/css/RatioKit.css
+
+# 4. 不要なバックアップファイルを削除
 find temp_zip -name "_10template.scss" -o -name "_mixin.scss" -exec rm {} +
 
 # 4. Zip作成

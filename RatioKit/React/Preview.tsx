@@ -445,7 +445,7 @@ function MyPage() {
 					</div>
 				</div>
 			)}
-			<header className="into fixed w-full min-h-[--head] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
+			<header className="into fixed w-full min-h-[var(--head)] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
 				<h1 className="mr-auto mb-0 leading-none pt-1">
 					React Gallery
 				</h1>
@@ -457,7 +457,7 @@ function MyPage() {
 				</button>
 			</header>
 
-			<main className="py-[--head] PX" id="contents">
+			<main className="py-[var(--head)] PX" id="contents">
 				{/* FlexRatio Preview */}
 				<section className="mt-8" ref={flexRef}>
 					<div className="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
