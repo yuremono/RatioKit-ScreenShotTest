@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
+    "build": "vite build",
     "build:lib": "tsc",
     "build:css:tailwind": "sass RatioKit/RatioKit.scss:css/RatioKit.css --load-path=RatioKit",
     "build:css:simple": "sass RatioKit/RatioKitSimple.scss:css/RatioKitSimple.css --load-path=RatioKit",

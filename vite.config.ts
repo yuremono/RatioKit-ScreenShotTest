@@ -13,4 +13,19 @@ export default defineConfig({
     port: 8080,
     open: false,
   },
+  build: {
+    rollupOptions: {
+      input: {
+        main: 'index.html',
+        react: 'ReactPreview.html',
+        vue: 'VuePreview.html',
+        svelte: 'SveltePreview.html',
+        wc: 'WCPreview.html',
+        html: 'HtmlPreview.html',
+        snipet: 'SnipetTest.html',
+        template: 'template.html',
+        katutoki: 'Katutoki.html',
+      },
+    },
+  },
 });
