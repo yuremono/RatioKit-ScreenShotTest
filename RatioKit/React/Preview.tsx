@@ -193,7 +193,7 @@ import './RatioKit.scss';`
       },
       {
         type: 'code',
-        content: `import { FlexRatio } from './components/RatioKit/index';
+        content: `import { FlexRatio } from '@ratiokit';
 
 function MyPage() {
   return (

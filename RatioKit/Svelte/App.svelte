@@ -178,7 +178,7 @@ mount(App, { target: document.getElementById('app')! });`
       {
         type: 'code',
         content: `<script>
-  import { FlexRatio } from './lib/RatioKit/index';
+  import { FlexRatio } from '@ratiokit';
 </scr` + `ipt>
 
 <div class="p-8">

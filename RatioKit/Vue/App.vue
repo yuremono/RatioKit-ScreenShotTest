@@ -165,7 +165,7 @@ import './RatioKit.scss';`
     {
       type: 'code',
       content: `<script setup>
-import { FlexRatio } from './components/RatioKit/index';
+import { FlexRatio } from '@ratiokit';
 </scr` + `ipt>
 
 <template>
