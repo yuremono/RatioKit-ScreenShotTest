@@ -16,10 +16,6 @@ h4 {
   font-size: var(--h3FZ);
 }
 
-span {
-  display: inline-block;
-}
-
 :root {
   --Higo: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo", "Noto Sans JP", sans-serif;
   --Himi: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho", "MS PMincho", "Noto Serif JP", serif;
@@ -156,6 +152,15 @@ body {
   color: var(--tc, #333);
   font-style: normal;
   background-color: unset;
+}
+
+span {
+  display: inline-block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 main {
