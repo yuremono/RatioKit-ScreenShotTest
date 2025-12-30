@@ -177,7 +177,7 @@ const StarterApp: React.FC = () => {
             </Cards>
           </div>
           <div className="mt-6">
-            <h3>5. className="cards colfix" style={{ '--itemW': '200px' } as React.CSSProperties}</h3>
+            <h3>5. className="cards colfix" style={"{{ '--itemW': '200px' }}"}</h3>
             <Cards className="colfix mt-3 justify-center" style={{ '--itemW': '200px' } as React.CSSProperties}>
               {[1, 2, 3, 4].map(i => (
                 <CardItem key={i} className="bg-gray-100 p-4 rounded">

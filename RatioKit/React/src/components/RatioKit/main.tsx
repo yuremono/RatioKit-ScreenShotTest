@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
+import '../../RatioKit.scss';
 import StarterApp from './StarterApp';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
