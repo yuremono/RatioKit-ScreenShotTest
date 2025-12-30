@@ -1,48 +1,90 @@
-# ImgText
+# RatioKit
 
-SCSSの `.img_text` クラスをラップしたReactコンポーネントです。
-1つのソースから、Tailwind上書き用と標準CSS用の両方に対応したスタイルを出力します。
-
-## CSSの設計思想
-
-このコンポーネントのスタイルは、使用環境に合わせて2つの戦略を自動的に切り替えます。
-
-### 1. Tailwind環境 (`$output: "tailwind"`)
-- `RatioKit/_mixin.scss` で `$output: "tailwind"` を設定してビルドします。
-- スタイルが `@layer components` で囲まれます。
-- **メリット**: Tailwindの `utilities` レイヤー（`p-4`, `w-full` など）が常に優先されるため、コンポーネント側の詳細度を気にせず、シングルクラスで簡単に上書きできます。
-
-### 2. 標準CSS環境 (`$output: "simple"`)
-- `RatioKit/_mixin.scss` で `$output: "simple"` を設定してビルドします。
-- スタイルが `:where()` で保護されます。
-- **メリット**: 詳細度が **0** にリセットされるため、外部のどんなCSSクラスからでも、追加のセレクタ（詳細度上げ）なしで上書きが可能です。
+RatioKit は、React、Vue、Svelte の各フレームワークに対応した、レスポンシブなデザインと比率（Ratio）を重視した UI コンポーネントライブラリおよび SCSS テンプレートのプロジェクトです。
 
 
-### 2. コンポーネントの使用
 
-```tsx
-import { ImgText } from './RatioKit';
+## 主な機能と構成
 
-const MyComponent = () => {
-  return (
-    <ImgText 
-      imgSize="30" 
-      figureContent={<img src="photo.jpg" alt="サンプル" />}
-    >
-      <h3>タイトル</h3>
-      <p>説明文が入ります。</p>
-    </ImgText>
-  );
-};
+- **マルチフレームワーク対応**: React, Vue, Svelte 5 のそれぞれで利用可能な共通のコンポーネントセットを提供。
+- **Ratio-based Design**: 画像やレイアウトの比率を維持したまま柔軟にレスポンシブ対応が可能。
+- **Tailwind CSS v4 対応**: 最新の Tailwind CSS v4 環境での動作を想定した SCSS 設計。
+- **プレビュー機能**: Vite を使用して、各フレームワークのコンポーネントをブラウザ上で即座に確認可能。
+
+---
+
+# RatioKit Starter Kit (配布パッケージ詳細)
+
+このスターターキットは、React、Vue、Svelte 5、および HTML/CSS の各環境で RatioKit をすぐに試せるように構成されています。
+
+## 🚀 クイックスタート
+
+各フレームワークのディレクトリ（`React/`, `Vue/`, `Svelte/`）に入り、以下のコマンドを実行してください。
+
+```bash
+# 自動セットアップスクリプトを実行
+bash setup.sh
 ```
 
-## プロパティ
+または手動で：
+```bash
+npm install
+npm run dev
+```
 
-| プロパティ | 型 | デフォルト | 説明 |
-| :--- | :--- | :--- | :--- |
-| `imgSize` | `ImgSize` | `"50"` | 画像の横幅比率 (10〜100) |
-| `isRev` | `boolean` | `false` | 画像とテキストを反転させるか |
-| `figureContent` | `ReactNode` | - | 画像エリアの中身 |
-| `children` | `ReactNode` | - | テキストエリアの中身 |
-| `className` | `string` | `""` | 追加のクラス名 (Tailwindでの上書き用など) |
+## 導入時の注意点と改善点
 
+### 1. Tailwind CSS v4 への対応 (Vite 設定)
+最新の Tailwind CSS v4 (Rust エンジン) を使用している場合、環境によっては Vite の事前ビルドでエラーが発生することがあります。同梱の `vite.config.ts` には、これを回避するための設定が含まれています。
+
+```typescript
+// vite.config.ts
+export default defineConfig({
+  // ...
+  optimizeDeps: {
+    // Tailwind v4 / lightningcss のエラーを回避
+    exclude: ['@tailwindcss/oxide', 'lightningcss']
+  }
+})
+```
+
+### 2. コンポーネントのインポート (エイリアス設定)
+ディレクトリ構造に依存せず、どこからでも簡単にコンポーネントを呼び出せるよう、`@ratiokit` というエイリアスを設定しています。
+
+```typescript
+// インポート例
+import { FlexRatio } from '@ratiokit';
+```
+
+### 3. スタイルのカプセル化 (Scoped CSS) について
+RatioKit の基本スタイルは `RatioKit.scss` というグローバルな CSS として提供されていますが、Vue や Svelte の `scoped` 属性を組み合わせて使用することも可能です。既存プロジェクトへの導入でスタイルの干渉を防ぎたい場合は、コンポーネント内で以下のように記述することを推奨します。
+
+## 📂 ディレクトリ構造
+- `src/components/RatioKit/` (or `lib/`): 各フレームワークのコンポーネント本体
+- `src/RatioKit.scss`: コアスタイル
+- `vite.config.ts`: 推奨設定済みの設定ファイル
+
+---
+
+## 📂 プロジェクト全体のディレクトリ構造
+
+- `RatioKit/`: 各フレームワーク（React, Vue, Svelte）のソースおよび最新の SCSS。
+- `public/RatioKit.zip`: 配布用スターターキット（各環境のREADME/setup.sh同梱）。
+- `css/`: コンパイル済み CSS ファイル。
+
+## プレビューの実行方法 (プロジェクト全体)
+
+Vite を使用して開発サーバーを起動し、各プレビューページにアクセスしてください。
+
+```bash
+npm install
+npx vite
+```
+
+## 🚀 コーディングエージェントを使ってバイブコーディングを行う時のサンプル
+
+> このREADMEを読んでください。これから Web サイトを [React / Vue / Svelte のいずれかを指定] で作成したいので、まずは配布パッケージに用意されているプレビュー画面を開発サーバーを立ち上げて正常に表示されることを確認してください。確認ができたらプレビュー用のURLを教えてください。
+
+
+---
+**RatioKit** - 比率でデザインする、次世代のUIテンプレート
