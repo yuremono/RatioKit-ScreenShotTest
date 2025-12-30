@@ -358,7 +358,7 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
 
     <!-- FlexRatio Preview -->
     <section class="mt-8">
-      <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
         <h2 class="mr-auto mb-0 leading-none pt-1">FlexRatio
         </h2>
         <button @click="openSnippetModal($event, flexCss)" class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
@@ -388,7 +388,7 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
 
     <!-- Accordion Preview -->
     <section class="wrapper into bg-green-100 mt-12">
-      <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
         <h2 class="mr-auto mb-0 leading-none pt-1">Accordion
         </h2>
         <button @click="openSnippetModal($event, accordionCss)" class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
@@ -418,7 +418,7 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
 
     <!-- Panel Preview -->
     <section class="mt-12">
-      <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
         <h2 class="mr-auto mb-0 leading-none pt-1">Panel
         </h2>
         <button @click="openSnippetModal($event, panelCss)" class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
@@ -442,7 +442,7 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
 
     <!-- ImgText Preview -->
     <section class="wrapper into bg-purple-100 mt-12">
-      <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
         <h2 class="mr-auto mb-0 leading-none pt-1">ImgText
         </h2>
         <button @click="openSnippetModal($event, imgTextCss)" class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
@@ -467,7 +467,7 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
 
     <!-- Cards Preview -->
     <section class="mt-12">
-      <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
         <h2 class="mr-auto mb-0 leading-none pt-1">Cards
         </h2>
         <button @click="openSnippetModal($event, cardsCss)" class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>

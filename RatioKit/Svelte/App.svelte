@@ -383,7 +383,7 @@ mount(App, { target: document.getElementById('app')! });`
 
   <!-- FlexRatio Preview -->
   <section class="mt-8">
-    <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+    <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
       <h2 class="mr-auto mb-0 leading-none pt-1">FlexRatio
       </h2>
       <button onclick={(e) => openSnippetModal(e, flexCss)} class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
@@ -419,7 +419,7 @@ mount(App, { target: document.getElementById('app')! });`
 
   <!-- Accordion Preview -->
   <section class="wrapper into bg-green-100 mt-12">
-    <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+    <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
       <h2 class="mr-auto mb-0 leading-none pt-1">Accordion
       </h2>
       <button onclick={(e) => openSnippetModal(e, accordionCss)} class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
@@ -455,7 +455,7 @@ mount(App, { target: document.getElementById('app')! });`
 
   <!-- Panel Preview -->
   <section class="mt-12">
-    <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+    <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
       <h2 class="mr-auto mb-0 leading-none pt-1">Panel
       </h2>
       <button onclick={(e) => openSnippetModal(e, panelCss)} class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
@@ -485,7 +485,7 @@ mount(App, { target: document.getElementById('app')! });`
 
   <!-- ImgText Preview -->
   <section class="wrapper into bg-purple-100 mt-12">
-    <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+    <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
       <h2 class="mr-auto mb-0 leading-none pt-1">ImgText
       </h2>
       <button onclick={(e) => openSnippetModal(e, imgTextCss)} class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
@@ -514,7 +514,7 @@ mount(App, { target: document.getElementById('app')! });`
 
   <!-- Cards Preview -->
   <section class="mt-12">
-    <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+    <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
       <h2 class="mr-auto mb-0 leading-none pt-1">Cards
       </h2>
       <button onclick={(e) => openSnippetModal(e, cardsCss)} class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
