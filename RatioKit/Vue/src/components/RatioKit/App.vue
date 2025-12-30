@@ -7,8 +7,8 @@ import Cards from './Cards.vue';
 import CardItem from './CardItem.vue';
 import Panel from './Panel.vue';
 import PanelItem from './PanelItem.vue';
-import '../RatioKit.scss';
-import '../SnippetModal.css';
+import '../../RatioKit.scss';
+import './SnippetModal.css';
 
 interface ContentItem {
   type: 'text' | 'code';

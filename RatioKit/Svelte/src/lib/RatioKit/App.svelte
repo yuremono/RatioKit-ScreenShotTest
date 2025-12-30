@@ -6,8 +6,8 @@
   import CardItem from './CardItem.svelte';
   import Panel from './Panel.svelte';
   import PanelItem from './PanelItem.svelte';
-  import '../RatioKit.scss';
-  import '../SnippetModal.css';
+  import '../../RatioKit.scss';
+  import './SnippetModal.css';
 
   interface ContentItem {
     type: 'text' | 'code';

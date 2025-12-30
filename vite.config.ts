@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import vue from '@vitejs/plugin-vue';
 import { svelte } from '@sveltejs/vite-plugin-svelte';
+import path from 'path';
 
 export default defineConfig({
   plugins: [
@@ -9,6 +10,11 @@ export default defineConfig({
     vue(),
     svelte(),
   ],
+  resolve: {
+    alias: {
+      '@ratiokit': path.resolve(__dirname, './RatioKit/React/src/components/RatioKit'),
+    },
+  },
   server: {
     port: 8080,
     open: false,
