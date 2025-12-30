@@ -4,11 +4,11 @@
    * 2つの要素を指定された比率 (flex55, flex46 等) で並べます。
    */
   let { 
-    class: className = "mb-0", 
+    className = "mb-0", 
     style = {}, 
     children 
   } = $props<{
-    class?: string;
+    className?: string;
     style?: any;
     children?: import('svelte').Snippet;
   }>();

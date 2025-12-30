@@ -6,7 +6,7 @@
    */
   interface Props {
     /** クラス名 (img30, is_rev 等を指定) / Class name */
-    class?: string;
+    className?: string;
     /** インラインスタイル / Inline styles */
     style?: string | Record<string, any>;
     /** 画像エリア (Snippet) / Image content */
@@ -16,7 +16,7 @@
   }
 
   let { 
-    class: className = "mb-0", 
+    className = "mb-0", 
     style = "", 
     figure, 
     children 

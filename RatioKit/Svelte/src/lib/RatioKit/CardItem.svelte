@@ -6,7 +6,7 @@
    */
   interface Props {
     /** クラス名 (sheet, board 等を指定) / Class name */
-    class?: string;
+    className?: string;
     /** インラインスタイル / Inline styles */
     style?: string | Record<string, any>;
     /** 画像エリア (Snippet) / Image content */
@@ -16,7 +16,7 @@
   }
 
   let { 
-    class: className = "", 
+    className = "", 
     style = "", 
     figure, 
     children 

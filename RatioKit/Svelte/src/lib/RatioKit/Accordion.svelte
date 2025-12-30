@@ -8,7 +8,7 @@
     /** タイトル (summary) / Accordion title */
     title: string;
     /** クラス名 (is_qa 等を指定) / Class name */
-    class?: string;
+    className?: string;
     /** インラインスタイル / Inline styles */
     style?: string | Record<string, any>;
     /** 初期状態で開くかどうか / Whether to open by default */
@@ -23,7 +23,7 @@
 
   let { 
     title, 
-    class: className = "mb-0", 
+    className = "mb-0", 
     style = "", 
     open = false,
     figureTitle,

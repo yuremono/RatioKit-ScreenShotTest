@@ -4,12 +4,12 @@
    * 画像 (figure) とテキストコンテンツを並べて表示します。
    */
   let { 
-    class: className = "mb-0", 
+    className = "mb-0", 
     style = {}, 
     figure, 
     children 
   } = $props<{
-    class?: string;
+    className?: string;
     style?: any;
     figure?: import('svelte').Snippet;
     children?: import('svelte').Snippet;

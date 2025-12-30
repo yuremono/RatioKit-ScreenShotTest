@@ -4,12 +4,12 @@
    * Panel コンポーネントの子要素です。テキストの後に画像が来る構造を持ちます。
    */
   let { 
-    class: className = "", 
+    className = "", 
     style = {}, 
     figure, 
     children 
   } = $props<{
-    class?: string;
+    className?: string;
     style?: any;
     figure?: import('svelte').Snippet;
     children?: import('svelte').Snippet;

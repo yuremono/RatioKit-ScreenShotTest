@@ -5,7 +5,7 @@
    */
   let { 
     title, 
-    class: className = "mb-0", 
+    className = "mb-0", 
     style = {}, 
     open = false,
     figureTitle,
@@ -13,7 +13,7 @@
     children 
   } = $props<{
     title: string;
-    class?: string;
+    className?: string;
     style?: any;
     open?: boolean;
     figureTitle?: import('svelte').Snippet;

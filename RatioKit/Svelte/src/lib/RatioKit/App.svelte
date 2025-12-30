@@ -92,12 +92,12 @@
       {
         type: 'text',
         content: 'まず、上の「Download Zip」ボタンからファイルをダウンロードしてください。`Svelte/` フォルダに必要なファイルがすべて含まれています。',
-        title: 'Step 1: Download'
+        title: '1 Download'
       },
     {
       type: 'text',
       content: '既存の Vite プロジェクトに導入する場合、まず Sass と Tailwind v4 プラグインをインストールします。もし `npm run dev` でエラー（Pre-transform error 等）が発生した場合は、Vite のキャッシュクリア (`npx vite --force`) を試してください。',
-      title: 'Step 2: Install Dependencies'
+      title: '2 Install Dependencies'
     },
       {
         type: 'code',
@@ -106,7 +106,7 @@
       {
         type: 'text',
         content: '`vite.config.ts` に Tailwind v4 プラグインを登録してください。',
-        title: 'Step 3: Vite Config'
+        title: '3 Vite Config'
       },
       {
         type: 'code',
@@ -134,12 +134,12 @@ export default defineConfig({
       {
         type: 'text',
         content: '`Svelte/src/lib/RatioKit` フォルダと `RatioKit.scss` を自身の `src/lib/` 配下にコピーしてください。',
-        title: 'Step 4: Copy Files'
+        title: '4 Copy Files'
       },
       {
         type: 'text',
         content: 'プロジェクトのエントリファイル（`main.ts` や `+layout.svelte`）で SCSS をインポートします。Tailwind v4 の `@import "tailwindcss";` より後に読み込むようにしてください。',
-        title: 'Step 5: Global Styles'
+        title: '5 Global Styles'
       },
       {
         type: 'code',
@@ -149,7 +149,7 @@ import './RatioKit.scss';`
       {
         type: 'text',
         content: 'Svelte 5 での初期化は `mount` 関数を使用することが推奨されます。',
-        title: 'Step 6: Svelte 5 Mount'
+        title: '6 Svelte 5 Mount'
       },
       {
         type: 'code',
@@ -161,7 +161,7 @@ mount(App, { target: document.getElementById('app')! });`
       {
         type: 'text',
         content: 'RatioKitのCSS変数を上書きすることで、デザインをカスタマイズ可能です。',
-        title: 'Step 7: Customization'
+        title: '7 Customization'
       },
       {
         type: 'code',
@@ -173,7 +173,7 @@ mount(App, { target: document.getElementById('app')! });`
       {
         type: 'text',
         content: 'あとはカタログからコードをコピーして使うだけです。`{#snippet figure()}` などを活用してください。',
-        title: 'Usage Example'
+        title: '8 Usage Example'
       },
       {
         type: 'code',

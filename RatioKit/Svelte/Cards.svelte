@@ -4,11 +4,11 @@
    * カード状の要素をグリッド配置するための親コンポーネントです。
    */
   let { 
-    class: className = "mb-0", 
+    className = "mb-0", 
     style = {}, 
     children 
   } = $props<{
-    class?: string;
+    className?: string;
     style?: any;
     children?: import('svelte').Snippet;
   }>();
