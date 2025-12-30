@@ -1,0 +1,31 @@
+{
+  "name": "ratiokit-screenshottest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "build:lib": "tsc",
+    "build:css:tailwind": "sass RatioKit/RatioKit.scss:css/RatioKit.css --load-path=RatioKit",
+    "build:css:simple": "sass RatioKit/RatioKitSimple.scss:css/RatioKitSimple.css --load-path=RatioKit",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^6.2.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.1.2",
+    "@vitejs/plugin-vue": "^6.0.3",
+    "sass": "^1.97.1",
+    "svelte": "^5.46.1",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.0",
+    "vue": "^3.5.26"
+  }
+}

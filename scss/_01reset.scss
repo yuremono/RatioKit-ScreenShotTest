@@ -1,0 +1,168 @@
+@use "mixin" as *;
+
+
+*, *::before, *::after{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 0vw;
+  border: none;
+  background-color: unset;
+}
+
+html{
+    font-size: 62.5% !important;
+    text-size-adjust: none;
+	-moz-text-size-adjust: none;
+	-webkit-text-size-adjust: none;
+}
+body {
+	counter-reset: number 0;
+	// overflow: hidden;
+    min-height: 100vh;
+    min-height: 100dvh;
+	font-style: normal;
+	margin: 0;
+	color: unset;
+	text-align: unset;
+}
+figure>img{//js $(this).wrap('<figure>');
+    height: auto!important;
+}
+#contents{
+    width: 100%;
+	&::after{display: none;}
+}
+
+// #main {//function.jsで $('#main>#col_main,#col_main>section').unwrap();→不使用
+// 	display: flex;
+// 	flex-wrap:wrap;
+// 	justify-content: space-between;
+// 	align-items: flex-start;
+// 	flex-direction: row-reverse;
+// 	width: 100%;
+// 	@include tab {
+// 		display: block;
+// 	}
+// 	// &:after{
+// 	// 	display: none;
+// 	// }
+// }
+
+blockquote{font-style: italic;}
+.imgR,.imgL{
+    @media (max-width : 834px){
+        float: none;
+    }
+}
+iframe{width: 100%;}
+span.translate{
+	font-size: inherit;font-weight: inherit;font-family: inherit;
+	color: inherit;line-height: inherit;letter-spacing: inherit;
+}
+.clearfix:after{visibility: visible;}
+span,b,u{display: inline-block;}
+img {
+	max-width: 100%;
+	object-fit: contain;
+	display: block;
+}
+figure{
+    width: 100%;
+}
+body{
+    img.imgL {
+        max-width: 100%;
+    }
+    img.imgR {
+        max-width: 100%;
+    }
+}
+li {list-style: none;outline: none;}
+small {	font-size: 66%;}
+input,button,textarea,select{font: inherit;color: inherit;}
+input[type="button"] {
+	cursor: pointer;
+	padding: 5px 10px;
+}
+a:not([class],.h a,.f a){
+	text-decoration-skip-ink: auto;
+	color: var(--linkC);
+}
+div.cardform{display: block;}
+div.blog_list{
+    border: none;
+}
+div.sns_list div.sns_text,div.blog_list div.blog_text {
+    width: 100%;
+    padding: 0px;
+    font-size: inherit;
+}
+div.sns_list ul li a,div.blog_list ul li a {
+    display: block;
+    font-size: inherit;
+    line-height: inherit;
+}
+div.detail, div.detail2 {
+    margin-top: unset;
+}
+h2.mail.title {
+	display: none !important;
+}
+.form_wrap.confirm {
+	margin-top: 40px;
+	dl:last-of-type dt ,dl:last-of-type dd{
+		border-bottom: 1px solid #ddd;
+	}
+}
+.map li {
+	border-left: 5px solid #CCCCCC;
+	list-style: none;
+	margin: 0 0 15px;
+	padding: 0 0 0 10px;
+	text-align: left;
+}
+table {
+	table-layout: auto;
+}
+@media screen and (-ms-high-contrast: active),
+screen and (-ms-high-contrast: none) {
+	table {
+		table-layout: fixed;
+	}
+}
+pre {
+	margin: 0;
+	padding: 0;
+	white-space: pre-line;
+}
+u {
+	text-decoration: line-through;
+    text-decoration-skip-ink: none;
+    text-decoration: underline;
+}
+em,span{
+    font-size: inherit;font-weight: inherit;
+    display: inline-block;
+}
+section div.form_wrap dl{
+    color: var(--tx);
+} 
+:where(.box){
+    position: relative;
+    article>h3{display: none;}
+}
+.submit:is(#contents *){
+    margin-top: var(--block5);
+}
+div.clearfix{
+    >div,>article>div{
+        &:empty:not([class],[id]){display: none!important;}
+        a:not([class],[id]){color: var(--linkC);}
+    }
+}
+// body,b,p,strong,h~除外
+html,  div, span, applet, object, iframe,  blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike,  sub, sup, tt, var,  u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+	font-weight: inherit;
+    vertical-align: unset;
+}

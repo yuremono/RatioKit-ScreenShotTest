@@ -1,0 +1,1137 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About KATUTOKI - こだわりとんかつ勝時について</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="css/common_style.css">
+    <style>
+            /* 基本設定 */
+            :root{
+                --base: 1200px;              /* 基本コンテンツ幅 */
+                --inline: 20px;              /* 最小インライン余白 */
+            
+            /* ブロック単位（縦横の余白基準） */
+                --block     :120px;
+                --block25   :calc(var(--block)/4  );
+                --block3    :calc(var(--block)/3  );
+                --block5    :calc(var(--block)/2  );
+                --block6    :calc(var(--block)/3*2);
+                --block75   :calc(var(--block)/4*3);
+                --15block   :calc(var(--block)*1.5);
+                --2block    :calc(var(--block)*2.0);
+                --25block   :calc(var(--block)*2.5);
+                --3block    :calc(var(--block)*3.0);
+                --inBase:calc(50vw - (var(--base) / 2) );
+                --inBase:calc(50vw - clamp(0px,50vw - var(--inline,20px), (var(--base) / 2) ));
+                --in1800:calc(50vw - clamp(0px,50vw - var(--inline,20px), 900px ));
+                --in1740:calc(50vw - clamp(0px,50vw - var(--inline,20px), 870px ));
+                --in1728:calc(50vw - clamp(0px,50vw - var(--inline,20px), 864px ));
+                --in1680:calc(50vw - clamp(0px,50vw - var(--inline,20px), 840px ));
+                --in1620:calc(50vw - clamp(0px,50vw - var(--inline,20px), 810px ));
+                --in1560:calc(50vw - clamp(0px,50vw - var(--inline,20px), 780px ));
+                --in1536:calc(50vw - clamp(0px,50vw - var(--inline,20px), 768px ));
+                --in1500:calc(50vw - clamp(0px,50vw - var(--inline,20px), 750px ));
+                --in1400:calc(50vw - clamp(0px,50vw - var(--inline,20px), 700px ));
+                --in1440:calc(50vw - clamp(0px,50vw - var(--inline,20px), 720px ));
+                --in1380:calc(50vw - clamp(0px,50vw - var(--inline,20px), 690px ));
+                --in1320:calc(50vw - clamp(0px,50vw - var(--inline,20px), 660px ));
+                --in1200:calc(50vw - clamp(0px,50vw - var(--inline,20px), 600px )); 
+                --in1080:calc(50vw - clamp(0px,50vw - var(--inline,20px), 540px ));
+                --in1000:calc(50vw - clamp(0px,50vw - var(--inline,20px), 500px ));
+                --in960: calc(50vw - clamp(0px,50vw - var(--inline,20px), 480px ));
+                --in800: calc(50vw - clamp(0px,50vw - var(--inline,20px), 400px ));
+                --in840: calc(50vw - clamp(0px,50vw - var(--inline,20px), 420px ));
+                --in720: calc(50vw - clamp(0px,50vw - var(--inline,20px), 360px ));
+                --in600: calc(50vw - clamp(0px,50vw - var(--inline,20px), 300px ));
+                --out:calc(50% - 50vw);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <!-- ヘッダー：画面上部に固定 -->
+    <header class="fixed top-0 left-0 w-full z-50 transition-all duration-300">
+        <div class="mx-auto flex items-center justify-between" 
+             style="max-width: var(--base); padding-inline: var(--inline); height: 100px;">
+            
+            <!-- ロゴエリア -->
+            <div class="flex flex-col text-white drop-shadow-lg">
+                <span class="text-[11px] tracking-[0.4em] font-bold mb-1">こだわりとんかつ</span>
+                <div class="flex items-end gap-2">
+                    <h1 class="text-5xl font-black tracking-tighter leading-none">勝時</h1>
+                    <span class="text-sm font-bold tracking-widest pb-1 opacity-90">かつとき</span>
+                </div>
+            </div>
+
+            <!-- ナビゲーション -->
+            <nav class="hidden xl:flex items-center gap-10 text-white font-bold text-[16px] tracking-wider drop-shadow-md">
+                <a href="#" class="hover:text-[#FF9933] transition-colors border-b-2 border-[#FF9933] pb-1">ホーム</a>
+                <a href="#" class="hover:text-[#FF9933] transition-colors pb-1">店内メニュー</a>
+                <a href="#" class="hover:text-[#FF9933] transition-colors pb-1">お持ち帰りメニュー</a>
+                <a href="#" class="hover:text-[#FF9933] transition-colors pb-1">アクセス</a>
+                <a href="#" class="hover:text-[#FF9933] transition-colors pb-1">新井宿マップ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 右端固定ソーシャルアイコン：画面中央右側に配置 -->
+    <div class="fixed right-4 top-1/2 -translate-y-1/2 z-50 flex flex-col gap-2">
+        <div class="w-12 h-12 bg-[#06C755] rounded-xl flex items-center justify-center cursor-pointer shadow-2xl hover:scale-110 transition-transform group">
+            <span class="text-white text-[10px] font-bold">LINE</span>
+            <div class="absolute right-full mr-4 px-3 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">公式LINE</div>
+        </div>
+        <div class="w-12 h-12 bg-[#1877F2] rounded-xl flex items-center justify-center cursor-pointer shadow-2xl hover:scale-110 transition-transform group text-white">
+            <svg viewBox="0 0 24 24" class="w-7 h-7 fill-current"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.325 10.974 10.125 11.886v-8.412H7.061V12.073h3.064V9.748c0-3.022 1.799-4.691 4.554-4.691 1.32 0 2.703.235 2.703.235v2.971h-1.523c-1.497 0-1.964.93-1.964 1.881v2.249h3.348l-.535 3.515h-2.813v8.412C19.675 23.047 24 18.063 24 12.073z"/></svg>
+            <div class="absolute right-full mr-4 px-3 py-1 bg-black/80 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap pointer-events-none">Facebook</div>
+        </div>
+    </div>
+
+    <main class="">
+        <!-- メインビジュアル：アスペクト比 2:1 の全幅セクション -->
+        <section class="relative w-full overflow-hidden" 
+                 style="aspect-ratio: 2 / 1; margin-inline: var(--out); margin-top: 0;">
+            <!-- 背景画像（信頼性の高いダミー画像） -->
+            <div class="absolute inset-0 z-0 bg-[#222]">
+                <img src="https://picsum.photos/id/1060/1920/960" 
+                     class="w-full h-full object-cover opacity-80" alt="Tonkatsu Platter"
+                     onerror="this.src='https://placehold.jp/1920x960.png?text=Tonkatsu+Background'">
+                <!-- 上部の視認性確保用薄いオーバーレイ -->
+                <div class="absolute inset-0 bg-black/30"></div>
+            </div>
+
+            <!-- コンテンツ：inBaseで精密に整列 -->
+            <div class="mx-auto h-full flex items-center relative " 
+                 style="max-width: var(--base); padding-inline: var(--inline);">
+                
+                <!-- AOTキャッチコピー（左側に配置） -->
+                <div class="relative inline-block mt-12">
+                    <!-- 上のリボン -->
+                    <div class="absolute -top-5 left-1/2 -translate-x-1/2 w-[105%] flex justify-center z-20">
+                        <div class="bg-[#6A8D4E] text-white text-[11px] font-bold py-1 px-8 shadow-xl relative"
+                             style="clip-path: polygon(4% 0, 96% 0, 100% 50%, 96% 100%, 4% 100%, 0 50%);">
+                            AではじまりTで終わるとんかつ屋
+                        </div>
+                    </div>
+
+                    <!-- メインオレンジボックス -->
+                    <div class="bg-[#FF9933] px-12 py-12 shadow-[0_30px_60px_rgba(0,0,0,0.4)] relative border-[6px] border-[#FFB366]/20">
+                        <div class="flex flex-col gap-6 text-white">
+                            <div class="flex items-center gap-8">
+                                <span class="text-7xl font-serif italic font-black text-[#FFEBAD] drop-shadow-lg leading-none">A</span>
+                                <span class="text-5xl lg:text-6xl font-bold tracking-[0.15em] leading-none">新井宿</span>
+                            </div>
+                            <div class="flex items-center gap-8">
+                                <span class="text-7xl font-serif italic font-black text-[#FFEBAD] drop-shadow-lg leading-none">O</span>
+                                <span class="text-5xl lg:text-6xl font-bold tracking-[0.15em] leading-none">おいしい</span>
+                            </div>
+                            <div class="flex items-center gap-8">
+                                <span class="text-7xl font-serif italic font-black text-[#FFEBAD] drop-shadow-lg leading-none">T</span>
+                                <span class="text-5xl lg:text-6xl font-bold tracking-[0.15em] leading-none">とんかつ</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 下のリボン -->
+                    <div class="absolute -bottom-5 left-1/2 -translate-x-1/2 w-[85%] flex justify-center z-20">
+                        <div class="bg-[#6A8D4E] text-white text-sm font-bold py-2 px-10 shadow-xl relative"
+                             style="clip-path: polygon(5% 0, 95% 0, 100% 50%, 95% 100%, 5% 100%, 0 50%);">
+                            いかがでしょうか？
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Aboutセクション：精密実装版 -->
+        <section class="rounded-3xl shadow-2xl overflow-hidden max-w-6xl mx-auto my-8"
+             style="background: linear-gradient(135deg, #3A2619 0%, #4D3223 50%, #3A2619 100%);
+                    background-image: 
+                        repeating-linear-gradient(90deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 1px, transparent 1px, transparent 3px),
+                        repeating-linear-gradient(0deg, rgba(139, 90, 43, 0.15) 0px, rgba(101, 67, 33, 0.15) 1px, transparent 1px, transparent 80px),
+                        linear-gradient(135deg, #3A2619 0%, #4D3223 50%, #3A2619 100%);">
+            
+            <div class="flex flex-col lg:flex-row items-stretch">
+                <!-- 左側：テキストセクション -->
+                <div class="w-full lg:w-1/2 px-8 sm:px-12 lg:px-16 py-10 lg:py-16 text-white">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-5" style="color: #D4A574; letter-spacing: 0.02em;">About KATUTOKI</h2>
+                
+                <h3 class="text-3xl lg:text-4xl font-bold mb-6 leading-tight" style="color: #FFFFFF;">
+                    こだわりとんかつ<br>
+                    勝時について
+                </h3>
+                
+                <p class="text-base lg:text-lg leading-relaxed" style="color: #E0E0E0; line-height: 1.8;">
+                    こだわりとんかつ勝時（かつとき）は、その名の通り、こだわりを持った最高のとんかつをご提供しております。大粒の生パン粉を使用した、クセのないサクサクした衣とともに、柔らかでジューシーな揚げたてトンカツをお楽しみください！
+                </p>
+                
+                <!-- イラストセクション -->
+                <div class="flex items-center justify-center gap-8 mt-12 lg:mt-16">
+                    <!-- ご飯のイラスト -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 lg:w-24 lg:h-24 bg-gradient-to-b from-white to-gray-50 rounded-full relative overflow-hidden shadow-xl flex items-center justify-center">
+                            <div class="w-16 h-14 lg:w-20 lg:h-16 bg-white rounded-t-full"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- とんかつのイラスト -->
+                    <div class="flex flex-col items-center">
+                        <div class="relative">
+                            <!-- プレート -->
+                            <div class="w-44 h-36 lg:w-52 lg:h-40 rounded-full relative shadow-2xl"
+                                 style="background: linear-gradient(135deg, #2C3E50 0%, #1A252F 100%);">
+                                <!-- キャベツ -->
+                                <div class="absolute bottom-10 left-10 w-20 h-8 rounded-lg opacity-90"
+                                     style="background: #90C695;"></div>
+                                
+                                <!-- とんかつ -->
+                                <div class="absolute bottom-12 left-14 w-28 h-20 rounded-2xl shadow-xl"
+                                     style="background: linear-gradient(135deg, #D4834F 0%, #B87333 100%);">
+                                    <!-- パン粉の質感 -->
+                                    <div class="absolute inset-1 opacity-40">
+                                        <div class="w-2 h-2 bg-yellow-200 rounded-full absolute top-2 left-4"></div>
+                                        <div class="w-2 h-2 bg-yellow-200 rounded-full absolute top-5 left-10"></div>
+                                        <div class="w-2 h-2 bg-yellow-200 rounded-full absolute top-8 left-6"></div>
+                                        <div class="w-2 h-2 bg-yellow-200 rounded-full absolute top-4 left-18"></div>
+                                        <div class="w-1.5 h-1.5 bg-yellow-100 rounded-full absolute top-10 left-14"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- トッピング（ネギなど） -->
+                                <div class="absolute top-10 right-10 flex flex-col gap-1.5">
+                                    <div class="w-14 h-1.5 rounded-full" style="background: #4CAF50;"></div>
+                                    <div class="w-12 h-1.5 rounded-full" style="background: #4CAF50;"></div>
+                                    <div class="w-10 h-1.5 rounded-full" style="background: #4CAF50;"></div>
+                                </div>
+                                
+                                <!-- トマト -->
+                                <div class="absolute bottom-6 left-6 w-5 h-5 rounded-full shadow-md"
+                                     style="background: #E74C3C;"></div>
+                                
+                                <!-- レモン -->
+                                <div class="absolute bottom-6 right-10 w-6 h-6 rounded-full shadow-md"
+                                     style="background: #F4D03F;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+                <!-- 右側：画像セクション（飛び出し効果） -->
+                <div class="w-full lg:w-1/2 flex items-center justify-center py-8 lg:py-12 px-4 lg:px-6 lg:pr-10">
+                    <div class="rounded-3xl overflow-hidden shadow-2xl w-full" style="max-width: 550px;">
+                        <div class="relative w-full" style="aspect-ratio: 4/3;">
+                            <!-- 実際の写真の代わりにプレースホルダー -->
+                            <div class="absolute inset-0 flex flex-col items-center justify-center p-8"
+                                 style="background: linear-gradient(135deg, #F5E6D3 0%, #E8D4B8 50%, #DCC8A8 100%);">
+                                <div class="text-6xl mb-4">🍚 🍖 🥗</div>
+                                <p class="text-gray-700 text-base font-medium text-center">
+                                    実際の画像は<br>
+                                    こちらに配置されます
+                                </p>
+                                <p class="text-gray-600 text-xs mt-3 text-center">
+                                    とんかつ定食の写真<br>
+                                    (ご飯、味噌汁、漬物、メインのとんかつ)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        
+        <section class="rounded-3xl shadow-2xl mx-auto my-8"
+             style="max-width: var(--base);
+                    background: linear-gradient(135deg, #3A2619 0%, #4D3223 50%, #3A2619 100%);
+                    background-image: 
+                        repeating-linear-gradient(90deg, rgba(0,0,0,0.2) 0px, rgba(0,0,0,0.2) 1px, transparent 1px, transparent 3px),
+                        repeating-linear-gradient(0deg, rgba(139, 90, 43, 0.15) 0px, rgba(101, 67, 33, 0.15) 1px, transparent 1px, transparent 80px),
+                        linear-gradient(135deg, #3A2619 0%, #4D3223 50%, #3A2619 100%);">
+            
+            <div class="lg:flex pb-16 overflow-visible">
+                <!-- 左側：テキストセクション -->
+                <div class="w-full lg:w-1/2 text-white px-16 pt-16">
+                <h2 class="text-4xl lg:text-5xl font-bold mb-5" style="color: #D4A574; letter-spacing: 0.02em;">About KATUTOKI</h2>
+                
+                <h3 class="text-3xl lg:text-4xl font-bold mb-6 leading-tight" style="color: #FFFFFF;">
+                    こだわりとんかつ<br>
+                    勝時について
+                </h3>
+                
+                <p class="text-base lg:text-lg leading-relaxed" style="color: #E0E0E0; line-height: 1.8;">
+                    こだわりとんかつ勝時（かつとき）は、その名の通り、こだわりを持った最高のとんかつをご提供しております。大粒の生パン粉を使用した、クセのないサクサクした衣とともに、柔らかでジューシーな揚げたてトンカツをお楽しみください！
+                </p>
+                
+                <!-- イラストセクション -->
+                <div class="flex items-center justify-center mt-16"
+                     style="gap: var(--block5);">
+                    <!-- ご飯のイラスト -->
+                    <div class="flex flex-col items-center">
+                        <div class="w-20 h-20 lg:w-24 lg:h-24 bg-gradient-to-b from-white to-gray-50 rounded-full relative overflow-hidden shadow-xl flex items-center justify-center">
+                            <div class="w-16 h-14 lg:w-20 lg:h-16 bg-white rounded-t-full"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- とんかつのイラスト -->
+                    <div class="flex flex-col items-center">
+                        <div class="relative">
+                            <!-- プレート -->
+                            <div class="w-44 h-36 lg:w-52 lg:h-40 rounded-full relative shadow-2xl"
+                                 style="background: linear-gradient(135deg, #2C3E50 0%, #1A252F 100%);">
+                                <!-- キャベツ -->
+                                <div class="absolute bottom-10 left-10 w-20 h-8 rounded-lg opacity-90"
+                                     style="background: #90C695;"></div>
+                                
+                                <!-- とんかつ -->
+                                <div class="absolute bottom-12 left-14 w-28 h-20 rounded-2xl shadow-xl"
+                                     style="background: linear-gradient(135deg, #D4834F 0%, #B87333 100%);">
+                                    <!-- パン粉の質感 -->
+                                    <div class="absolute inset-1 opacity-40">
+                                        <div class="w-2 h-2 bg-yellow-200 rounded-full absolute top-2 left-4"></div>
+                                        <div class="w-2 h-2 bg-yellow-200 rounded-full absolute top-5 left-10"></div>
+                                        <div class="w-2 h-2 bg-yellow-200 rounded-full absolute top-8 left-6"></div>
+                                        <div class="w-2 h-2 bg-yellow-200 rounded-full absolute top-4 left-18"></div>
+                                        <div class="w-1.5 h-1.5 bg-yellow-100 rounded-full absolute top-10 left-14"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- トッピング（ネギなど） -->
+                                <div class="absolute top-10 right-10 flex flex-col gap-1.5">
+                                    <div class="w-14 h-1.5 rounded-full" style="background: #4CAF50;"></div>
+                                    <div class="w-12 h-1.5 rounded-full" style="background: #4CAF50;"></div>
+                                    <div class="w-10 h-1.5 rounded-full" style="background: #4CAF50;"></div>
+                                </div>
+                                
+                                <!-- トマト -->
+                                <div class="absolute bottom-6 left-6 w-5 h-5 rounded-full shadow-md"
+                                     style="background: #E74C3C;"></div>
+                                
+                                <!-- レモン -->
+                                <div class="absolute bottom-6 right-10 w-6 h-6 rounded-full shadow-md"
+                                     style="background: #F4D03F;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                
+                <!-- 右側：画像セクション（飛び出し効果） -->
+                <div class="lg:w-1/2 flex items-center " 
+                     style="margin-top: calc(var(--block) * -0.5);">
+                    <div class="rounded-3xl overflow-hidden shadow-2xl" 
+                         style="margin-right: calc(var(--out)/2); width: calc(100% + var(--inBase));">
+                        <div class="relative w-full h-full" style="aspect-ratio: 4/3;">
+                            <!-- 実際の写真の代わりにプレースホルダー -->
+                            <div class="absolute inset-0 flex flex-col items-center justify-center p-8"
+                                 style="background: linear-gradient(135deg, #F5E6D3 0%, #E8D4B8 50%, #DCC8A8 100%);">
+                                <div class="text-6xl mb-4">🍚 🍖 🥗</div>
+                                <p class="text-gray-700 text-base font-medium text-center">
+                                    実際の画像は<br>
+                                    こちらに配置されます
+                                </p>
+                                <p class="text-gray-600 text-xs mt-3 text-center">
+                                    とんかつ定食の写真<br>
+                                    (ご飯、味噌汁、漬物、メインのとんかつ)
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- メニューセクション：精密実装版v2 -->
+        <section class=" shadow-2xl mx-auto my-8"
+             style="margin-inline: var(--out);
+                    background: linear-gradient(135deg, #D4B896 0%, #C9A87C 50%, #BFA570 100%);
+                    background-image: 
+                        linear-gradient(135deg, rgba(212, 184, 150, 0.95) 0%, rgba(201, 168, 124, 0.95) 50%, rgba(191, 165, 112, 0.95) 100%),
+                        repeating-linear-gradient(90deg, rgba(0,0,0,0.02) 0px, rgba(0,0,0,0.02) 1px, transparent 1px, transparent 3px),
+                        repeating-linear-gradient(0deg, rgba(139, 90, 43, 0.08) 0px, rgba(101, 67, 33, 0.08) 1px, transparent 1px, transparent 40px);">
+            
+            <div class="lg:flex py-16">
+                <!-- 左側：メニューコンテンツ（コンテナ相当のパディング） -->
+                <div class="w-full lg:w-1/2 pt-16"
+                     style="padding-left: var(--inBase);">
+                    <!-- ロゴ -->
+                    <div class="mb-8">
+                        <div class="w-24 h-16 bg-gradient-to-br from-gray-900 to-black flex items-center justify-center shadow-lg relative overflow-hidden"
+                             style="border-radius: 50%; transform: scaleX(1.3);">
+                            <!-- 白い扇形の背景 -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="relative w-14 h-14 bg-white rounded-full overflow-hidden"
+                                     style="clip-path: polygon(30% 40%, 50% 20%, 70% 40%, 70% 70%, 30% 70%);">
+                                </div>
+                            </div>
+                            <!-- とんかつ3つ -->
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="flex gap-0.5 mt-1">
+                                    <div class="w-3 h-5 rounded-full" style="background: #C87533;"></div>
+                                    <div class="w-3 h-5 rounded-full" style="background: #C87533;"></div>
+                                    <div class="w-3 h-5 rounded-full" style="background: #C87533;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- タイトル -->
+                    <h2 class="text-5xl font-bold mb-4" style="color: #FF9933; letter-spacing: 0.05em;">Menu</h2>
+                    
+                    <h3 class="text-4xl font-bold mb-6 leading-tight" style="color: #3D2817;">
+                        メニュー
+                    </h3>
+                    
+                    <p class="text-base leading-relaxed mb-8" style="color: #3D2817;">
+                        ランチからお持ち帰り、イベントでのお弁当販売など<br>
+                        新井宿で"すっかり名物"になった勝時のとんかつをお楽しみください。
+                    </p>
+                    
+                    <!-- タブボタン -->
+                    <div class="flex gap-0 mb-8 max-w-xl">
+                        <button class="flex-1 py-4 px-6 font-bold text-white rounded-l-full relative overflow-hidden shadow-lg"
+                                style="background: linear-gradient(135deg, #FF9933 0%, #FF7722 100%);
+                                       border: 3px dotted rgba(255, 255, 255, 0.6);">
+                            店内メニュー
+                        </button>
+                        <button class="flex-1 py-4 px-6 font-bold text-white rounded-r-full relative overflow-hidden shadow-lg"
+                                style="background: linear-gradient(135deg, #5C3D2E 0%, #3D2817 100%);
+                                       border: 3px dotted rgba(255, 255, 255, 0.6);">
+                            お持ち帰りメニュー
+                        </button>
+                    </div>
+
+                    <!-- 弁当イラスト -->
+                    <div class="flex justify-end pr-4 mt-auto">
+                        <div class="relative w-40 h-32">
+                            <!-- 弁当箱本体 -->
+                            <div class="absolute inset-0 rounded-2xl shadow-2xl"
+                                 style="background: linear-gradient(135deg, #2C2C2C 0%, #1A1A1A 100%);
+                                        border: 3px solid #1F1F1F;
+                                        transform: perspective(400px) rotateY(-5deg);">
+                                <!-- ご飯 -->
+                                <div class="absolute top-6 left-7 w-12 h-9 bg-white rounded-md shadow-md"></div>
+                                <!-- とんかつ -->
+                                <div class="absolute top-5 right-6 w-14 h-11 rounded-lg shadow-lg"
+                                     style="background: linear-gradient(135deg, #D4834F 0%, #B8722F 100%);">
+                                    <!-- パン粉の質感 -->
+                                    <div class="absolute inset-1 opacity-50">
+                                        <div class="w-1 h-1 bg-yellow-200 rounded-full absolute top-1 left-2"></div>
+                                        <div class="w-1 h-1 bg-yellow-200 rounded-full absolute top-3 left-5"></div>
+                                        <div class="w-1 h-1 bg-yellow-200 rounded-full absolute top-5 left-3"></div>
+                                        <div class="w-1 h-1 bg-yellow-200 rounded-full absolute top-2 left-9"></div>
+                                    </div>
+                                </div>
+                                <!-- おかず -->
+                                <div class="absolute bottom-5 left-7 flex gap-1.5">
+                                    <div class="w-4 h-4 rounded-full shadow-md" style="background: #E74C3C;"></div>
+                                    <div class="w-4 h-4 rounded-full shadow-md" style="background: #F39C12;"></div>
+                                    <div class="w-4 h-4 rounded-full shadow-md" style="background: #27AE60;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 右側：料理写真3枚 -->
+                <div class="lg:w-1/2 flex items-center justify-center" 
+                     >
+                    <div class="flex flex-wrap justify-center w-full" style="gap: 2rem;">
+                        <!-- 写真1：スコッチエッグ -->
+                        <div class="rounded-3xl overflow-hidden shadow-2xl" style="width: calc((100% - 2rem) / 2); min-width: 250px; aspect-ratio: 5/4;">
+                            <div class="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900">
+                                <div class="absolute inset-0 flex items-center justify-center p-6">
+                                    <div class="text-center">
+                                        <div class="text-6xl mb-2">🥚</div>
+                                        <p class="text-white text-sm font-medium">スコッチエッグ</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 写真2：とんかつ弁当 -->
+                        <div class="rounded-3xl overflow-hidden shadow-2xl" style="width: calc((100% - 2rem) / 2); min-width: 250px; aspect-ratio: 5/4;">
+                            <div class="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900">
+                                <div class="absolute inset-0 flex items-center justify-center p-6">
+                                    <div class="text-center">
+                                        <div class="text-6xl mb-2">🍱</div>
+                                        <p class="text-white text-sm font-medium">とんかつ弁当</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 写真3：メンチカツ -->
+                        <div class="rounded-3xl overflow-hidden shadow-2xl" style="width: calc((100% - 2rem) / 2); min-width: 250px; aspect-ratio: 5/4;">
+                            <div class="relative w-full h-full bg-gradient-to-br from-gray-800 to-gray-900">
+                                <div class="absolute inset-0 flex items-center justify-center p-6">
+                                    <div class="text-center">
+                                        <div class="text-6xl mb-2">🍖</div>
+                                        <p class="text-white text-sm font-medium">メンチカツ</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pointセクション：精密実装版 -->
+        <section class="py-24" 
+                 style="margin-inline: var(--out); 
+                        background-color: #FDFBF7;
+                        background-image: 
+                            repeating-linear-gradient(90deg, rgba(232, 226, 217, 0.4) 0px, rgba(232, 226, 217, 0.4) 1px, transparent 1px, transparent 32px);">
+            
+            <div class="mx-auto" style="max-width: var(--base); padding-inline: var(--inline);">
+                <!-- セクションタイトル -->
+                <div class="text-center mb-20">
+                    <span class="block text-xl font-bold uppercase tracking-[0.3em] mb-4" style="color: #D4A574;">Point</span>
+                    <h2 class="text-4xl lg:text-5xl font-bold" style="color: #3A2619; letter-spacing: 0.1em;">勝時のこだわり</h2>
+                </div>
+
+                <!-- 3カラム・こだわりカード -->
+                <div class="flex flex-wrap justify-center" style="gap: var(--block5);">
+                    <!-- 01 豚肉へのこだわり -->
+                    <div class="flex flex-col" style="width: calc((100% - var(--block5) * 2) / 3); min-width: 320px;">
+                        <!-- 番号とタイトル（重なり） -->
+                        <div class="flex items-end gap-3 mb-6 pl-2">
+                            <span class="text-7xl font-bold leading-[0.8]" style="color: #D4A574; opacity: 0.9; font-family: 'Times New Roman', serif;">01</span>
+                            <h3 class="text-xl font-bold mb-1" style="color: #3A2619;">豚肉へのこだわり</h3>
+                        </div>
+                        
+                        <!-- カード本体 -->
+                        <div class="relative bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] p-6 mb-10 rounded-sm">
+                            <div class="aspect-[4/3] w-full overflow-hidden bg-[#F9F9F9]">
+                                <div class="w-full h-full flex flex-col items-center justify-center p-4">
+                                    <span class="text-7xl mb-4">🥩</span>
+                                    <p class="text-gray-400 text-sm font-medium">厳選された国産豚肉の写真</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 豚のイラスト（右下重なり） -->
+                            <div class="absolute -bottom-8 -right-6 w-32 h-32 pointer-events-none drop-shadow-xl">
+                                <svg viewBox="0 0 100 100" class="w-full h-full">
+                                    <!-- シンプルな豚のベクター風イラスト -->
+                                    <circle cx="45" cy="60" r="32" fill="#FFC9C9" />
+                                    <ellipse cx="82" cy="65" rx="15" ry="12" fill="#FFB2B2" />
+                                    <circle cx="78" cy="65" r="2.5" fill="#4A2A2A" />
+                                    <circle cx="86" cy="65" r="2.5" fill="#4A2A2A" />
+                                    <circle cx="35" cy="50" r="3.5" fill="#4A2A2A" />
+                                    <path d="M 25 35 Q 15 15 35 25" fill="#FFC9C9" stroke="#FFB2B2" stroke-width="2" />
+                                    <path d="M 55 35 Q 65 15 45 25" fill="#FFC9C9" stroke="#FFB2B2" stroke-width="2" />
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <!-- 説明テキスト -->
+                        <p class="text-[15px] leading-[2.1] text-gray-700 px-2" style="font-family: 'Hiragino Sans', 'Meiryo', sans-serif;">
+                            店主自ら厳選した 国産の美味しい豚肉を、絶妙な揚げ加減でご提供しております。とんかつ・メンチかつとも、最初はソースを付けずに、お肉の味わいだけをお楽しみいただくのもオススメですよ！
+                        </p>
+                    </div>
+
+                    <!-- 02 パン粉へのこだわり -->
+                    <div class="flex flex-col" style="width: calc((100% - var(--block5) * 2) / 3); min-width: 320px;">
+                        <div class="flex items-end gap-3 mb-6 pl-2">
+                            <span class="text-7xl font-bold leading-[0.8]" style="color: #D4A574; opacity: 0.9; font-family: 'Times New Roman', serif;">02</span>
+                            <h3 class="text-xl font-bold mb-1" style="color: #3A2619;">パン粉へのこだわり</h3>
+                        </div>
+                        
+                        <div class="relative bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] p-6 mb-10 rounded-sm">
+                            <div class="aspect-[4/3] w-full overflow-hidden bg-[#F9F9F9]">
+                                <div class="w-full h-full flex flex-col items-center justify-center p-4">
+                                    <span class="text-7xl mb-4">🍞</span>
+                                    <p class="text-gray-400 text-sm font-medium">大粒の生パン粉の写真</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 稲のイラスト（右下重なり） -->
+                            <div class="absolute -bottom-8 -right-6 w-28 h-40 pointer-events-none drop-shadow-lg">
+                                <svg viewBox="0 0 80 120" class="w-full h-full">
+                                    <path d="M 40 110 Q 45 60 35 10" fill="none" stroke="#A7C957" stroke-width="3" stroke-linecap="round" />
+                                    <g fill="#F2E085">
+                                        <ellipse cx="32" cy="20" rx="6" ry="10" transform="rotate(-30 32 20)" />
+                                        <ellipse cx="45" cy="35" rx="6" ry="10" transform="rotate(20 45 35)" />
+                                        <ellipse cx="30" cy="50" rx="6" ry="10" transform="rotate(-20 30 50)" />
+                                        <ellipse cx="48" cy="65" rx="6" ry="10" transform="rotate(30 48 65)" />
+                                    </g>
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <p class="text-[15px] leading-[2.1] text-gray-700 px-2" style="font-family: 'Hiragino Sans', 'Meiryo', sans-serif;">
+                            店主自らが選んだ、とんかつに最適な大粒の生パン粉を使用しております。上品な甘味、そして、揚げたてならではの、衣が立ったサクサクとした食感をお楽しみいただけます。
+                        </p>
+                    </div>
+
+                    <!-- 03 油へのこだわり -->
+                    <div class="flex flex-col" style="width: calc((100% - var(--block5) * 2) / 3); min-width: 320px;">
+                        <div class="flex items-end gap-3 mb-6 pl-2">
+                            <span class="text-7xl font-bold leading-[0.8]" style="color: #D4A574; opacity: 0.9; font-family: 'Times New Roman', serif;">03</span>
+                            <h3 class="text-xl font-bold mb-1" style="color: #3A2619;">油へのこだわり</h3>
+                        </div>
+                        
+                        <div class="relative bg-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] p-6 mb-10 rounded-sm">
+                            <div class="aspect-[4/3] w-full overflow-hidden bg-[#F9F9F9]">
+                                <div class="w-full h-full flex flex-col items-center justify-center p-4">
+                                    <span class="text-7xl mb-4">🥣</span>
+                                    <p class="text-gray-400 text-sm font-medium">植物性油の写真</p>
+                                </div>
+                            </div>
+                            
+                            <!-- 菜の花のイラスト（右下重なり） -->
+                            <div class="absolute -bottom-8 -right-6 w-28 h-40 pointer-events-none drop-shadow-lg">
+                                <svg viewBox="0 0 80 120" class="w-full h-full">
+                                    <path d="M 40 110 L 40 30" fill="none" stroke="#8FB339" stroke-width="3" stroke-linecap="round" />
+                                    <g fill="#F9DC5C">
+                                        <circle cx="40" cy="25" r="6" />
+                                        <circle cx="52" cy="35" r="5" />
+                                        <circle cx="30" cy="40" r="5" />
+                                        <circle cx="45" cy="45" r="4" />
+                                        <circle cx="35" cy="55" r="4" />
+                                    </g>
+                                    <path d="M 40 80 Q 20 70 25 50" fill="#8FB339" />
+                                    <path d="M 40 95 Q 60 85 55 65" fill="#8FB339" />
+                                </svg>
+                            </div>
+                        </div>
+                        
+                        <p class="text-[15px] leading-[2.1] text-gray-700 px-2" style="font-family: 'Hiragino Sans', 'Meiryo', sans-serif;">
+                            当店では、食べやすく胃もたれのしない、植物性油を使用しております。胃が重くなるからという理由で、揚げ物が苦手な方にもご好評をいただいております。ぜひ一度、ご賞味下さい。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mapセクション：精密実装版 -->
+        <section class="py-24 bg-white overflow-hidden" 
+                 style="margin-inline: var(--out);">
+            <div class="mx-auto" style="max-width: var(--base); padding-inline: var(--inline);">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-12 lg:gap-8">
+                    
+                    <!-- 左側：新井宿マップ画像 -->
+                    <div class="w-full lg:w-[38%]">
+                        <div class="rounded-3xl border-[6px] border-[#3D2817] overflow-hidden shadow-2xl bg-[#FDFBF7]">
+                            <div class="relative w-full" style="aspect-ratio: 1.1 / 1;">
+                                <!-- プレースホルダー（実際のマップ画像の代わり） -->
+                                <div class="absolute inset-0 flex flex-col items-center justify-center p-8 text-center bg-[#FDFBF7]">
+                                    <div class="text-6xl mb-4">🗺️</div>
+                                    <p class="text-[#3D2817] font-bold text-lg mb-2">新井宿マップ</p>
+                                    <p class="text-gray-500 text-xs">
+                                        手書きイラスト風の<br>
+                                        詳細な周辺案内マップ
+                                    </p>
+                                    <!-- 装飾的な小さな要素を配置してマップ感を出す -->
+                                    <div class="absolute top-10 left-10 w-4 h-4 rounded-full bg-green-500/20"></div>
+                                    <div class="absolute bottom-20 right-10 w-8 h-8 rounded-lg bg-orange-500/10"></div>
+                                    <div class="absolute top-1/2 left-1/4 w-12 h-1 rounded-full bg-blue-300/30 rotate-45"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 中央：テキスト＆ボタン -->
+                    <div class="w-full lg:w-[24%] flex flex-col items-center text-center">
+                        <!-- 盆栽イラスト -->
+                        <div class="mb-6 w-28 h-28">
+                            <svg viewBox="0 0 100 100" class="w-full h-full">
+                                <!-- 鉢 -->
+                                <path d="M25 70 L75 70 L70 85 L30 85 Z" fill="#4D3223" />
+                                <rect x="25" y="68" width="50" height="4" rx="1" fill="#3D2817" />
+                                <!-- 幹 -->
+                                <path d="M45 70 Q48 50 40 40 Q35 30 50 20" fill="none" stroke="#5C3D2E" stroke-width="6" stroke-linecap="round" />
+                                <!-- 葉 -->
+                                <circle cx="40" cy="35" r="12" fill="#6A8D4E" />
+                                <circle cx="55" cy="22" r="10" fill="#6A8D4E" />
+                                <circle cx="48" cy="45" r="8" fill="#55753C" />
+                            </svg>
+                        </div>
+
+                        <!-- タイトル -->
+                        <div class="mb-10">
+                            <span class="block text-xl font-bold tracking-wider mb-2" style="color: #FF9933; font-family: serif;">Araiyado Map</span>
+                            <h2 class="text-4xl font-bold text-[#3D2817]" style="letter-spacing: 0.1em;">新井宿マップ</h2>
+                        </div>
+
+                        <!-- ボタン -->
+                        <a href="#" class="inline-block px-12 py-5 rounded-full text-white font-bold text-xl shadow-xl transition-transform hover:scale-105"
+                           style="background: linear-gradient(135deg, #FF9933 0%, #FF7722 100%);
+                                  border: 3px dotted rgba(255,255,255,0.7);">
+                            もっとみる
+                        </a>
+
+                        <!-- 桜の枝イラスト -->
+                        <div class="mt-12 w-32 h-32 transform rotate-12">
+                            <svg viewBox="0 0 100 100" class="w-full h-full">
+                                <!-- 枝 -->
+                                <path d="M30 90 Q40 60 70 30" fill="none" stroke="#5C3D2E" stroke-width="3" stroke-linecap="round" />
+                                <path d="M45 70 Q55 75 75 70" fill="none" stroke="#5C3D2E" stroke-width="2" stroke-linecap="round" />
+                                <!-- 花 -->
+                                <g fill="#FFC9C9">
+                                    <circle cx="70" cy="30" r="5" />
+                                    <circle cx="78" cy="25" r="4" />
+                                    <circle cx="65" cy="22" r="4" />
+                                    <circle cx="75" cy="70" r="4" />
+                                    <circle cx="60" cy="75" r="3" />
+                                    <circle cx="85" cy="65" r="3" />
+                                </g>
+                                <!-- 花芯 -->
+                                <g fill="#FF8E8E">
+                                    <circle cx="70" cy="30" r="1.5" />
+                                    <circle cx="78" cy="25" r="1" />
+                                    <circle cx="65" cy="22" r="1" />
+                                    <circle cx="75" cy="70" r="1" />
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+
+                    <!-- 右側：公園写真画像 -->
+                    <div class="w-full lg:w-[38%]">
+                        <div class="rounded-3xl border-[6px] border-[#3D2817] overflow-hidden shadow-2xl">
+                            <div class="relative w-full" style="aspect-ratio: 1.1 / 1;">
+                                <!-- プレースホルダー（実際の公園写真の代わり） -->
+                                <div class="absolute inset-0 bg-gradient-to-br from-[#E8D4B8] to-[#DCC8A8] flex flex-col items-center justify-center p-8">
+                                    <div class="text-6xl mb-4">🌳</div>
+                                    <p class="text-[#3D2817] font-bold text-lg mb-2">周辺公園の写真</p>
+                                    <p class="text-gray-600 text-xs text-center">
+                                        青空、芝生、樹木が広がる<br>
+                                        開放感のある公園の風景
+                                    </p>
+                                    <!-- 日差しのようなグラデーション -->
+                                    <div class="absolute top-0 right-0 w-32 h-32 bg-yellow-200/20 rounded-full blur-3xl"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Royal Sangen Porkセクション：精密実装版 -->
+        <section class="py-24 relative overflow-hidden" 
+                 style="margin-inline: var(--out);
+                        background: #150A06;
+                        background-image: 
+                            linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                            repeating-linear-gradient(0deg, rgba(40, 25, 20, 0.2) 0px, rgba(40, 25, 20, 0.2) 1px, transparent 1px, transparent 80px),
+                            url('https://www.transparenttextures.com/patterns/dark-wood.png');">
+            
+            <div class="lg:flex items-center">
+                <!-- 左側：テキストコンテンツ -->
+                <div class="w-full lg:w-1/2 text-white" 
+                     style="padding-left: var(--inBase); padding-right: var(--block5); position: relative; z-index: 20;">
+                    <p class="text-[13px] mb-5 tracking-[0.3em] font-medium opacity-90">とんかつ屋さんのイチオシ！ギフト</p>
+                    
+                    <!-- 黄金のバナー -->
+                    <div class="relative inline-block mb-10">
+                        <div class="bg-gradient-to-b from-[#F3D060] via-[#E6B830] to-[#B38B2D] px-12 py-2.5 shadow-[0_5px_15px_rgba(0,0,0,0.3)] relative z-10 border-y border-[#FFEBAD]/30">
+                            <span class="text-[#3D2817] font-bold text-xl tracking-[0.1em]" style="text-shadow: 0 1px 0 rgba(255,255,255,0.3);">美味しいお肉のお取り寄せ</span>
+                        </div>
+                        <div class="absolute top-1/2 -left-2.5 -translate-y-1/2 w-5 h-10 bg-[#B38B2D] rounded-l-full z-0"></div>
+                        <div class="absolute top-1/2 -right-2.5 -translate-y-1/2 w-5 h-10 bg-[#B38B2D] rounded-r-full z-0"></div>
+                    </div>
+                    
+                    <div class="mb-12">
+                        <p class="text-xl mb-3 tracking-[0.2em] font-serif" style="color: #D4A574;">ロイヤルという名がふさわしい豚肉</p>
+                        <h2 class="text-7xl font-bold mb-3 tracking-tight leading-tight">ロイヤル三元豚</h2>
+                        <p class="text-[11px] tracking-[0.6em] opacity-70 uppercase">Royal Sangen Pork</p>
+                    </div>
+                    
+                    <div class="space-y-5 mb-12 text-base leading-[2.2] opacity-90 font-light">
+                        <p>とんかつに合うよう、三種の豚を掛け合わせた国産の豚肉です。<br>
+                        豊かな旨味と上質で特別な甘み、ジューシーで柔らかな肉質が楽しめる極上の逸品です。</p>
+                        <p class="text-2xl font-bold tracking-wider mt-8">贈答品に最適。とっておきの自分用にも！</p>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <p class="text-sm tracking-widest opacity-80">ご予約は店頭またはお電話にて！</p>
+                        <div class="inline-flex items-center gap-4 px-10 py-4 rounded-full bg-[#2A140C] border-2 border-dashed border-[#D4A574]/40">
+                            <span class="text-xl opacity-80">☎</span>
+                            <span class="text-3xl font-bold tracking-[0.15em] font-mono">048-280-5980</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側：画像セクション（はみ出し効果） -->
+                <div class="w-full lg:w-1/2 relative z-10" 
+                     style="margin-left: -10%; width: 60%;">
+                    <div class="rounded-l-[100px] overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.8)] border-l border-white/10">
+                        <div class="aspect-[16/10] relative">
+                            <!-- プレースホルダー（実際の豚肉写真の代わり） -->
+                            <div class="absolute inset-0 bg-[#0A0503] flex items-center justify-center overflow-hidden">
+                                <!-- 背後のグロー効果 -->
+                                <div class="absolute w-[80%] h-[80%] bg-yellow-400/10 rounded-full blur-[100px]"></div>
+                                <div class="relative z-10 text-center">
+                                    <div class="text-[12rem] mb-4 drop-shadow-[0_20px_40px_rgba(0,0,0,0.6)]">🥩</div>
+                                    <p class="text-[#D4A574] text-xs font-bold tracking-[0.5em] uppercase opacity-80">Royal Sangen Pork</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        
+
+        <!-- Aboutセクション：精密再現版（飛び出し写真スタイル） -->
+        <section class="mx-auto my-24 overflow-visible" style="max-width: var(--base); padding-inline: var(--inline);">
+            <div class="rounded-[2rem] shadow-2xl overflow-visible relative"
+                 style="background: #1A0D08;
+                        background-image: 
+                            repeating-linear-gradient(0deg, rgba(0,0,0,0.15) 0px, rgba(0,0,0,0.15) 1px, transparent 1px, transparent 3px),
+                            linear-gradient(rgba(26, 13, 8, 0.94), rgba(26, 13, 8, 0.94)),
+                            url('https://www.transparenttextures.com/patterns/dark-wood.png');">
+                
+                <div class="lg:flex items-stretch overflow-visible">
+                    <!-- 左側：テキストコンテンツ -->
+                    <div class="w-full lg:w-[55%] text-white py-16 lg:py-20 pl-12 lg:pl-16 pr-8">
+                        <h2 class="text-lg font-bold mb-5 tracking-[0.2em]" style="color: #D4A574; font-family: serif;">About KATUTOKI</h2>
+                        
+                        <h3 class="text-4xl lg:text-5xl font-bold mb-10 leading-tight" style="letter-spacing: 0.05em;">
+                            こだわりとんかつ<br>
+                            勝時について
+                        </h3>
+                        
+                        <p class="text-[15px] lg:text-[17px] leading-[2.1] mb-16 opacity-90 max-w-lg" style="font-family: 'Hiragino Sans', sans-serif;">
+                            こだわりとんかつ勝時（かつとき）は、その名の通り、こだわりを持った最高のとんかつをご提供しております。大粒の生パン粉を使用した、クセのないサクサクした衣とともに、柔らかでジューシーな揚げたてトンカツをお楽しみください！
+                        </p>
+                        
+                        <!-- イラスト（左下配置） -->
+                        <div class="flex items-end gap-6 pt-4">
+                            <!-- ご飯 -->
+                            <div class="relative w-24 h-18">
+                                <div class="absolute bottom-0 w-full h-10 bg-gray-100 rounded-b-full shadow-inner border-t border-gray-200"></div>
+                                <div class="absolute bottom-5 left-1 w-22 h-12 bg-white rounded-t-full shadow-lg"></div>
+                                <!-- 湯気のような装飾 -->
+                                <div class="absolute -top-2 left-1/2 -translate-x-1/2 flex gap-1 opacity-20">
+                                    <div class="w-1 h-3 bg-white rounded-full blur-[1px]"></div>
+                                    <div class="w-1 h-4 bg-white rounded-full blur-[1px]"></div>
+                                    <div class="w-1 h-3 bg-white rounded-full blur-[1px]"></div>
+                                </div>
+                            </div>
+                            <!-- とんかつプレート -->
+                            <div class="relative w-48 h-32">
+                                <div class="absolute bottom-0 w-full h-28 bg-[#1A1A1A] rounded-full shadow-2xl border-[5px] border-[#2C2C2C] flex items-center justify-center overflow-hidden">
+                                    <!-- とんかつ -->
+                                    <div class="w-32 h-20 bg-gradient-to-br from-[#D4834F] to-[#B87333] rounded-2xl shadow-lg relative">
+                                        <!-- 衣のテクスチャ -->
+                                        <div class="absolute inset-0 opacity-30 bg-[radial-gradient(circle,#fff_1px,transparent_1px)] bg-[size:6px_6px]"></div>
+                                        <!-- キャベツ -->
+                                        <div class="absolute top-0 left-0 w-14 h-10 bg-[#4CAF50] rounded-full blur-sm opacity-50"></div>
+                                        <!-- トマト -->
+                                        <div class="absolute bottom-2 right-6 w-5 h-5 bg-[#E74C3C] rounded-full shadow-md"></div>
+                                        <!-- レモン -->
+                                        <div class="absolute bottom-1 right-14 w-6 h-6 bg-[#F4D03F] rounded-full shadow-md"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 右側：画像セクション（飛び出し効果） -->
+                    <div class="w-full lg:w-[45%] relative flex items-center" style="margin-top: -3rem; margin-bottom: -3rem;">
+                        <div class="rounded-3xl overflow-hidden shadow-[0_30px_80px_rgba(0,0,0,0.6)] border-[10px] border-white/5" 
+                             style="margin-right: var(--out); width: calc(100% + var(--inBase)); height: 120%;">
+                            <div class="w-full h-full relative">
+                                <!-- 写真のプレースホルダー -->
+                                <div class="absolute inset-0 bg-cover bg-center"
+                                     style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1200&q=80');">
+                                    <div class="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-transparent"></div>
+                                    <div class="absolute inset-0 flex items-center justify-center p-8">
+                                        <div class="text-center">
+                                            <p class="text-white text-lg font-bold tracking-widest drop-shadow-lg uppercase mb-2">Premium Tonkatsu</p>
+                                            <div class="w-16 h-1 bg-[#D4A574] mx-auto rounded-full"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+
+        <!-- Menuセクション：真・究極再現版（253行目の構造を継承） -->
+        <section class="py-24 relative overflow-hidden" 
+                 style="margin-inline: var(--out);
+                        background-color: #F5E6D3;
+                        background-image: 
+                            repeating-linear-gradient(0deg, rgba(160, 120, 80, 0.08) 0px, rgba(160, 120, 80, 0.08) 1px, transparent 1px, transparent 45px),
+                            repeating-linear-gradient(0deg, rgba(160, 120, 80, 0.04) 0px, rgba(160, 120, 80, 0.04) 2px, transparent 2px, transparent 90px),
+                            linear-gradient(to right, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.03));">
+            
+            <div class="lg:flex items-start">
+                <!-- 左側：メニューコンテンツ（253行目の正解レイアウト） -->
+                <div class="w-full lg:w-1/2 flex flex-col items-center text-center relative" 
+                     style="padding-left: var(--inBase); padding-right: var(--block5);">
+                    
+                    <!-- 小皿アイコン -->
+                    <div class="mb-10">
+                        <div class="w-40 h-20 bg-[#1A1A1A] rounded-full shadow-2xl flex items-center justify-center relative border-b-[6px] border-black/60">
+                            <div class="absolute inset-x-6 inset-y-4 bg-white/10 rounded-lg transform rotate-2"></div>
+                            <div class="flex gap-2 z-10">
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#D4834F] to-[#B87333] shadow-lg"></div>
+                                <div class="w-9 h-9 rounded-full bg-gradient-to-br from-[#D4834F] to-[#B87333] shadow-lg -mt-2"></div>
+                                <div class="w-8 h-8 rounded-full bg-gradient-to-br from-[#D4834F] to-[#B87333] shadow-lg"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- タイトル -->
+                    <div class="mb-10">
+                        <span class="block text-2xl font-bold tracking-[0.3em] mb-4" style="color: #FF9933; font-family: serif;">Menu</span>
+                        <h2 class="text-5xl lg:text-6xl font-bold text-[#3D2817]" style="letter-spacing: 0.15em;">メニュー</h2>
+                    </div>
+
+                    <!-- 説明文 -->
+                    <p class="text-[17px] lg:text-[19px] leading-[2.4] text-[#3D2817] mb-16 max-w-lg font-bold opacity-90">
+                        ランチからお持ち帰り、イベントでのお弁当販売など<br>
+                        新井宿で"すっかり名物"になった勝時のとんかつをお楽しみください。
+                    </p>
+
+                    <!-- タブボタン -->
+                    <div class="flex w-full max-w-lg rounded-full overflow-hidden shadow-[0_25px_50px_rgba(0,0,0,0.2)] mb-20 border-[6px] border-white/40">
+                        <button class="flex-1 py-6 px-4 font-bold text-2xl text-white tracking-widest"
+                                style="background: #FF9933; border-right: 4px dotted rgba(255,255,255,0.5);">
+                            店内メニュー
+                        </button>
+                        <button class="flex-1 py-6 px-4 font-bold text-2xl text-white tracking-widest"
+                                style="background: #3D2817;">
+                            お持ち帰りメニュー
+                        </button>
+                    </div>
+
+                    <!-- お弁当イラスト（右寄せ配置） -->
+                    <div class="mt-auto ml-auto pr-8 pb-4">
+                        <div class="w-56 h-40 relative transform rotate-[-2deg]">
+                            <div class="absolute inset-0 bg-[#2A140C] rounded-2xl shadow-[0_20px_40px_rgba(0,0,0,0.5)] border-[4px] border-[#3D2817] overflow-hidden">
+                                <div class="absolute top-4 left-4 w-22 h-18 bg-white rounded-xl shadow-inner flex items-center justify-center">
+                                    <div class="w-4 h-4 rounded-full bg-[#E74C3C]"></div>
+                                </div>
+                                <div class="absolute top-4 right-4 w-24 h-20 bg-gradient-to-br from-[#D4834F] to-[#B87333] rounded-xl shadow-md"></div>
+                                <div class="absolute bottom-4 left-4 flex gap-3">
+                                    <div class="w-8 h-8 rounded-full bg-[#FFD700] shadow-sm"></div>
+                                    <div class="w-8 h-8 rounded-full bg-[#4CAF50] shadow-sm"></div>
+                                </div>
+                                <div class="absolute bottom-8 right-4 w-24 h-5 bg-[#FF7F50] rounded-full rotate-[-12deg] shadow-lg border-b-2 border-black/10"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 右側：画像ギャラリー（画面幅を活用した正しい配置） -->
+                <div class="w-full lg:w-1/2 flex flex-wrap justify-center gap-12 py-12">
+                    <div class="rounded-[3rem] border-[10px] border-[#3D2817] overflow-hidden shadow-2xl bg-white" 
+                         style="width: calc((100% - 3rem) / 2); min-width: 280px; aspect-ratio: 1.25/1;">
+                        <div class="w-full h-full relative">
+                            <img src="https://images.unsplash.com/photo-1541529086526-db283c563270?auto=format&fit=crop&w=800&q=80" 
+                                 class="w-full h-full object-cover" alt="Menu Image 1">
+                            <div class="absolute inset-0 bg-black/5"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 画像2 -->
+                    <div class="rounded-[3rem] border-[10px] border-[#3D2817] overflow-hidden shadow-2xl bg-white" 
+                         style="width: calc((100% - 3rem) / 2); min-width: 280px; aspect-ratio: 1.25/1;">
+                        <div class="w-full h-full relative">
+                            <img src="https://images.unsplash.com/photo-1512132411229-c30391241dd8?auto=format&fit=crop&w=800&q=80" 
+                                 class="w-full h-full object-cover" alt="Menu Image 2">
+                            <div class="absolute inset-0 bg-black/5"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- 画像3（中央配置） -->
+                    <div class="rounded-[3rem] border-[10px] border-[#3D2817] overflow-hidden shadow-2xl bg-white" 
+                         style="width: calc((100% - 3rem) / 2); min-width: 280px; aspect-ratio: 1.25/1;">
+                        <div class="w-full h-full relative">
+                            <img src="https://images.unsplash.com/photo-1598511726623-d306560942c7?auto=format&fit=crop&w=800&q=80" 
+                                 class="w-full h-full object-cover" alt="Menu Image 3">
+                            <div class="absolute inset-0 bg-black/5"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 安心セクション -->
+        <section class="bg100  py-24 px-8 bg-green-500 inBase" style="max-width: var(--base);">
+                <div class="bg-orange-500   py-16 px-16  ">
+
+                        <!-- タイトル -->
+                        <div class="text-center mb-16">
+                            <h2 class="text-2xl lg:text-3xl font-serif mb-6 tracking-widest text-[#250e02]">安心してご来院頂けます</h2>
+                            <div class="border-b border-dotted border-gray-400 w-48 mx-auto"></div>
+                        </div>
+            
+                        <!-- 3列カード (CMS_COMPONENTS.md: .card3) -->
+                        <div class="card3 text-center mb-20 bg-gray-100">
+                            <div class="box">
+                                <div class="mb-2 text-xl font-serif text-[#250e02]">01</div>
+                                <div class="bg-[#f2f2f2] rounded-full py-5 px-4 text-sm lg:text-base text-[#250e02] tracking-tighter">
+                                    15年の施術実績を持つ治療師
+                                </div>
+                            </div>
+                            <div class="box">
+                                <div class="mb-2 text-xl font-serif text-[#250e02]">02</div>
+                                <div class="bg-[#f2f2f2] rounded-full py-5 px-4 text-sm lg:text-base text-[#250e02]">
+                                    お子様連れOK
+                                </div>
+                            </div>
+                            <div class="box">
+                                <div class="mb-2 text-xl font-serif text-[#250e02]">03</div>
+                                <div class="bg-[#f2f2f2] rounded-full py-5 px-4 text-sm lg:text-base text-[#250e02]">
+                                    駐車場あり
+                                </div>
+                            </div>
+                        </div>
+            
+                        <hr class="border-t border-gray-300 mb-20">
+            
+                        <!-- 案内テキスト -->
+                        <div class="text-center space-y-4 mb-16 text-[#250e02]">
+                            <p class="text-sm lg:text-base opacity-80">当店は予約優先制となっております。</p>
+                            <p class="text-sm lg:text-base opacity-80">予約なしでも受付可能ですが、ご来院の方は事前のご予約がおすすめです。</p>
+                        </div>
+            
+                        <!-- 電話番号 -->
+                        <div class="flex justify-center items-center gap-6 text-4xl lg:text-7xl font-serif text-[#250e02] mb-20">
+                            <i class="fa-solid fa-phone-volume text-3xl lg:text-5xl"></i>
+                            <a href="tel:0774-63-6301" class="hover:opacity-70 transition-opacity tracking-tight">0774-63-6301</a>
+                        </div>
+            
+                        <!-- ボタン (CMS_COMPONENTS.md: .btn) -->
+                        <div class="flex flex-col lg:flex-row justify-center items-center gap-10">
+                            <a href="#" class="btn border border-[#250e02] text-[#250e02] w-full lg:w-[340px] h-20 flex items-center justify-center gap-3 hover:bg-gray-50 transition-all font-bold tracking-widest text-xl">
+                                <i class="fa-solid fa-envelope text-2xl"></i>
+                                <span>お問い合わせ</span>
+                            </a>
+                            <a href="#" class="btn bg-[#250e02] text-white w-full lg:w-[340px] h-20 flex items-center justify-center gap-3 hover:opacity-90 transition-all font-bold tracking-widest text-xl">
+                                <i class="fa-solid fa-calendar-days text-2xl"></i>
+                                <span>Web予約</span>
+                            </a>
+                        </div>
+                </div>
+        </section>
+
+        <!-- コラムセクション -->
+        <section class="wrapper100in bg-black py-32 mt-16">
+            <div class="fl37 items-start">
+                <!-- 左側：タイトルエリア -->
+                <div class="flex flex-col pt-4">
+                    <span class="text-[#9a9a9a] font-serif text-sm tracking-[0.2em] mb-2 uppercase">column</span>
+                    <h2 class="text-4xl font-serif text-[#250e02] tracking-widest leading-none">コラム</h2>
+                </div>
+
+                <!-- 右側：記事リストエリア -->
+                <div class="relative">
+                    <div class="form_wrap form_01 flex flex-col gap-6">
+                        <!-- 記事1 -->
+                        <dl class="bg-white p-10 lg:p-12 flex flex-col border-none m-0 shadow-sm relative overflow-hidden">
+                            <dt class="text-[#9a9a9a] text-sm font-sans mb-2 p-0 w-full font-normal">2025.00.00</dt>
+                            <dd class="text-[#250e02] text-lg lg:text-xl font-serif p-0 w-full leading-relaxed">
+                                タイトルが入ります。タイトルが入ります。
+                            </dd>
+                        </dl>
+                        <!-- 記事2 -->
+                        <dl class="bg-white p-10 lg:p-12 flex flex-col border-none m-0 shadow-sm">
+                            <dt class="text-[#9a9a9a] text-sm font-sans mb-2 p-0 w-full font-normal">2025.00.00</dt>
+                            <dd class="text-[#250e02] text-lg lg:text-xl font-serif p-0 w-full leading-relaxed">
+                                タイトルが入ります。タイトルが入ります。
+                            </dd>
+                        </dl>
+                        <!-- 記事3 -->
+                        <dl class="bg-white p-10 lg:p-12 flex flex-col border-none m-0 shadow-sm">
+                            <dt class="text-[#9a9a9a] text-sm font-sans mb-2 p-0 w-full font-normal">2025.00.00</dt>
+                            <dd class="text-[#250e02] text-lg lg:text-xl font-serif p-0 w-full leading-relaxed">
+                                タイトルが入ります。タイトルが入ります。
+                            </dd>
+                        </dl>
+                    </div>
+                    
+                    <!-- 右側の装飾的な縦線（1つ目と2つ目の記事にまたがる位置） -->
+                    <div class="absolute -right-[2px] top-24 w-[3px] h-56 bg-[#250e02] hidden lg:block"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 施術紹介セクション (ti01) -->
+        <section class="mx-auto py-24 px-8" style="max-width: var(--base);">
+            <div class="ti01 img50 AIC">
+                <!-- 左側：テキストエリア -->
+                <div class="lg:pr-16">
+                    <div class="H-bdl mb-8 border-l-2 border-[#250e02] pl-6">
+                        <h2 class="text-2xl lg:text-3xl font-serif italic tracking-widest text-[#250e02]">磁気マニュアルテクニック</h2>
+                    </div>
+                    <div class="space-y-6 text-[#250e02] leading-loose mb-12 text-sm lg:text-base">
+                        <p>全国でも約20院のみが導入している検査・施術法です。</p>
+                        <p>磁気を使って神経や筋肉の動きを確認し、痛みの原因を見極めます。</p>
+                        <p>施術後に再検査を行い、その場で改善の変化を確認できます。</p>
+                    </div>
+                    <a href="#" class="btn bg-[#250e02] text-white w-full lg:w-80 h-16 flex items-center justify-between px-10 hover:opacity-80 transition-opacity font-serif">
+                        <span class="tracking-[0.2em] text-lg">More</span>
+                        <i class="fa-solid fa-chevron-right text-sm"></i>
+                    </a>
+                </div>
+                <!-- 右側：画像エリア -->
+                <figure class="rounded-xl overflow-hidden shadow-xl">
+                    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80" 
+                         alt="施術風景" class="w-full h-full object-cover">
+                </figure>
+            </div>
+        </section>
+
+        <!-- カードレイアウトセクション (card2) -->
+        <section class="mx-auto py-24 px-8 bg-[#f8f8f8]" style="max-width: var(--base);">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-serif text-[#250e02]">こだわりの技術</h2>
+            </div>
+            <div class="card2">
+                <div class="box bg-white p-8 rounded-2xl shadow-sm">
+                    <article>
+                        <img src="https://images.unsplash.com/photo-1519823551278-64ac92734fb1?auto=format&fit=crop&w=800&q=80" 
+                             alt="技術1" class="rounded-xl mb-6 aspect-[16/9] object-cover">
+                        <h3 class="text-xl font-bold mb-4 text-[#250e02]">深層筋アプローチ</h3>
+                        <p class="text-gray-600 leading-relaxed text-sm">表面的なマッサージではなく、痛みの根本原因となっている深い筋肉のコリに的確にアプローチします。</p>
+                    </article>
+                </div>
+                <div class="box bg-white p-8 rounded-2xl shadow-sm">
+                    <article>
+                        <img src="https://images.unsplash.com/photo-1512290923902-8a9f81dc2069?auto=format&fit=crop&w=800&q=80" 
+                             alt="技術2" class="rounded-xl mb-6 aspect-[16/9] object-cover">
+                        <h3 class="text-xl font-bold mb-4 text-[#250e02]">骨盤・骨格矯正</h3>
+                        <p class="text-gray-600 leading-relaxed text-sm">バキバキしないソフトな矯正で、身体の歪みを整え、本来の自然治癒力を引き出します。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+
+            
+        <!-- 比率指定レイアウトセクション (fl50) -->
+        <section class="mx-auto py-24 px-8" style="max-width: var(--base);">
+            <div class="fl50 AIC ">
+                <div class="rounded-3xl overflow-hidden shadow-2xl order-2 lg:order-1">
+                    <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=1200&q=80" 
+                         alt="院内風景">
+                </div>
+                <div class="order-1 lg:order-2">
+                    <span class="text-[#9a9a9a] uppercase tracking-widest text-sm block mb-4 font-serif">interior</span>
+                    <h2 class="text-3xl lg:text-4xl font-serif text-[#250e02] mb-8 leading-tight">清潔でリラックスできる<br>完全個室の空間</h2>
+                    <p class="text-[#250e02] leading-loose opacity-80 text-sm lg:text-base">
+                        患者様に心からリラックスして施術を受けていただけるよう、清潔感のある落ち着いた空間づくりを徹底しています。完全個室ですので、周りの目を気にせずお悩みをご相談いただけます。
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+</html>

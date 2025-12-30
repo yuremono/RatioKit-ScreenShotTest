@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+        <head>
+                <meta charset="UTF-8">
+                <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                <title>HTML/CSS Preview</title>
+                <script src="https://cdn.tailwindcss.com"></script>
+                <script>
+                        tailwind.config = {
+                                corePlugins: {
+                                        preflight: false,
+                                }
+                        }
+                </script>
+                <!-- プレビュー表示用：RatioKitの全スタイルを読み込み -->
+                <link rel="stylesheet" href="css/RatioKitSimple.css">
+                <style>
+                        *,
+                        ::before,
+                        ::after {
+                                border-width: 0;
+                                border-style: solid;
+                                border-color: theme('colors.gray.200', currentColor);
+                        }
+
+                        html,
+                        body {
+                                background-color: white !important;
+                                color: #333;
+                        }
+
+                        #snippetModal {
+                                display: none;
+                                position: fixed;
+                                inset: 0;
+                                z-index: 1000;
+                                background: rgba(0, 0, 0, 0.7);
+                                backdrop-filter: blur(4px);
+                                align-items: center;
+                                justify-content: center;
+                                padding: 2rem;
+                        }
+
+                        #snippetModal.active {
+                                display: flex;
+                        }
+
+                        .code-editor {
+                                background: #1e1e1e;
+                                color: #d4d4d4;
+                                border-radius: 8px;
+                                width: 100%;
+                                max-width: 900px;
+                                max-height: 80vh;
+                                display: flex;
+                                flex-direction: column;
+                                box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.5);
+                                border: 1px solid #333;
+                        }
+
+                        .code-header {
+                                display: flex;
+                                items-center: center;
+                                gap: 8px;
+                                padding: 0.75rem 1.25rem;
+                                background: #2d2d2d;
+                                border-bottom: 1px solid #3c3c3c;
+                                border-top-left-radius: 8px;
+                                border-top-right-radius: 8px;
+                        }
+
+                        .code-header .notice-text {
+                                color: #999;
+                                font-size: 0.875rem;
+                                margin-right: auto;
+                        }
+
+                        .code-header button {
+                                padding: 4px 12px;
+                                border-radius: 4px;
+                                font-size: 0.875rem;
+                                transition: all 0.2s;
+                                cursor: pointer;
+                        }
+
+                        .copy-btn {
+                                background: #007acc;
+                                color: white;
+                                border: none;
+                        }
+
+                        .copy-btn:hover {
+                                background: #0062a3;
+                        }
+
+                        .close-btn {
+                                background: #444;
+                                color: #ccc;
+                                border: none;
+                        }
+
+                        .close-btn:hover {
+                                background: #555;
+                                color: white;
+                        }
+
+                        .code-content {
+                                padding: 1.5rem;
+                                overflow: auto;
+                                font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+                                font-size: 0.9rem;
+                                line-height: 1.5;
+                                white-space: pre;
+                                text-align: left;
+                        }
+                </style>
+        </head>
+
+        <body class="bg-white text-gray-900">
+                <!-- スニペットモーダル -->
+                <div id="snippetModal" onclick="closeSnippetModal(event)">
+                        <div class="code-editor" onclick="event.stopPropagation()">
+                                <div class="code-header">
+                                        <span id="snippetNotice" class="notice-text" style="display: none; padding-top: 2px;">フレームワークを使用しないhtml,cssの使用例です。シングルクラスの詳細度で上書きできます</span>
+                                        <button id="downloadBtn" class="download-btn bg-green-600 hover:bg-green-700 text-white border-none text-sm py-1 px-4 rounded" style="display: none;" onclick="window.open('/RatioKit.zip', '_blank')">Download Zip</button>
+                                        <button class="copy-btn" onclick="copySnippet()">Copy</button>
+                                        <button class="close-btn" onclick="closeSnippetModal()">Close</button>
+                                </div>
+                                <div class="code-content px-10 py-8 overflow-y-auto" id="snippetContent"></div>
+                        </div>
+                </div>
+
+                <header class="into fixed w-full min-h-[--head] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
+                        <h1 class="mr-auto mb-0 leading-none pt-1">
+                                HTML Gallery
+                        </h1>
+                        <button onclick="openSetupModal()"
+                                class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1 md:min-h-[3em]">
+                                Setup / Download
+                        </button>
+                </header>
+
+                <main class="py-[--head] PX" id="contents">
+
+
+                        <!-- FlexRatio Preview -->
+                        <section class="mt-8">
+                                <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+                                        <h2 class="mr-auto mb-0 leading-none pt-1">FlexRatio
+                                        </h2>
+                                        <button onclick="openSnippetModal(this)"
+                                                        class=" text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+                                </div>
+                                <div class="mt-6">
+                                        <h3>1. className="flex55 mt-3"</h3>
+                                        <div class="flex55 mt-3">
+                                                <div class="p-4 bg-gray-200">Left Content (50%)</div>
+                                                <div class="p-4 bg-gray-300">Right Content (50%)</div>
+                                        </div>
+                                </div>
+                                <div class="mt-6">
+                                        <h3>2. className="flex46 mt-3"</h3>
+                                        <div class="flex46 mt-3">
+                                                <div class="p-4 bg-blue-200">Left Content (40%)</div>
+                                                <div class="p-4 bg-blue-300">Right Content (60%)</div>
+                                        </div>
+                                </div>
+                                <div class="mt-6">
+                                        <h3>3. className="flex73 bp-sm mt-3"</h3>
+                                        <div class="flex73 bp-sm mt-3">
+                                                <div class="p-4 bg-green-100">Left Content(70%)</div>
+                                                <div class="p-4 bg-green-200">Right Content(30%)</div>
+                                        </div>
+                                </div>
+                                <!-- スニペット用CSS（プレビュー画面では無効） -->
+                                <template class="component-style">
+                                        <style>
+.wrapper { padding-block: var(--MY, 60px); margin-inline: var(--out, calc(50% - 50vw)); max-width: unset; width: unset; position: relative; }
+:where(.wrapper)>* { margin-inline: auto; max-width: 100%; }
+:where(.wrapper)>*+* { margin-top: var(--MY, 60px); }
+.into { padding-inline: var(--into, calc(50vw - clamp(0px, 50vw - var(--PX, 20px), var(--wid, 1080px) / 2))); }
+:where(.flex55)>* { width: calc(50% - var(--gap, 30px) / 2); }
+.flex46 { --few: 40%; }
+:where(.flex46)>:where(:nth-child(1)) { width: calc(var(--few, 40%)); }
+:where(.flex46)>:where(:nth-child(2)) { width: calc(100% - var(--few, 40%) - var(--gap, 30px)); }
+.flex64 { --few: 40%; }
+:where(.flex64)>:where(:nth-child(1)) { width: calc(100% - var(--few, 40%) - var(--gap, 30px)); }
+:where(.flex64)>:where(:nth-child(2)) { width: calc(var(--few, 40%)); }
+.flex37 { --few: 30%; }
+:where(.flex37)>:where(:nth-child(1)) { width: calc(var(--few, 30%)); }
+:where(.flex37)>:where(:nth-child(2)) { width: calc(100% - var(--few, 30%) - var(--gap, 30px)); }
+.flex73 { --few: 30%; }
+:where(.flex73)>:where(:nth-child(1)) { width: calc(100% - var(--few, 30%) - var(--gap, 30px)); }
+:where(.flex73)>:where(:nth-child(2)) { width: calc(var(--few, 30%)); }
+.flex28 { --few: 20%; }
+:where(.flex28)>:where(:nth-child(1)) { width: calc(var(--few, 20%)); }
+:where(.flex28)>:where(:nth-child(2)) { width: calc(100% - var(--few, 20%) - var(--gap, 30px)); }
+.flex82 { --few: 20%; }
+:where(.flex82)>:where(:nth-child(1)) { width: calc(100% - var(--few, 20%) - var(--gap, 30px)); }
+:where(.flex82)>:where(:nth-child(2)) { width: calc(var(--few, 20%)); }
+:is(.flex55, .flex28, .flex37, .flex46, .flex64, .flex73, .flex82) { gap: var(--gap, 30px); display: flex; flex-wrap: wrap; }
+:where(:is(.flex55, .flex28, .flex37, .flex46, .flex64, .flex73, .flex82)) img { width: 100%; }
+@media (max-width: 767px) { :where(:is(.flex55, .flex28, .flex37, .flex46, .flex64, .flex73, .flex82)):not(.bp-sm)>* { width: 100%; } }
+@media (max-width: 639px) { :where(:is(.flex55, .flex28, .flex37, .flex46, .flex64, .flex73, .flex82)):is(.bp-sm)>* { width: 100%; } }
+                                        </style>
+                                </template>
+                        </section>
+
+                        <!-- Accordion Preview -->
+                        <section class="wrapper into bg-green-100">
+                                <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+                                        <h2 class="mr-auto mb-0 leading-none pt-1">Accordion
+                                        </h2>
+                                        <button onclick="openSnippetModal(this)"
+                                                        class=" text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+                                </div>
+                                <div class="mt-6">
+                                        <h3>1. className="accordion mt-3"</h3>
+                                        <details class="accordion mt-3">
+                                                <summary>クリックして詳細を表示（基本形）</summary>
+                                                <div>
+                                                        <p>汎用的なアコーディオンですQ&A以外の用途（利用規約や補足説明など）に最適です</p>
+                                                </div>
+                                        </details>
+                                </div>
+                                <div class="mt-6">
+                                        <h3>2. className="accordion is_qa mt-3"</h3>
+                                        <details class="accordion is_qa mt-3">
+                                                <summary>Q&Aスタイルの質問テキストです</summary>
+                                                <div>
+                                                        <p>is_qaクラスを付与することで、Q&Aのアイコンが表示されます</p>
+                                                </div>
+                                        </details>
+                                </div>
+                                <div class="mt-6">
+                                        <h3>3. className="accordion is_qa mt-3"</h3>
+                                        <details class="accordion is_qa mt-3">
+                                                <summary>画像付きの質問です</summary>
+                                                <div>
+                                                        <div class="has_img">
+                                                                <figure><img src="https://picsum.photos/id/60/400/300"
+                                                                             alt="" /></figure>
+                                                                <div>
+                                                                        <p>回答部分に画像を表示する例ですPCでは横並び、スマホでは縦並びになります</p>
+                                                                </div>
+                                                        </div>
+                                                </div>
+                                        </details>
+                                </div>
+                                <template class="component-style">
+                                        <style>
+.wrapper { padding-block: var(--MY, 60px); margin-inline: var(--out, calc(50% - 50vw)); max-width: unset; width: unset; position: relative; }
+:where(.wrapper)>* { margin-inline: auto; max-width: 100%; }
+:where(.wrapper)>*+* { margin-top: var(--MY, 60px); }
+.into { padding-inline: var(--into, calc(50vw - clamp(0px, 50vw - var(--PX, 20px), var(--wid, 1080px) / 2))); }
+.accordion::details-content { -webkit-transition: height 0.4s ease, content-visibility 0.4s allow-discrete; transition: height 0.4s ease, content-visibility 0.4s allow-discrete; height: 0; overflow: hidden; }
+.accordion[open]::details-content { height: auto; }
+:where(.accordion) summary { list-style: none; outline: none; cursor: pointer; position: relative; background-color: var(--qBG, var(--bc, #fbf9ef)); padding: 1em; padding-right: 2.5em; -webkit-transition: 0.4s; transition: 0.4s; }
+:where(.accordion) summary:hover { opacity: 0.8; }
+:where(.accordion) summary::-webkit-details-marker { display: none; }
+:where(.accordion) summary:after { content: ">"; font-weight: 900; font-family: var(--icon, inherit); font-size: 1.5em; position: absolute; right: 1em; top: 50%; translate: 0 -50%; -webkit-transition: 0.4s; transition: 0.4s; rotate: 90deg; }
+:where(.accordion)[open] summary:after { rotate: -90deg; }
+:where(.accordion)>div { position: relative; padding: 1em; background-color: var(--aBG, var(--wh, #fff)); }
+:where(.accordion) .has_img { display: flex; flex-direction: row; align-items: center; flex-wrap: wrap; gap: 1em; width: 100%; }
+:where(.accordion) .has_img figure { max-width: 100%; order: 1; width: var(--imgW, 30%); margin-left: auto; }
+:where(.accordion) .has_img figure img { width: 100%; height: auto; display: block; }
+:where(.accordion) .has_img>div { flex: 1; }
+@media (max-width: 767px) { :where(.accordion) .has_img:not(.bp-sm) figure { width: 100%; margin-left: unset; } }
+@media (max-width: 639px) { :where(.accordion) .has_img:is(.bp-sm) figure { width: 100%; margin-left: unset; } }
+:where(.accordion).is_qa summary, :where(.accordion).is_qa>div { padding-left: 4em; }
+:where(.accordion).is_qa summary:before, :where(.accordion).is_qa>div:before { content: ""; font-family: var(--bfFF, var(--Eng, sans-serif)); color: var(--bfC, var(--wh, #fff)); background-color: var(--bfBG, var(--mc, #2db542)); display: block; position: absolute; left: 1em; top: 50%; -webkit-transform: translateY(-50%); transform: translateY(-50%); border-radius: var(--bfRad, var(--rad, 0vmin)); width: 2em; aspect-ratio: 1; align-content: center; text-align: center; }
+:where(.accordion).is_qa summary:before { content: "Q"; }
+:where(.accordion).is_qa>div:before { content: "A"; background-color: var(--abfBG, var(--ac, #512db5)); }
+                                        </style>
+                                </template>
+                        </section>
+
+                        <!-- Panel Preview -->
+                        <section class="">
+                                <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+                                        <h2 class="mr-auto mb-0 leading-none pt-1">Panel
+                                        </h2>
+                                        <button onclick="openSnippetModal(this)"
+                                                        class=" text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+                                </div>
+                                <div class="mt-6">
+                                        <h3>1. className="panel is_flow img20 mt-3"</h3>
+                                        <div class="panel is_flow img20 mt-3">
+                                                <div class="item has_img">
+                                                        <div>
+                                                                <h4><span class="sub text-[--sc]">STEP 01</span>お問い合わせ
+                                                                </h4>
+                                                                <p>is_flowクラスとimg20クラスを付与した例です</p>
+                                                        </div>
+                                                        <figure><img src="https://picsum.photos/id/103/400/300"
+                                                                     alt="" /></figure>
+                                                </div>
+                                                <div class="item has_img is_rev">
+                                                        <div>
+                                                                <h4><span class="sub text-[--sc]">STEP 02</span>ヒアリング
+                                                                </h4>
+                                                                <p>お客様のご要望を詳しくお伺いし、最適なプランをご提案いたします</p>
+                                                        </div>
+                                                        <figure><img src="https://picsum.photos/id/104/400/300"
+                                                                     alt="" /></figure>
+                                                </div>
+                                        </div>
+                                </div>
+                                <template class="component-style">
+                                        <style>
+.wrapper { padding-block: var(--MY, 60px); margin-inline: var(--out, calc(50% - 50vw)); max-width: unset; width: unset; position: relative; }
+:where(.wrapper)>* { margin-inline: auto; max-width: 100%; }
+:where(.wrapper)>*+* { margin-top: var(--MY, 60px); }
+.into { padding-inline: var(--into, calc(50vw - clamp(0px, 50vw - var(--PX, 20px), var(--wid, 1080px) / 2))); }
+.panel { position: relative; --mt: var(--MY5, 30px); --p: 1em; --bg: var(--bc, #fbf9ef); --beforeFZ: 75%; --beforeC: var(--mc, #2db542); --afterW: 2em; --afterBG: var(--sc, #3194c9); --imgW: 30%; }
+:where(.panel) .item { background-color: var(--bg, var(--bc, #fbf9ef)); counter-increment: cnt; width: 100%; display: flex; flex-wrap: wrap; border-radius: var(--rad, 0vmin); padding: var(--p, 1em); gap: var(--gap, 30px); position: relative; }
+:where(.panel) .item+.item { margin-top: var(--gap, 30px); }
+:where(.panel) .item figure { width: var(--imgW, 30%); }
+:where(.panel) .item figure:is(.is_rev *) { order: -1; }
+:where(.panel) .item figure img { width: 100%; height: auto; display: block; }
+:where(.panel) .item>div { flex: 1; }
+:where(.panel) .item>div .sub { font-size: 0.75em; color: var(--mc, #2db542); margin-right: 0.5em; }
+@media (max-width: 767px) { :where(.panel) .item:not(.bp-sm) figure { width: 100%; } }
+@media (max-width: 639px) { :where(.panel) .item:is(.bp-sm) figure { width: 100%; } }
+:where(.panel).img20 { --imgW: 20%; }
+:where(.panel).img30 { --imgW: 30%; }
+:where(.panel).img40 { --imgW: 40%; }
+:where(.panel).img50 { --imgW: 50%; }
+:where(.panel).is_flow .item+.item { margin-top: calc(var(--afterW, 2em) + 2em); }
+:where(.panel).is_flow .item:after { content: ""; display: block; position: absolute; top: calc(100% + 1em); left: 50%; transform: translateX(-50%); width: var(--afterW, 2em); aspect-ratio: 1; background-color: var(--afterBG, var(--sc, #3194c9)); clip-path: polygon(0 0%, 50% 85%, 100% 0%); }
+:where(.panel).is_flow .item:last-child:after { display: none; }
+                                        </style>
+                                </template>
+                        </section>
+
+                        <!-- ImgText Preview -->
+                        <section class="wrapper into bg-purple-100">
+                                <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+                                        <h2 class="mr-auto mb-0 leading-none pt-1">ImgText
+                                        </h2>
+                                        <button onclick="openSnippetModal(this)"
+                                                        class=" text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+                                </div>
+                                <div class="mt-6">
+                                        <div class="img_text has_img bp-sm mt-3">
+                                                <figure><img src="https://picsum.photos/id/10/400/300" alt="" />
+                                                </figure>
+                                                <div>
+                                                        <h3>1. className="img_text bp-sm mt-3"</h3>
+                                                        <p>基本ブレイクポイントはTailwindのmax-md(767px)<br />
+                                                                bp-smクラスでmax-sm(639px)に変更できます
+                                                        </p>
+                                                </div>
+                                        </div>
+                                </div>
+                                <div class="mt-6">
+                                        <div class="img_text has_img bp-sm img30 is_rev mt-3">
+                                                <figure><img src="https://picsum.photos/id/20/400/300" alt="" />
+                                                </figure>
+                                                <div>
+                                                        <h3>2. className="img_text bp-sm img30 is_rev mt-3"</h3>
+                                                        <p>画像30%指定かつ左右反転 </p>
+                                                </div>
+                                        </div>
+                                </div>
+                                <template class="component-style">
+                                        <style>
+.wrapper { padding-block: var(--MY, 60px); margin-inline: var(--out, calc(50% - 50vw)); max-width: unset; width: unset; position: relative; }
+:where(.wrapper)>* { margin-inline: auto; max-width: 100%; }
+:where(.wrapper)>*+* { margin-top: var(--MY, 60px); }
+.into { padding-inline: var(--into, calc(50vw - clamp(0px, 50vw - var(--PX, 20px), var(--wid, 1080px) / 2))); }
+.img_text { display: flex; flex-wrap: wrap; align-items: flex-start; gap: var(--gap, 30px); --imgW: calc(50% - var(--gap, 30px)/2); }
+:where(.img_text) figure { width: var(--imgW, calc(50% - var(--gap, 30px)/2)); margin-inline: auto; }
+:where(.img_text) figure>a, :where(.img_text) figure img { display: block; width: 100%; height: auto; }
+:where(.img_text)>div { flex: 1; }
+@media (max-width: 767px) { :where(.img_text):not(.bp-sm) figure { order: 1; width: 100%; } }
+@media (max-width: 639px) { :where(.img_text):is(.bp-sm) figure { order: 1; width: 100%; } }
+:where(.img_text).is_rev figure { order: 1; }
+@media (max-width: 767px) { :where(.img_text).is_rev:not(.bp-sm) figure { order: unset; } }
+@media (max-width: 639px) { :where(.img_text).is_rev:is(.bp-sm) figure { order: unset; } }
+:where(.img_text).img100 { --imgW: 100%; }
+:where(.img_text).img95 { --imgW: 95%; }
+:where(.img_text).img90 { --imgW: 90%; }
+:where(.img_text).img875 { --imgW: 87.5%; }
+:where(.img_text).img85 { --imgW: 85%; }
+:where(.img_text).img80 { --imgW: 80%; }
+:where(.img_text).img75 { --imgW: 75%; }
+:where(.img_text).img70 { --imgW: 70%; }
+:where(.img_text).img66 { --imgW: 66%; }
+:where(.img_text).img65 { --imgW: 65%; }
+:where(.img_text).img60 { --imgW: 60%; }
+:where(.img_text).img55 { --imgW: 55%; }
+:where(.img_text).img50 { --imgW: 50%; }
+:where(.img_text).img45 { --imgW: 45%; }
+:where(.img_text).img40 { --imgW: 40%; }
+:where(.img_text).img35 { --imgW: 35%; }
+:where(.img_text).img33 { --imgW: 33%; }
+:where(.img_text).img30 { --imgW: 30%; }
+:where(.img_text).img25 { --imgW: 25%; }
+:where(.img_text).img20 { --imgW: 20%; }
+:where(.img_text).img10 { --imgW: 10%; }
+                                        </style>
+                                </template>
+                        </section>
+
+                        <!-- Cards Preview -->
+                        <section class="">
+                                <div class="py-2 flex justify-end flex-wrap gap-3 border-b-4 border-gray-400 border-solid">
+                                        <h2 class="mr-auto mb-0 leading-none pt-1">Cards
+                                        </h2>
+                                        <button onclick="openSnippetModal(this)"
+                                                        class=" text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+                                </div>
+                                <div class="mt-6">
+                                        <h3>1. className="cards col3 justify-center mt-3"</h3>
+                                        <div class="cards col3 justify-center mt-3">
+                                                <div class="item has_img sheet">
+                                                        <figure><img src="https://picsum.photos/id/10/400/250" alt="" />
+                                                        </figure>
+                                                        <div>
+                                                                <h4>Card 1</h4>
+                                                                <p>col? でPCカラム数指定。max-mdで全種2カラム、max-xs(479px)で1カラムに</p>
+                                                        </div>
+                                                </div>
+                                                <div class="item has_img sheet">
+                                                        <figure><img src="https://picsum.photos/id/10/400/250" alt="" />
+                                                        </figure>
+                                                        <div>
+                                                                <h4>Card 2</h4>
+                                                                <p>col? でPCカラム数指定。max-mdで全種2カラム、max-xs(479px)で1カラムに</p>
+                                                        </div>
+                                                </div>
+                                                <div class="item has_img sheet">
+                                                        <figure><img src="https://picsum.photos/id/10/400/250" alt="" />
+                                                        </figure>
+                                                        <div>
+                                                                <h4>Card 3</h4>
+                                                                <p>col? でPCカラム数指定。max-mdで全種2カラム、max-xs(479px)で1カラムに</p>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="mt-6">
+                                        <h3 class="">2. className="cards col4 min2 justify-center mt-3"</h3>
+                                        <div class="cards col4 min2 justify-center mt-3">
+                                                <div class="item has_img board">
+                                                        <figure><img src="https://picsum.photos/id/20/400/250" alt="" />
+                                                        </figure>
+                                                        <div>
+                                                                <h4>Card 1</h4>
+                                                                <p>min2指定によりスマホサイズウェでも2列を維持します</p>
+                                                        </div>
+                                                </div>
+                                                <div class="item has_img board">
+                                                        <figure><img src="https://picsum.photos/id/20/400/250" alt="" />
+                                                        </figure>
+                                                        <div>
+                                                                <h4>Card 2</h4>
+                                                                <p>min2指定によりスマホサイズでも2列を維持します</p>
+                                                        </div>
+                                                </div>
+                                                <div class="item has_img board">
+                                                        <figure><img src="https://picsum.photos/id/20/400/250" alt="" />
+                                                        </figure>
+                                                        <div>
+                                                                <h4>Card 3</h4>
+                                                                <p>min2指定によりスマホサイズでも2列を維持します</p>
+                                                        </div>
+                                                </div>
+                                                <div class="item has_img board">
+                                                        <figure><img src="https://picsum.photos/id/20/400/250" alt="" />
+                                                        </figure>
+                                                        <div>
+                                                                <h4>Card 4</h4>
+                                                                <p>min2指定によりスマホサイズでも2列を維持します</p>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="mt-6">
+                                        <h3>3. className="cards col3 is_layer justify-center mt-3"</h3>
+                                        <div class="cards col3 is_layer justify-center mt-3">
+                                                <div class="item has_img">
+                                                        <figure><img src="https://picsum.photos/id/30/600/600" alt="" />
+                                                        </figure>
+                                                        <div
+                                                             class="bg-black/50 text-white p-5 flex flex-col justify-center items-center">
+                                                                <h4 class="text-white">Layer 1</h4>
+                                                                <p>画像の上に重なるレイヤー構造です</p>
+                                                        </div>
+                                                </div>
+                                                <div class="item has_img">
+                                                        <figure><img src="https://picsum.photos/id/30/600/600" alt="" />
+                                                        </figure>
+                                                        <div
+                                                             class="bg-black/50 text-white p-5 flex flex-col justify-center items-center self-center">
+                                                                <h4 class="text-white">Layer 1</h4>
+                                                                <p>画像の上に重なるレイヤー構造です</p>
+                                                        </div>
+                                                </div>
+                                                <div class="item has_img">
+                                                        <figure><img src="https://picsum.photos/id/30/600/600" alt="" />
+                                                        </figure>
+                                                        <div
+                                                             class="bg-black/50 text-white p-5 flex flex-col justify-center items-center self-end">
+                                                                <h4 class="text-white">Layer 1</h4>
+                                                                <p>画像の上に重なるレイヤー構造です</p>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="mt-6">
+                                        <h3>4. className="cards colflex mt-3"</h3>
+                                        <div class="cards colflex mt-3">
+                                                <div class="item bg-gray-100 p-4 rounded">
+                                                        <div>
+                                                                <h4>Flexible 1</h4>
+                                                                <p>均等に広がります</p>
+                                                        </div>
+                                                </div>
+                                                <div class="item bg-gray-100 p-4 rounded">
+                                                        <div>
+                                                                <h4>Flexible 2</h4>
+                                                                <p>均等に広がります</p>
+                                                        </div>
+                                                </div>
+                                                <div class="item bg-gray-100 p-4 rounded">
+                                                        <div>
+                                                                <h4>Flexible 3</h4>
+                                                                <p>均等に広がります</p>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+
+                                <div class="mt-6">
+                                        <h3>5. className="cards colfix" style="--itemW: 200px" </h3>
+                                        <div class="cards colfix mt-3 justify-center" style="--itemW: 200px">
+                                                <div class="item bg-gray-100 p-4 rounded">
+                                                        <div>
+                                                                <h4>Fixed 1</h4>
+                                                                <p>--itemW:固定幅</p>
+                                                        </div>
+                                                </div>
+                                                <div class="item bg-gray-100 p-4 rounded">
+                                                        <div>
+                                                                <h4>Fixed 2</h4>
+                                                                <p>--itemW:固定幅</p>
+                                                        </div>
+                                                </div>
+                                                <div class="item bg-gray-100 p-4 rounded">
+                                                        <div>
+                                                                <h4>Fixed 3</h4>
+                                                                <p>--itemW:固定幅</p>
+                                                        </div>
+                                                </div>
+                                                <div class="item bg-gray-100 p-4 rounded">
+                                                        <div>
+                                                                <h4>Fixed 4</h4>
+                                                                <p>--itemW:固定幅</p>
+                                                        </div>
+                                                </div>
+                                        </div>
+                                </div>
+                                <template class="component-style">
+                                        <style>
+.wrapper { padding-block: var(--MY, 60px); margin-inline: var(--out, calc(50% - 50vw)); max-width: unset; width: unset; position: relative; }
+:where(.wrapper)>* { margin-inline: auto; max-width: 100%; }
+:where(.wrapper)>*+* { margin-top: var(--MY, 60px); }
+.into { padding-inline: var(--into, calc(50vw - clamp(0px, 50vw - var(--PX, 20px), var(--wid, 1080px) / 2))); }
+.cards { display: flex; flex-wrap: wrap; gap: var(--gap, 30px); }
+:where(.cards) .btn { min-width: 100%; }
+:where(.cards) .item { display: flex; flex-direction: column; gap: 1em; margin-top: unset; }
+:where(.cards) .item img { width: 100%; }
+:where(.cards).is_layer .item { display: grid; }
+:where(.cards).is_layer .item>* { grid-area: 1/1; z-index: 1; }
+:where(.cards).is_layer .item figure { width: 100%; height: 100%; margin: 0; }
+:where(.cards).is_layer .item figure img { height: 100%; object-fit: cover; }
+:where(.cards).colflex .item { flex: 1; width: auto; }
+:where(.cards).colfix { --itemW: 240px; }
+:where(.cards).colfix .item { width: var(--itemW, 240px); }
+:where(.cards).col1 { --itemW: calc((100% - (var(--gap, 30px) * 0)) / 1); }
+:where(.cards).col1 .item { width: var(--itemW); }
+:where(.cards).col2 { --itemW: calc((100% - (var(--gap, 30px) * 1)) / 2); }
+:where(.cards).col2 .item { width: var(--itemW); }
+:where(.cards).col3 { --itemW: calc((100% - (var(--gap, 30px) * 2)) / 3); }
+:where(.cards).col3 .item { width: var(--itemW); }
+:where(.cards).col4 { --itemW: calc((100% - (var(--gap, 30px) * 3)) / 4); }
+:where(.cards).col4 .item { width: var(--itemW); }
+:where(.cards).col5 { --itemW: calc((100% - (var(--gap, 30px) * 4)) / 5); }
+:where(.cards).col5 .item { width: var(--itemW); }
+:where(.cards).col6 { --itemW: calc((100% - (var(--gap, 30px) * 5)) / 6); }
+:where(.cards).col6 .item { width: var(--itemW); }
+@media (max-width: 767px) { :where(.cards):not(.bp-sm)>.item { width: calc(50% - var(--gap, 30px) / 2); flex: unset; } }
+@media (max-width: 639px) { :where(.cards):is(.bp-sm)>.item { width: calc(50% - var(--gap, 30px) / 2); flex: unset; } }
+@media (max-width: 479px) { :where(.cards):not(.min2)>.item { width: 100%; } }
+                                        </style>
+                                </template>
+                        </section>
+                </main>
+
+                <script>
+                        /**
+                         * モーダルの内容をクリアして準備する
+                         */
+                        function prepareModal(isSetup = false) {
+                                const modal = document.getElementById('snippetModal');
+                                const editor = modal.querySelector('.code-editor');
+                                const content = document.getElementById('snippetContent');
+                                const downloadBtn = document.getElementById('downloadBtn');
+                                const copyBtn = document.querySelector('.copy-btn');
+                                const notice = document.getElementById('snippetNotice');
+
+                                content.innerHTML = '';
+                                if (isSetup) {
+                                        editor.classList.add('setup-mode');
+                                        downloadBtn.style.display = 'block';
+                                        notice.style.display = 'none';
+                                        copyBtn.style.display = 'none';
+                                } else {
+                                        editor.classList.remove('setup-mode');
+                                        downloadBtn.style.display = 'none';
+                                        notice.style.display = 'block';
+                                        copyBtn.style.display = 'block';
+                                }
+                                return { modal, content, copyBtn };
+                        }
+
+                        /**
+                         * セットアップモーダルを開く
+                         */
+                        function openSetupModal() {
+                                const { modal, content } = prepareModal(true);
+
+                                const items = [
+                                        {
+                                                type: 'text',
+                                                content: 'RatioKitは、1つのSCSS定義から「Vite+Tailwind v4環境用」と「CMS等の既存環境を壊さない軽量版（Simple）」の2種類を生成しています。HTML/CSSプレビューでは主に後者の導入手順を説明します。',
+                                                title: 'Getting Started'
+                                        },
+                                        {
+                                                type: 'text',
+                                                content: 'まず、上の「Download Zip」ボタンからファイルをダウンロードしてください。配布パッケージの `SharedStyles/` 内にCSSが含まれています。',
+                                                title: 'Step 1: Download'
+                                        },
+                                        {
+                                                type: 'text',
+                                                content: '・RatioKitSimple.css: CMSや静的サイト用。:where()を使用し詳細度を0に抑えた、既存デザインと競合しにくい推奨版です。\n・RatioKit.css: Tailwind環境用。@layer構成の標準版です。',
+                                                title: 'Step 2: Choose CSS'
+                                        },
+                                        {
+                                                type: 'code',
+                                                content: '<!-- HTMLの<head>内で読み込みます -->\n<link rel="stylesheet" href="path/to/RatioKitSimple.css">'
+                                        },
+                                        {
+                                                type: 'text',
+                                                content: 'Tailwind CSSをCDN（Play CDN）経由で使用する場合、RatioKitのベース要素（h1-h6等）を優先させるため、Tailwindのリセット（Preflight）を無効化することを推奨します。',
+                                                title: 'Step 3: Optional Tailwind (CDN)'
+                                        },
+                                        {
+                                                type: 'code',
+                                                content: '<script src="https://cdn.tailwindcss.com"></scr' + 'ipt>\n<script>\n  tailwind.config = { corePlugins: { preflight: false } }\n</scr' + 'ipt>'
+                                        },
+                                        {
+                                                type: 'text',
+                                                content: 'RatioKitのCSS変数を上書きすることで、プロジェクトに合わせてカスタマイズ可能です。',
+                                                title: 'Customization'
+                                        },
+                                        {
+                                                type: 'code',
+                                                content: ':root {\n  --mc: #2db542; /* メインカラー */\n  --gap: 30px;   /* 余白 */\n}'
+                                        }
+                                ];
+
+                                items.forEach(item => {
+                                        const div = document.createElement('div');
+                                        div.className = item.type === 'text' ? 'mb-6' : 'mb-8 relative group';
+
+                                        if (item.title) {
+                                                const h3 = document.createElement('h3');
+                                                h3.className = 'text-xl font-bold mb-3 text-white';
+                                                if (item.title.startsWith('Step')) {
+                                                        const stepNum = item.title.split(':')[0].replace('Step ', '');
+                                                        const titleText = item.title.split(':')[1] || item.title;
+                                                        h3.innerHTML = `<span class="setup-step-number">${stepNum}</span>${titleText}`;
+                                                } else {
+                                                        h3.textContent = item.title;
+                                                }
+                                                div.appendChild(h3);
+                                        }
+
+                                        if (item.type === 'text') {
+                                                const p = document.createElement('p');
+                                                p.className = 'text-gray-300 leading-relaxed whitespace-pre-wrap';
+                                                p.textContent = item.content;
+                                                div.appendChild(p);
+                                        } else {
+                                                const preContainer = document.createElement('div');
+                                                preContainer.className = 'relative';
+
+                                                const copyBtn = document.createElement('button');
+                                                copyBtn.className = 'absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 px-2 rounded z-10';
+                                                copyBtn.textContent = 'Copy';
+                                                copyBtn.onclick = () => {
+                                                        navigator.clipboard.writeText(item.content).then(() => {
+                                                                copyBtn.textContent = 'Copied!';
+                                                                setTimeout(() => copyBtn.textContent = 'Copy', 2000);
+                                                        });
+                                                };
+
+                                                const pre = document.createElement('pre');
+                                                pre.className = 'bg-black/50 p-4 rounded border border-gray-700 overflow-x-auto';
+                                                const code = document.createElement('code');
+                                                code.className = 'text-sm font-mono text-blue-300';
+                                                code.textContent = item.content;
+
+                                                pre.appendChild(code);
+                                                preContainer.appendChild(copyBtn);
+                                                preContainer.appendChild(pre);
+                                                div.appendChild(preContainer);
+                                        }
+                                        content.appendChild(div);
+                                });
+
+                                modal.classList.add('active');
+                                document.body.style.overflow = 'hidden';
+                        }
+
+                        /**
+                         * スニペットモーダルを開く
+                         * @param {HTMLElement} btn - クリックされたボタン要素
+                         */
+                        function openSnippetModal(btn) {
+                                const { modal, content } = prepareModal(false);
+
+                                const section = btn.closest('section');
+                                if (!section) return;
+
+                                // クローンを作成
+                                const clone = section.cloneNode(true);
+
+                                // 属性削除用ヘルパー関数
+                                function cleanAttributes(el) {
+                                        const attrs = el.attributes;
+                                        for (let i = attrs.length - 1; i >= 0; i--) {
+                                                if (attrs[i].name.startsWith('data-cursor-')) {
+                                                        el.removeAttribute(attrs[i].name);
+                                                }
+                                        }
+                                        for (let child of el.children) {
+                                                cleanAttributes(child);
+                                        }
+                                }
+
+                                // snippetボタンの削除
+                                const snippetBtn = clone.querySelector('button');
+                                if (snippetBtn) snippetBtn.remove();
+
+                                // テンプレートタグ（非表示CSS）の削除（後で別途結合するため）
+                                const styleTemplate = clone.querySelector('template.component-style');
+                                let componentCss = '';
+                                if (styleTemplate) {
+                                        componentCss = styleTemplate.innerHTML.trim();
+                                        styleTemplate.remove();
+                                }
+
+                                cleanAttributes(clone);
+
+                                // HTMLの整形
+                                function formatHTML(html) {
+                                        let tab = '    ';
+                                        let result = '';
+                                        let indent = '';
+
+                                        html.replace(/>\s*</g, '>\n<').split('\n').forEach(function (element) {
+                                                element = element.trim();
+                                                if (!element) return;
+
+                                                if (element.match(/^<\/\w/)) {
+                                                        indent = indent.substring(tab.length);
+                                                }
+
+                                                result += indent + element + '\n';
+
+                                                if (element.match(/^<\w[^>]*[^\/]>$/) && !element.match(/^<(input|img|br|hr)/)) {
+                                                        indent += tab;
+                                                }
+                                        });
+
+                                        return result.trim();
+                                }
+
+                                let formattedHtml = formatHTML(clone.outerHTML);
+                                const tailwindCdn = '\n\n<!-- <script src="https://cdn.tailwindcss.com"></script> -->';
+
+                                // テンプレートから抽出したCSSをスタイルタグとして結合
+                                const styleTag = componentCss ? `\n\n${componentCss}` : '';
+
+                                const pre = document.createElement('pre');
+                                pre.className = 'm-0';
+                                const code = document.createElement('code');
+                                code.className = 'text-sm font-mono text-blue-300';
+                                code.textContent = formattedHtml + tailwindCdn + styleTag;
+                                pre.appendChild(code);
+                                content.appendChild(pre);
+
+                                modal.classList.add('active');
+                                document.body.style.overflow = 'hidden';
+                        }
+
+                        function closeSnippetModal(e) {
+                                const modal = document.getElementById('snippetModal');
+                                if (!e || e.target === modal || e.target.classList.contains('close-btn')) {
+                                        modal.classList.remove('active');
+                                        document.body.style.overflow = '';
+                                }
+                        }
+
+                        function copySnippet() {
+                                const content = document.getElementById('snippetContent').innerText;
+                                navigator.clipboard.writeText(content).then(() => {
+                                        const copyBtn = document.querySelector('.copy-btn');
+                                        const originalText = copyBtn.textContent;
+                                        copyBtn.textContent = 'Copied!';
+                                        setTimeout(() => copyBtn.textContent = originalText, 2000);
+                                });
+                        }
+                </script>
+        </body>
+
+</html>

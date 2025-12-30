@@ -1,0 +1,57 @@
+// --- 1. 最適なミックスインの定義例 ---
+// _mixin.scss にこれを定義すると、ネストしてもしなくても正しく機能します。
+
+$output: "simple"; // "tailwind" または "simple"
+
+@mixin where {
+    @if $output == "tailwind" {
+        // Tailwind環境：レイヤー機能を使用
+        @layer components {
+            @content;
+        }
+    } @else {
+        // 標準環境：:where() でセレクタ全体を包む
+        @if & {
+            // セレクタの中で呼ばれた場合（例: .box { @include where { ... } }）
+            @at-root :where(#{&}) {
+                @content;
+            }
+        } @else {
+            // セレクタの外で呼ばれた場合（例: @include where { .box { ... } }）
+            // この場合は中身のセレクタを一つずつ :where() で包む必要があるため、
+            // 基本的には「外側で一括して囲む」より「各コンポーネントのルートで囲む」のが推奨されます。
+            @content; 
+        }
+    }
+}
+
+// --- 2. 使用例とコンパイル結果の比較 ---
+
+// パターンA: 各コンポーネントのルートを個別に囲む（推奨）
+.panel {
+    @include where {
+        background: white;
+        .item { padding: 10px; }
+    }
+}
+
+// --- 結果のイメージ ---
+
+/* [Mode: simple] */
+:where(.panel) {
+    background: white;
+}
+:where(.panel) .item {
+    padding: 10px;
+}
+
+/* [Mode: tailwind] */
+@layer components {
+    .panel {
+        background: white;
+    }
+    .panel .item {
+        padding: 10px;
+    }
+}
+

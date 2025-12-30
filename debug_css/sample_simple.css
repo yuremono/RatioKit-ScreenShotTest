@@ -1,0 +1,36 @@
+/* --- [最適化版] Mode: $output: "simple" --- */
+
+/* コンポーネントのルートから :where() で囲むことで、詳細度を 0 に落としています。
+   これにより、Tailwindの flex (詳細度10) などで簡単に上書き可能になります。 */
+
+:where(.img_text) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  --imgW: calc(50% - var(--gapH));
+}
+
+:where(.img_text) figure {
+  max-width: var(--imgW);
+  width: var(--imgW);
+  margin-inline: auto;
+}
+
+:where(.img_text) img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+:where(.img_text) > div {
+  flex: 1;
+}
+
+:where(.img_text.is_rev) figure {
+  order: 1;
+}
+
+/* ユーティリティクラスは :where() で囲わないことで、
+   コンポーネントの基本スタイル（詳細度0）を確実に上書き（詳細度10〜）できます */
+.img_text.img30 { --imgW: 30%; }
+.img_text.img40 { --imgW: 40%; }

@@ -1,0 +1,84 @@
+@use "mixin"as *;
+/* バイリンガルボタン */
+#builingual {
+    position: fixed;
+    bottom: 5px;
+    right: 5px;
+    z-index: 999999;
+    padding: 5px 10px !important;
+    background: rgba(255,255,255, 0.7) !important;
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between!important;
+}
+.language{
+    color: #333!important;
+    float:none!important;
+    padding:0!important;
+}
+.switch {
+    float: none!important;
+    width: 33px;
+    margin-left: 5px!important;
+    display: block!important;
+}
+.switch input[type="checkbox"] {
+    display: none;
+}
+.switch label {
+    display: block;
+    box-sizing: border-box;
+    padding: 5px 0 8px 0;
+    background: #eee;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    box-shadow: 0 0 2px rgba(136, 136, 136, 0.4);
+    font-size: 18px;
+    text-align: center;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    transition: .3s;
+}
+div#builingual div.language select{
+    margin:0!important;
+    margin-left: 5px!important;
+}
+/* ON */
+.switch label span:after {
+    content: "OFF";
+    font-size: 10px;
+    font-weight: 500;
+    color: #aaa;
+}
+.switch #cmn-toggle-1:checked + label {
+    background-color: #fb6103;
+    box-shadow: none;
+}
+.switch #cmn-toggle-1:checked + label span:after {
+    content: "ON";
+    color: #fff;
+}
+.bili_name dl:nth-of-type(2) dd div,
+.bili_name dl:last-of-type dd div {
+    display: block !important;
+}
+.bili_name dl:nth-of-type(2) dd .translate,
+.bili_name dl:last-of-type dd .translate {
+    display: none !important;
+}
+
+
+.language select {
+    padding:3px !important;
+}
+
+@media screen and (max-width: 360px){
+    #builingual .language {
+    display: flex !important;    
+    }
+    div#builingual div.language select{
+    width: 130px;
+    }
+}
