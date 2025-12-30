@@ -5,18 +5,18 @@
  */
 interface Props {
   /** モディファイアクラス (is_rev 等) */
-  className?: string;
+  class?: string;
   /** インラインスタイル */
   style?: any;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  className: ""
+  class: ""
 });
 </script>
 
 <template>
-  <div :class="['item', $slots.figure ? 'has_img' : '', className]" :style="style">
+  <div :class="['item', $slots.figure ? 'has_img' : '', props.class]" :style="style">
     <div>
       <slot></slot>
     </div>
@@ -27,6 +27,3 @@ const props = withDefaults(defineProps<Props>(), {
 </template>
 
 
-<style scoped>
-/* このコンポーネント固有のスタイルが必要な場合はここに記述してください */
-</style>

@@ -5,18 +5,18 @@
  */
 interface Props {
   /** モディファイアクラス (sheet, board 等) */
-  className?: string;
+  class?: string;
   /** インラインスタイル */
   style?: any;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  className: ""
+  class: ""
 });
 </script>
 
 <template>
-  <div :class="['item', $slots.figure ? 'has_img' : '', className]" :style="style">
+  <div :class="['item', $slots.figure ? 'has_img' : '', props.class]" :style="style">
     <figure v-if="$slots.figure">
       <slot name="figure"></slot>
     </figure>

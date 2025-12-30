@@ -48,17 +48,12 @@
       <div class="has_img">
         <figure>{@render figure()}</figure>
         <div>
-          {#if children}
-            {@render children()}
-          {/if}
+          {@render children?.()}
         </div>
       </div>
-    {:else if children}
-      {@render children()}
+    {:else}
+      {@render children?.()}
     {/if}
   </div>
 </details>
 
-<style>
-  /* 既存の RatioKit.scss で制御されます */
-</style>

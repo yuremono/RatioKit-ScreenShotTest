@@ -1,11 +1,13 @@
 <script lang="ts">
-  import ImgText from './ImgText.svelte';
-  import FlexRatio from './FlexRatio.svelte';
-  import Accordion from './Accordion.svelte';
-  import Cards from './Cards.svelte';
-  import CardItem from './CardItem.svelte';
-  import Panel from './Panel.svelte';
-  import PanelItem from './PanelItem.svelte';
+  import { 
+    ImgText,
+    FlexRatio,
+    Accordion,
+    Cards,
+    CardItem,
+    Panel,
+    PanelItem
+  } from '@ratiokit';
   import '../../RatioKit.scss';
 
   /**
@@ -33,28 +35,22 @@
       <div class="mt-6">
         <h3>1. class="flex55 mt-3"</h3>
         <FlexRatio class="flex55 mt-3">
-          {#snippet children()}
-            <div class="p-4 bg-gray-200">Left Content (50%)</div>
-            <div class="p-4 bg-gray-300">Right Content (50%)</div>
-          {/snippet}
+          <div class="p-4 bg-gray-200">Left Content (50%)</div>
+          <div class="p-4 bg-gray-300">Right Content (50%)</div>
         </FlexRatio>
       </div>
       <div class="mt-6">
         <h3>2. class="flex46 mt-3"</h3>
         <FlexRatio class="flex46 mt-3">
-          {#snippet children()}
-            <div class="p-4 bg-blue-200">Left Content (40%)</div>
-            <div class="p-4 bg-blue-300">Right Content (60%)</div>
-          {/snippet}
+          <div class="p-4 bg-blue-200">Left Content (40%)</div>
+          <div class="p-4 bg-blue-300">Right Content (60%)</div>
         </FlexRatio>
       </div>
       <div class="mt-6">
         <h3>3. class="flex73 bp-sm mt-3"</h3>
         <FlexRatio class="flex73 bp-sm mt-3">
-          {#snippet children()}
-            <div class="p-4 bg-green-100">Left Content(70%)</div>
-            <div class="p-4 bg-green-200">Right Content(30%)</div>
-          {/snippet}
+          <div class="p-4 bg-green-100">Left Content(70%)</div>
+          <div class="p-4 bg-green-200">Right Content(30%)</div>
         </FlexRatio>
       </div>
     </section>
@@ -248,7 +244,3 @@
     </div>
   </footer>
 </div>
-
-<style>
-  /* Svelte 固有のスタイル */
-</style>

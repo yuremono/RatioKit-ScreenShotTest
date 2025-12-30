@@ -25,15 +25,10 @@
 
 <div class="item {figure ? 'has_img' : ''} {className}" {style}>
   <div>
-    {#if children}
-      {@render children()}
-    {/if}
+    {@render children?.()}
   </div>
   {#if figure}
     <figure>{@render figure()}</figure>
   {/if}
 </div>
 
-<style>
-  /* 既存の RatioKit.scss で制御されます */
-</style>

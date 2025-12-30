@@ -5,18 +5,18 @@
  */
 interface Props {
   /** モディファイアクラス (col3, col4, min2, is_layer 等) */
-  className?: string;
+  class?: string;
   /** インラインスタイル */
   style?: any;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  className: "mb-0"
+  class: "mb-0"
 });
 </script>
 
 <template>
-  <div :class="['cards', className]" :style="style">
+  <div :class="['cards', props.class]" :style="style">
     <slot></slot>
   </div>
 </template>

@@ -5,18 +5,18 @@
  */
 interface Props {
   /** モディファイアクラス (img30, is_rev, bp-sm 等) */
-  className?: string;
+  class?: string;
   /** インラインスタイル */
   style?: any;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  className: "mb-0"
+  class: "mb-0"
 });
 </script>
 
 <template>
-  <div :class="['img_text', $slots.figure ? 'has_img' : '', className]" :style="style">
+  <div :class="['img_text', $slots.figure ? 'has_img' : '', props.class]" :style="style">
     <figure v-if="$slots.figure">
       <slot name="figure"></slot>
     </figure>
@@ -27,6 +27,3 @@ const props = withDefaults(defineProps<Props>(), {
 </template>
 
 
-<style scoped>
-/* このコンポーネント固有のスタイルが必要な場合はここに記述してください */
-</style>

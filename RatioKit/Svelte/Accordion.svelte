@@ -5,7 +5,7 @@
    */
   let { 
     title, 
-    className = "mb-0", 
+    class: className = "mb-0", 
     style = {}, 
     open = false,
     figureTitle,
@@ -13,7 +13,7 @@
     children 
   } = $props<{
     title: string;
-    className?: string;
+    class?: string;
     style?: any;
     open?: boolean;
     figureTitle?: import('svelte').Snippet;
@@ -38,13 +38,11 @@
       <div class="has_img">
         <figure>{@render figure()}</figure>
         <div>
-          {#if children}
-            {@render children()}
-          {/if}
+          {@render children?.()}
         </div>
       </div>
-    {:else if children}
-      {@render children()}
+    {:else}
+      {@render children?.()}
     {/if}
   </div>
 </details>

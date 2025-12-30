@@ -7,7 +7,7 @@
     ImgText, 
     Cards, 
     CardItem 
-  } from '@ratiokit';
+  } from './lib/RatioKit';
   import './RatioKit.scss';
   import './lib/RatioKit/SnippetModal.css';
 
@@ -15,31 +15,36 @@
     type: 'text' | 'code';
     content: string;
     title?: string;
+    noCopy?: boolean;
   }
 
+  /**
+   * RatioKit Gallery - Svelte Preview
+   */
   let showModal = $state(false);
   let isSetup = $state(false);
   let modalItems = $state<ContentItem[]>([]);
   let copyStates = $state<{[key: number]: string}>({});
+
+  let flexRef = $state<HTMLElement | null>(null);
+  let accordionRef = $state<HTMLElement | null>(null);
+  let panelRef = $state<HTMLElement | null>(null);
+  let imgTextRef = $state<HTMLElement | null>(null);
+  let cardsRef = $state<HTMLElement | null>(null);
 
   const formatHTML = (html: string) => {
     let tab = '    ';
     let result = '';
     let indent = '';
 
-    const formatted = html.replace(/</g, '\n<').replace(/>/g, '>\n');
-
-    formatted.split('\n').forEach(function(element) {
+    html.replace(/>\s*</g, '>\n<').split('\n').forEach(function(element) {
       element = element.trim();
       if (!element) return;
-
       if (element.match(/^<\/\w/)) {
         indent = indent.substring(tab.length);
       }
-      
       result += indent + element + '\n';
-      
-      if (element.match(/^<\w[^>]*[^\/]>$/) && !element.match(/^<(input|img|br|hr|meta|link)/)) {
+      if (element.match(/^<\w[^>]*[^\/]>$/) && !element.match(/^<(input|img|br|hr)/)) {
         indent += tab;
       }
     });
@@ -51,35 +56,32 @@
     const attrs = el.attributes;
     for (let i = attrs.length - 1; i >= 0; i--) {
       const name = attrs[i].name;
-      if (name.startsWith('data-cursor-') || name.includes('svelte-')) {
+      if (name.startsWith('data-cursor-') || name.includes('svelte-') || name === 'ref') {
         el.removeAttribute(name);
       }
     }
     Array.from(el.children).forEach(child => cleanAttributes(child as HTMLElement));
   };
 
-  const openSnippetModal = (event: MouseEvent, css: string) => {
+  const openModal = (event: MouseEvent, css: string) => {
     isSetup = false;
-    const btn = event.currentTarget as HTMLButtonElement;
-    const section = btn.closest('section');
-    if (!section) return;
-
-    const clone = section.cloneNode(true) as HTMLElement;
-    const snippetBtn = clone.querySelector('button');
-    if (snippetBtn) snippetBtn.remove();
+    const sectionRef = (event.currentTarget as HTMLElement).closest('section');
+    if (!sectionRef) return;
+    const clone = sectionRef.cloneNode(true) as HTMLElement;
+    
+    const btn = clone.querySelector('button');
+    if (btn) btn.remove();
     
     cleanAttributes(clone);
 
-    // Svelteのハイドレーション用空コメントを削除
     let html = clone.outerHTML.replace(/<!---->/g, '');
     html = formatHTML(html);
-    
     const tailwindCdn = '\n\n<!-- <scr' + 'ipt src="https://cdn.tailwindcss.com"></scr' + 'ipt> -->';
     const content = html + tailwindCdn + '\n\n<style>\n' + css.trim() + '\n</style>';
     
     modalItems = [{ type: 'code', content }];
-    copyStates = { 0: 'Copy' };
     showModal = true;
+    copyStates = { 0: 'Copy' };
     document.body.style.overflow = 'hidden';
   };
 
@@ -94,21 +96,21 @@
       {
         type: 'text',
         content: 'まず、上の「Download Zip」ボタンからファイルをダウンロードしてください。`Svelte/` フォルダに必要なファイルがすべて含まれています。',
-        title: '1 Download'
+        title: 'Step 1: Download'
       },
-    {
-      type: 'text',
-      content: '既存の Vite プロジェクトに導入する場合、まず Sass と Tailwind v4 プラグインをインストールします。もし `npm run dev` でエラー（Pre-transform error 等）が発生した場合は、Vite のキャッシュクリア (`npx vite --force`) を試してください。',
-      title: '2 Install Dependencies'
-    },
+      {
+        type: 'text',
+        content: '既存の Vite プロジェクトに導入する場合、まず Sass と Tailwind v4 プラグインをインストールします。',
+        title: 'Step 2: Install Dependencies'
+      },
       {
         type: 'code',
         content: 'npm install -D sass @tailwindcss/vite'
       },
       {
         type: 'text',
-        content: '`vite.config.ts` に Tailwind v4 プラグインを登録してください。',
-        title: '3 Vite Config'
+        content: '`vite.config.ts` にエイリアスと Tailwind v4 用の設定を追加してください。\n※ @tailwindcss/oxide の除外設定は、環境によっては発生する Rust エンジンの読み込みエラーを回避するために必要です。',
+        title: 'Step 3: Vite Config'
       },
       {
         type: 'code',
@@ -124,24 +126,23 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@ratiokit': path.resolve(__dirname, './src/lib/RatioKit'),
-    },
+      '@ratiokit': path.resolve(__dirname, './src/lib/RatioKit')
+    }
   },
   optimizeDeps: {
-    // 依存関係のエラー回避用
-    exclude: ['@tailwindcss/oxide', 'lightningcss']
+    exclude: ['@tailwindcss/oxide']
   }
 })`
       },
       {
         type: 'text',
         content: '`Svelte/src/lib/RatioKit` フォルダと `RatioKit.scss` を自身の `src/lib/` 配下にコピーしてください。',
-        title: '4 Copy Files'
+        title: 'Step 4: Copy Files'
       },
       {
         type: 'text',
         content: 'プロジェクトのエントリファイル（`main.ts` や `+layout.svelte`）で SCSS をインポートします。Tailwind v4 の `@import "tailwindcss";` より後に読み込むようにしてください。',
-        title: '5 Global Styles'
+        title: 'Step 5: Global Styles'
       },
       {
         type: 'code',
@@ -150,20 +151,8 @@ import './RatioKit.scss';`
       },
       {
         type: 'text',
-        content: 'Svelte 5 での初期化は `mount` 関数を使用することが推奨されます。',
-        title: '6 Svelte 5 Mount'
-      },
-      {
-        type: 'code',
-        content: `import { mount } from 'svelte';
-import App from './App.svelte';
-
-mount(App, { target: document.getElementById('app')! });`
-      },
-      {
-        type: 'text',
         content: 'RatioKitのCSS変数を上書きすることで、デザインをカスタマイズ可能です。',
-        title: '7 Customization'
+        title: 'Step 6: Customization'
       },
       {
         type: 'code',
@@ -174,8 +163,8 @@ mount(App, { target: document.getElementById('app')! });`
       },
       {
         type: 'text',
-        content: 'あとはカタログからコードをコピーして使うだけです。`{#snippet figure()}` などを活用してください。',
-        title: '8 Usage Example'
+        content: 'あとはカタログからコードをコピーして使うだけです。`{#snippet children()}` などを活用してください。',
+        title: 'Step 7: Usage Example'
       },
       {
         type: 'code',
@@ -184,7 +173,7 @@ mount(App, { target: document.getElementById('app')! });`
 </scr` + `ipt>
 
 <div class="p-8">
-  <FlexRatio class="flex55 mt-8">
+  <FlexRatio class="flex55 gap-8">
     {#snippet children()}
       <div class="bg-gray-100 p-4">左側のコンテンツ</div>
       <div class="bg-gray-200 p-4">右側のコンテンツ</div>
@@ -219,7 +208,9 @@ mount(App, { target: document.getElementById('app')! });`
   const handleCopy = (index: number, text: string) => {
     navigator.clipboard.writeText(text).then(() => {
       copyStates[index] = 'Copied!';
-      setTimeout(() => copyStates[index] = 'Copy', 2000);
+      setTimeout(() => {
+        copyStates[index] = 'Copy';
+      }, 2000);
     });
   };
 
@@ -325,6 +316,7 @@ mount(App, { target: document.getElementById('app')! });`
 @media (max-width: 767px) { :where(.cards):not(.bp-sm) > .item { width: calc(50% - var(--gap, 30px) / 2); -webkit-box-flex: unset; -ms-flex: unset; flex: unset; } }
 @media (max-width: 639px) { :where(.cards):is(.bp-sm) > .item { width: calc(50% - var(--gap, 30px) / 2); -webkit-box-flex: unset; -ms-flex: unset; flex: unset; } }
 @media (max-width: 479px) { :where(.cards):not(.min2) > .item { width: 100%; } }`;
+
 </script>
 
 {#if showModal}
@@ -353,19 +345,14 @@ mount(App, { target: document.getElementById('app')! });`
           <div class={item.type === 'text' ? 'mb-6' : 'mb-8 relative group'}>
             {#if item.title}
               <h3 class="text-xl font-bold mb-3 text-white">
-                {#if isSetup && item.title.startsWith('Step')}
-                  <span class="setup-step-number">{item.title.split(':')[0].replace('Step ', '')}</span>
-                  {item.title.split(':')[1] || item.title}
-                {:else}
-                  {item.title}
-                {/if}
+                {item.title}
               </h3>
             {/if}
             {#if item.type === 'text'}
               <p class="text-gray-300 leading-relaxed whitespace-pre-wrap">{item.content}</p>
             {:else}
               <div class="relative">
-                {#if isSetup}
+                {#if isSetup && !item.noCopy}
                   <button 
                     class="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 px-2 rounded z-10"
                     onclick={() => handleCopy(index, item.content)}
@@ -383,23 +370,21 @@ mount(App, { target: document.getElementById('app')! });`
   </div>
 {/if}
 
-  <header class="into fixed w-full min-h-[var(--head)] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
-    <h1 class="mr-auto mb-0 leading-none pt-1">
-      Svelte Gallery
-    </h1>
-  <button onclick={openSetupModal} class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1 md:min-h-[3em]">Setup / Download</button>
-  </header>
+<header class="into fixed w-full min-h-[var(--head)] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
+  <h1 class="mr-auto mb-0 leading-none pt-1">
+    Svelte Gallery
+  </h1>
+  <button onclick={openSetupModal} class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1 md:min-h-[3em]">Setup / Download</button>
+</header>
 
-  <main class="py-[var(--head)] PX" id="contents">
-
-    <!-- FlexRatio Preview -->
-    <section class="mt-8">
-      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-      <h2 class="mr-auto mb-0 leading-none pt-1">FlexRatio
-      </h2>
-      <button onclick={(e) => openSnippetModal(e, flexCss)} class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
-      </div>
-      <div class="mt-6">
+<main class="py-[var(--head)] PX" id="contents">
+  <!-- FlexRatio Preview -->
+  <section class="mt-8">
+    <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+      <h2 class="mr-auto mb-0 leading-none pt-1">FlexRatio</h2>
+      <button onclick={(e) => openModal(e, flexCss)} class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+    </div>
+    <div class="mt-6">
       <h3>1. class="flex55 mt-3"</h3>
       <FlexRatio class="flex55 mt-3">
         {#snippet children()}
@@ -407,8 +392,8 @@ mount(App, { target: document.getElementById('app')! });`
           <div class="p-4 bg-gray-300">Right Content (50%)</div>
         {/snippet}
       </FlexRatio>
-      </div>
-      <div class="mt-6">
+    </div>
+    <div class="mt-6">
       <h3>2. class="flex46 mt-3"</h3>
       <FlexRatio class="flex46 mt-3">
         {#snippet children()}
@@ -416,8 +401,8 @@ mount(App, { target: document.getElementById('app')! });`
           <div class="p-4 bg-blue-300">Right Content (60%)</div>
         {/snippet}
       </FlexRatio>
-      </div>
-      <div class="mt-6">
+    </div>
+    <div class="mt-6">
       <h3>3. class="flex73 bp-sm mt-3"</h3>
       <FlexRatio class="flex73 bp-sm mt-3">
         {#snippet children()}
@@ -425,55 +410,53 @@ mount(App, { target: document.getElementById('app')! });`
           <div class="p-4 bg-green-200">Right Content(30%)</div>
         {/snippet}
       </FlexRatio>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- Accordion Preview -->
+  <!-- Accordion Preview -->
   <section class="wrapper into bg-green-100 mt-12">
-      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-      <h2 class="mr-auto mb-0 leading-none pt-1">Accordion
-      </h2>
-      <button onclick={(e) => openSnippetModal(e, accordionCss)} class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
-      </div>
-      <div class="mt-6">
+    <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+      <h2 class="mr-auto mb-0 leading-none pt-1">Accordion</h2>
+      <button onclick={(e) => openModal(e, accordionCss)} class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+    </div>
+    <div class="mt-6">
       <h3>1. class="accordion mt-3"</h3>
-        <Accordion class="mt-3" title="クリックして詳細を表示（基本形）">
-          {#snippet children()}
-            <p>汎用的なアコーディオンですQ&A以外の用途（利用規約や補足説明など）に最適です</p>
-          {/snippet}
-        </Accordion>
-      </div>
-      <div class="mt-6">
+      <Accordion class="mt-3" title="クリックして詳細を表示（基本形）">
+        {#snippet children()}
+          <p>汎用的なアコーディオンですQ&A以外の用途（利用規約や補足説明など）に最適です</p>
+        {/snippet}
+      </Accordion>
+    </div>
+    <div class="mt-6">
       <h3>2. class="accordion is_qa mt-3"</h3>
-        <Accordion class="is_qa mt-3" title="Q&Aスタイルの質問テキストです">
-          {#snippet children()}
-            <p>is_qaクラスを付与することで、Q&Aのアイコンが表示されます</p>
-          {/snippet}
-        </Accordion>
-      </div>
-      <div class="mt-6">
+      <Accordion class="is_qa mt-3" title="Q&Aスタイルの質問テキストです">
+        {#snippet children()}
+          <p>is_qaクラスを付与することで、Q&Aのアイコンが表示されます</p>
+        {/snippet}
+      </Accordion>
+    </div>
+    <div class="mt-6">
       <h3>3. class="accordion is_qa mt-3"</h3>
-        <Accordion class="is_qa mt-3" title="画像付きの質問です">
-          {#snippet figure()}
-            <img src="https://picsum.photos/id/60/400/300" alt="" />
-          {/snippet}
-          {#snippet children()}
-            <p>回答部分に画像を表示する例ですPCでは横並び、スマホでは縦並びになります</p>
-          {/snippet}
-        </Accordion>
-      </div>
-    </section>
+      <Accordion class="is_qa mt-3" title="画像付きの質問です">
+        {#snippet figure()}
+          <img src="https://picsum.photos/id/60/400/300" alt="" />
+        {/snippet}
+        {#snippet children()}
+          <p>回答部分に画像を表示する例ですPCでは横並び、スマホでは縦並びになります</p>
+        {/snippet}
+      </Accordion>
+    </div>
+  </section>
 
-    <!-- Panel Preview -->
+  <!-- Panel Preview -->
   <section class="mt-12">
-      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-      <h2 class="mr-auto mb-0 leading-none pt-1">Panel
-      </h2>
-      <button onclick={(e) => openSnippetModal(e, panelCss)} class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
-      </div>
-      <div class="mt-6">
+    <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+      <h2 class="mr-auto mb-0 leading-none pt-1">Panel</h2>
+      <button onclick={(e) => openModal(e, panelCss)} class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+    </div>
+    <div class="mt-6">
       <h3>1. class="panel is_flow img20 mt-3"</h3>
-        <Panel class="is_flow img20 mt-3">
+      <Panel class="is_flow img20 mt-3">
         {#snippet children()}
           <PanelItem>
             {#snippet figure()}<img src="https://picsum.photos/id/103/400/300" alt="" />{/snippet}
@@ -490,47 +473,45 @@ mount(App, { target: document.getElementById('app')! });`
             {/snippet}
           </PanelItem>
         {/snippet}
-        </Panel>
-      </div>
-    </section>
+      </Panel>
+    </div>
+  </section>
 
-    <!-- ImgText Preview -->
+  <!-- ImgText Preview -->
   <section class="wrapper into bg-purple-100 mt-12">
-      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-      <h2 class="mr-auto mb-0 leading-none pt-1">ImgText
-      </h2>
-      <button onclick={(e) => openSnippetModal(e, imgTextCss)} class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
-      </div>
-      <div class="mt-6">
+    <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+      <h2 class="mr-auto mb-0 leading-none pt-1">ImgText</h2>
+      <button onclick={(e) => openModal(e, imgTextCss)} class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+    </div>
+    <div class="mt-6">
       <ImgText class="bp-sm mt-3">
         {#snippet figure()}<img src="https://picsum.photos/id/10/400/300" alt="" />{/snippet}
-          {#snippet children()}
+        {#snippet children()}
           <h3>1. class="img_text bp-sm mt-3"</h3>
-            <p>基本ブレイクポイントはTailwindのmax-md(767px)<br />
-              bp-smクラスでmax-sm(639px)に変更できます
-            </p>
-          {/snippet}
-        </ImgText>
-      </div>
-      <div class="mt-6">
+          <p>基本ブレイクポイントはTailwindのmax-md(767px)<br />
+             bp-smクラスでmax-sm(639px)に変更できます
+          </p>
+        {/snippet}
+      </ImgText>
+    </div>
+    <div class="mt-6">
       <ImgText class="bp-sm img30 is_rev mt-3">
         {#snippet figure()}<img src="https://picsum.photos/id/20/400/300" alt="" />{/snippet}
-          {#snippet children()}
+        {#snippet children()}
           <h3>2. class="img_text bp-sm img30 is_rev mt-3"</h3>
           <p>画像30%指定かつ左右反転</p>
-          {/snippet}
-        </ImgText>
-      </div>
-    </section>
+        {/snippet}
+      </ImgText>
+    </div>
+  </section>
 
-    <!-- Cards Preview -->
+  <!-- Cards Preview -->
   <section class="mt-12">
-      <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-      <h2 class="mr-auto mb-0 leading-none pt-1">Cards
-      </h2>
-      <button onclick={(e) => openSnippetModal(e, cardsCss)} class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
-      </div>
-      <div class="mt-6">
+    <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+      <h2 class="mr-auto mb-0 leading-none pt-1">Cards</h2>
+      <button onclick={(e) => openModal(e, cardsCss)} class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+    </div>
+    <div class="mt-6">
       <h3>1. class="cards col3 justify-center mt-3"</h3>
       <Cards class="col3 justify-center mt-3">
         {#snippet children()}
@@ -539,14 +520,14 @@ mount(App, { target: document.getElementById('app')! });`
               {#snippet figure()}<img src="https://picsum.photos/id/10/400/250" alt="" />{/snippet}
               {#snippet children()}
                 <h4>Card {i}</h4>
-                <p>col? でPCカラム数指定。max-mdで全種2カラム、max-xs(479px)で1カラムに</p>
+                <p>col? でPCカラム数指定. max-mdで全種2カラム, max-xs(479px)で1カラムに</p>
               {/snippet}
             </CardItem>
           {/each}
         {/snippet}
-        </Cards>
-      </div>
-      <div class="mt-6">
+      </Cards>
+    </div>
+    <div class="mt-6">
       <h3>2. class="cards col4 min2 justify-center mt-3"</h3>
       <Cards class="col4 min2 justify-center mt-3">
         {#snippet children()}
@@ -560,9 +541,9 @@ mount(App, { target: document.getElementById('app')! });`
             </CardItem>
           {/each}
         {/snippet}
-        </Cards>
-      </div>
-      <div class="mt-6">
+      </Cards>
+    </div>
+    <div class="mt-6">
       <h3>3. class="cards col3 is_layer justify-center mt-3"</h3>
       <Cards class="col3 is_layer justify-center mt-3">
         {#snippet children()}
@@ -582,9 +563,9 @@ mount(App, { target: document.getElementById('app')! });`
             </CardItem>
           {/each}
         {/snippet}
-        </Cards>
-      </div>
-      <div class="mt-6">
+      </Cards>
+    </div>
+    <div class="mt-6">
       <h3>4. class="cards colflex mt-3"</h3>
       <Cards class="colflex mt-3">
         {#snippet children()}
@@ -597,9 +578,9 @@ mount(App, { target: document.getElementById('app')! });`
             </CardItem>
           {/each}
         {/snippet}
-        </Cards>
-      </div>
-      <div class="mt-6">
+      </Cards>
+    </div>
+    <div class="mt-6">
       <h3>5. class="cards colfix" style="--itemW: 200px"</h3>
       <Cards class="colfix mt-3 justify-center" style="--itemW: 200px">
         {#snippet children()}
@@ -612,17 +593,14 @@ mount(App, { target: document.getElementById('app')! });`
             </CardItem>
           {/each}
         {/snippet}
-        </Cards>
-      </div>
-    </section>
-  </main>
+      </Cards>
+    </div>
+  </section>
+</main>
 
 <footer class="bg-slate-900 text-white py-10 mt-20">
   <div class="wrapper into text-center">
     <p class="opacity-50 text-sm">&copy; 2026 RatioKit Project. All rights reserved.</p>
     <p class="opacity-30 text-[10px] mt-4">Build: 2025-12-31 19:15</p>
-</div>
+  </div>
 </footer>
-
-<style>
-</style>

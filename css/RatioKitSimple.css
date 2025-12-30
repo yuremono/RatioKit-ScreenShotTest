@@ -1,4 +1,22 @@
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap");
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+span {
+  display: inline-block;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 h1 {
   font-size: var(--h1FZ);
 }
@@ -16,12 +34,48 @@ h4 {
   font-size: var(--h3FZ);
 }
 
+main {
+  padding-inline: var(--PX, 40px);
+}
+
+main > * {
+  width: var(--wid, 1080px);
+  max-width: 100%;
+  margin-inline: auto;
+  position: relative;
+}
+main > * + * {
+  margin-top: var(--MY, 60px);
+}
+main > *:is(script, input[type=hidden]) {
+  margin-top: unset;
+}
+
+.wrapper {
+  padding-block: var(--MY, 60px);
+  margin-inline: var(--out, calc(50% - 50vw));
+  max-width: unset;
+  width: unset;
+  position: relative;
+}
+:where(.wrapper) > * {
+  margin-inline: auto;
+  max-width: 100%;
+}
+:where(.wrapper) > * + * {
+  margin-top: var(--MY, 60px);
+}
+
+.into {
+  padding-inline: var(--into, calc(50vw - clamp(0px, 50vw - var(--PX, 20px), var(--wid, 1080px) / 2)));
+}
+
 :root {
   --Higo: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "Meiryo", "Noto Sans JP", sans-serif;
   --Himi: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho", "MS PMincho", "Noto Serif JP", serif;
   --Yugo:"Yu Gothic", "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Meiryo", "Noto Sans JP", sans-serif;
   --Yumi: "Yu Mincho", "Hiragino Mincho ProN", "Hiragino Mincho Pro", "MS PMincho", "Noto Serif JP", serif;
-  --Tnr:'Times New Roman', Times, "Noto Serif JP", sans-serif;
+  --Tnr:"Times New Roman", Times, "Noto Serif JP", sans-serif;
   --Ser: "Noto Serif JP", serif;
   --San: "Noto Sans JP", sans-serif;
   --Sora: "Noto Sans JP", sans-serif;
@@ -41,12 +95,6 @@ h4 {
   font-family: var(--Eng);
 }
 
-:where(*, *::before, *::after) {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
 :root {
   --un: unset;
   --inh: inherit;
@@ -64,13 +112,6 @@ h4 {
 
 :root {
   --head: 84px;
-}
-@media (max-width: 767px) {
-  :root {
-    --head: 60px;
-  }
-}
-:root {
   --wid: 1080px;
   --MY: 120px;
   --MY25: calc(var(--MY, 60px)/4);
@@ -94,6 +135,11 @@ h4 {
   --in840: calc(50vw - clamp(0px, 50vw - var(--PX, 20px), 420px));
   --in720: calc(50vw - clamp(0px, 50vw - var(--PX, 20px), 360px));
   --out: calc(50% - 50vw);
+}
+@media (max-width: 767px) {
+  :root {
+    --head: 60px;
+  }
 }
 
 :root {
@@ -155,32 +201,6 @@ body {
   background-color: unset;
 }
 
-span {
-  display: inline-block;
-}
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-main {
-  padding-inline: var(--PX, 40px);
-}
-
-:where(main > *) {
-  width: var(--wid, 1080px);
-  max-width: 100%;
-  margin-inline: auto;
-  position: relative;
-}
-:where(main > *) + * {
-  margin-top: var(--MY, 60px);
-}
-:where(main > *):is(script, input[type=hidden]) {
-  margin-top: unset;
-}
-
 .wid {
   width: var(--wid, 1080px);
 }
@@ -191,25 +211,6 @@ main {
 
 .MY {
   margin-block: var(--MY, 60px);
-}
-
-.wrapper {
-  padding-block: var(--MY, 60px);
-  margin-inline: var(--out, calc(50% - 50vw));
-  max-width: unset;
-  width: unset;
-  position: relative;
-}
-:where(.wrapper) > * {
-  margin-inline: auto;
-  max-width: 100%;
-}
-:where(.wrapper) > * + * {
-  margin-top: var(--MY, 60px);
-}
-
-.into {
-  padding-inline: var(--into, calc(50vw - clamp(0px, 50vw - var(--PX, 20px), var(--wid, 1080px) / 2)));
 }
 
 .intoL {
@@ -237,16 +238,24 @@ main {
 }
 
 .cards {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   gap: var(--gap, 30px);
 }
 :where(.cards) .btn {
   min-width: 100%;
 }
 :where(.cards) .item {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
   gap: 1em;
   margin-top: unset;
 }
@@ -267,10 +276,13 @@ main {
 }
 :where(.cards).is_layer .item figure img {
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 :where(.cards).colflex .item {
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
   width: auto;
 }
 :where(.cards).colfix {
@@ -318,13 +330,17 @@ main {
 @media (max-width: 767px) {
   :where(.cards):not(.bp-sm) > .item {
     width: calc(50% - var(--gap, 30px) / 2);
-    flex: unset;
+    -webkit-box-flex: unset;
+        -ms-flex: unset;
+            flex: unset;
   }
 }
 @media (max-width: 639px) {
   :where(.cards):is(.bp-sm) > .item {
     width: calc(50% - var(--gap, 30px) / 2);
-    flex: unset;
+    -webkit-box-flex: unset;
+        -ms-flex: unset;
+            flex: unset;
   }
 }
 @media (max-width: 479px) {
@@ -338,6 +354,7 @@ main {
 }
 
 .accordion::details-content {
+  -webkit-transition: height 0.4s ease, content-visibility 0.4s allow-discrete;
   transition: height 0.4s ease, content-visibility 0.4s allow-discrete;
   height: 0;
   overflow: hidden;
@@ -353,6 +370,7 @@ main {
   background-color: var(--qBG, var(--bc, #fbf9ef));
   padding: 1em;
   padding-right: 2.5em;
+  -webkit-transition: 0.4s;
   transition: 0.4s;
 }
 :where(.accordion) summary:hover {
@@ -371,6 +389,7 @@ main {
   right: 1em;
   top: 50%;
   translate: 0 -50%;
+  -webkit-transition: 0.4s;
   transition: 0.4s;
   rotate: 90deg;
 }
@@ -383,16 +402,26 @@ main {
   background-color: var(--aBG, var(--wh, #fff));
 }
 :where(.accordion) .has_img {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-direction: row;
-  align-items: center;
-  flex-wrap: wrap;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   gap: 1em;
   width: 100%;
 }
 :where(.accordion) .has_img figure {
   max-width: 100%;
-  order: 1;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
   width: var(--imgW, 30%);
   margin-left: auto;
 }
@@ -402,7 +431,9 @@ main {
   display: block;
 }
 :where(.accordion) .has_img > div {
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 @media (max-width: 767px) {
   :where(.accordion) .has_img:not(.bp-sm) figure {
@@ -430,11 +461,13 @@ main {
   position: absolute;
   left: 1em;
   top: 50%;
-  transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
   border-radius: var(--bfRad, var(--rad, 0vmin));
   width: 2em;
   aspect-ratio: 1;
-  align-content: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
   text-align: center;
 }
 :where(.accordion).is_qa summary:before {
@@ -460,8 +493,11 @@ main {
   background-color: var(--bg, var(--bc, #fbf9ef));
   counter-increment: cnt;
   width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
   border-radius: var(--rad, 0vmin);
   padding: var(--p, 1em);
   gap: var(--gap, 30px);
@@ -474,7 +510,9 @@ main {
   width: var(--imgW, 30%);
 }
 :where(.panel) .item figure:is(.is_rev *) {
-  order: -1;
+  -webkit-box-ordinal-group: 0;
+      -ms-flex-order: -1;
+          order: -1;
 }
 :where(.panel) .item figure img {
   width: 100%;
@@ -482,7 +520,9 @@ main {
   display: block;
 }
 :where(.panel) .item > div {
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 :where(.panel) .item > div .sub {
   font-size: 0.75em;
@@ -520,11 +560,13 @@ main {
   position: absolute;
   top: calc(100% + 1em);
   left: 50%;
-  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
   width: var(--afterW, 2em);
   aspect-ratio: 1;
   background-color: var(--afterBG, var(--sc, #3194c9));
-  clip-path: polygon(0 0%, 50% 85%, 100% 0%);
+  -webkit-clip-path: polygon(0 0%, 50% 85%, 100% 0%);
+          clip-path: polygon(0 0%, 50% 85%, 100% 0%);
 }
 :where(.panel).is_flow .item:last-child:after {
   display: none;
@@ -596,8 +638,11 @@ main {
 
 :is(.flex55, .flex28, .flex37, .flex46, .flex64, .flex73, .flex82) {
   gap: var(--gap, 30px);
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
 }
 :where(:is(.flex55, .flex28, .flex37, .flex46, .flex64, .flex73, .flex82)) img {
   width: 100%;
@@ -614,9 +659,14 @@ main {
 }
 
 .img_text {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
   gap: var(--gap, 30px);
   --imgW: calc(50% - var(--gap, 30px)/2);
 }
@@ -694,32 +744,42 @@ main {
   height: auto;
 }
 :where(.img_text) > div {
-  flex: 1;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
 }
 @media (max-width: 767px) {
   :where(.img_text):not(.bp-sm) figure {
-    order: 1;
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
     width: 100%;
   }
 }
 @media (max-width: 639px) {
   :where(.img_text):is(.bp-sm) figure {
-    order: 1;
+    -webkit-box-ordinal-group: 2;
+        -ms-flex-order: 1;
+            order: 1;
     width: 100%;
   }
 }
 :where(.img_text).is_rev figure {
-  order: 1;
+  -webkit-box-ordinal-group: 2;
+      -ms-flex-order: 1;
+          order: 1;
 }
 @media (max-width: 767px) {
   :where(.img_text).is_rev:not(.bp-sm) figure {
-    order: unset;
+    -webkit-box-ordinal-group: unset;
+        -ms-flex-order: unset;
+            order: unset;
   }
 }
 @media (max-width: 639px) {
   :where(.img_text).is_rev:is(.bp-sm) figure {
-    order: unset;
+    -webkit-box-ordinal-group: unset;
+        -ms-flex-order: unset;
+            order: unset;
   }
-}
-
-/*# sourceMappingURL=RatioKitSimple.css.map */
+}/*# sourceMappingURL=RatioKitSimple.css.map */

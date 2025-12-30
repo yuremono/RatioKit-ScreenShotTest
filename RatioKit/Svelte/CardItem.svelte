@@ -4,12 +4,12 @@
    * Cards コンポーネントの子要素として使用する個別カードです。
    */
   let { 
-    className = "", 
+    class: className = "", 
     style = {}, 
     figure, 
     children 
   } = $props<{
-    className?: string;
+    class?: string;
     style?: any;
     figure?: import('svelte').Snippet;
     children?: import('svelte').Snippet;
@@ -21,9 +21,7 @@
     <figure>{@render figure()}</figure>
   {/if}
   <div>
-    {#if children}
-      {@render children()}
-    {/if}
+    {@render children?.()}
   </div>
 </div>
 

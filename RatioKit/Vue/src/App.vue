@@ -8,7 +8,7 @@ import {
   ImgText, 
   Cards, 
   CardItem 
-} from '@ratiokit';
+} from './components/RatioKit';
 import './RatioKit.scss';
 import './SnippetModal.css';
 
@@ -16,32 +16,36 @@ interface ContentItem {
   type: 'text' | 'code';
   content: string;
   title?: string;
+  noCopy?: boolean;
 }
 
+/**
+ * RatioKit Gallery - Vue Preview
+ */
 const showModal = ref(false);
 const isSetup = ref(false);
 const modalItems = ref<ContentItem[]>([]);
 const copyStates = ref<{[key: number]: string}>({});
+
+const flexRef = ref<HTMLElement | null>(null);
+const accordionRef = ref<HTMLElement | null>(null);
+const panelRef = ref<HTMLElement | null>(null);
+const imgTextRef = ref<HTMLElement | null>(null);
+const cardsRef = ref<HTMLElement | null>(null);
 
 const formatHTML = (html: string) => {
   let tab = '    ';
   let result = '';
   let indent = '';
 
-  // タグの前後に改行を入れて分割しやすくする
-  const formatted = html.replace(/</g, '\n<').replace(/>/g, '>\n');
-
-  formatted.split('\n').forEach(function(element) {
+  html.replace(/>\s*</g, '>\n<').split('\n').forEach(function(element) {
     element = element.trim();
     if (!element) return;
-
     if (element.match(/^<\/\w/)) {
       indent = indent.substring(tab.length);
     }
-    
     result += indent + element + '\n';
-    
-    if (element.match(/^<\w[^>]*[^\/]>$/) && !element.match(/^<(input|img|br|hr|meta|link)/)) {
+    if (element.match(/^<\w[^>]*[^\/]>$/) && !element.match(/^<(input|img|br|hr)/)) {
       indent += tab;
     }
   });
@@ -52,23 +56,22 @@ const formatHTML = (html: string) => {
 const cleanAttributes = (el: HTMLElement) => {
   const attrs = el.attributes;
   for (let i = attrs.length - 1; i >= 0; i--) {
-    const name = attrs[i].name;
-    if (name.startsWith('data-cursor-') || name.startsWith('data-v-') || name === 'ref') {
-      el.removeAttribute(name);
+    const attr = attrs[i];
+    if (attr && (attr.name.startsWith('data-cursor-') || attr.name.startsWith('data-v-') || attr.name === 'ref')) {
+      el.removeAttribute(attr.name);
     }
   }
   Array.from(el.children).forEach(child => cleanAttributes(child as HTMLElement));
 };
 
-const openSnippetModal = (event: MouseEvent, css: string) => {
+const openModal = (event: MouseEvent, css: string) => {
   isSetup.value = false;
-  const btn = event.currentTarget as HTMLButtonElement;
-  const section = btn.closest('section');
-  if (!section) return;
-
-  const clone = section.cloneNode(true) as HTMLElement;
-  const snippetBtn = clone.querySelector('button');
-  if (snippetBtn) snippetBtn.remove();
+  const sectionRef = (event.currentTarget as HTMLElement).closest('section');
+  if (!sectionRef) return;
+  const clone = sectionRef.cloneNode(true) as HTMLElement;
+  
+  const btn = clone.querySelector('button');
+  if (btn) btn.remove();
   
   cleanAttributes(clone);
 
@@ -77,8 +80,8 @@ const openSnippetModal = (event: MouseEvent, css: string) => {
   const content = html + tailwindCdn + '\n\n<style>\n' + css.trim() + '\n</style>';
   
   modalItems.value = [{ type: 'code', content }];
-  copyStates.value = { 0: 'Copy' };
   showModal.value = true;
+  copyStates.value = { 0: 'Copy' };
   document.body.style.overflow = 'hidden';
 };
 
@@ -205,7 +208,9 @@ const handleDownload = () => {
 const handleCopy = (index: number, text: string) => {
   navigator.clipboard.writeText(text).then(() => {
     copyStates.value[index] = 'Copied!';
-    setTimeout(() => copyStates.value[index] = 'Copy', 2000);
+    setTimeout(() => {
+      copyStates.value[index] = 'Copy';
+    }, 2000);
   });
 };
 
@@ -311,6 +316,7 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
 @media (max-width: 767px) { :where(.cards):not(.bp-sm) > .item { width: calc(50% - var(--gap, 30px) / 2); -webkit-box-flex: unset; -ms-flex: unset; flex: unset; } }
 @media (max-width: 639px) { :where(.cards):is(.bp-sm) > .item { width: calc(50% - var(--gap, 30px) / 2); -webkit-box-flex: unset; -ms-flex: unset; flex: unset; } }
 @media (max-width: 479px) { :where(.cards):not(.min2) > .item { width: 100%; } }`;
+
 </script>
 
 <template>
@@ -333,24 +339,22 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
         </button>
         <button class="close-btn" @click="closeModal">Close</button>
       </div>
-      <div class="code-content p-6 overflow-y-auto">
+      <div class="code-content px-10 py-8 overflow-y-auto">
         <div v-for="(item, index) in modalItems" :key="index" :class="item.type === 'text' ? 'mb-6' : 'mb-8 relative group'">
-          <h3 v-if="item.title" class="text-xl font-bold mb-3 text-white">
-            <template v-if="isSetup && item.title.startsWith('Step')">
-              <span class="setup-step-number">{{ item.title.split(':')[0].replace('Step ', '') }}</span>
-              {{ item.title.split(':')[1] || item.title }}
-            </template>
-            <template v-else>{{ item.title }}</template>
+          <h3 v-if="item.title" class="text-xl mb-4 text-white">
+            {{ item.title }}
           </h3>
-          <p v-if="item.type === 'text'" class="text-gray-300 leading-relaxed whitespace-pre-wrap">{{ item.content }}</p>
+          <p v-if="item.type === 'text'" class="text-gray-300 leading-relaxed whitespace-pre-wrap">
+            {{ item.content }}
+          </p>
           <div v-else class="relative">
-            <button v-if="isSetup" 
+            <button v-if="isSetup && !item.noCopy" 
               class="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 px-2 rounded z-10"
               @click="handleCopy(index, item.content)"
             >
               {{ copyStates[index] || 'Copy' }}
             </button>
-            <pre class="bg-black/50 p-4 rounded border border-gray-700 overflow-x-auto"><code class="text-sm font-mono text-blue-300">{{ item.content }}</code></pre>
+            <pre class="bg-black/50 p-6 rounded border border-gray-700 overflow-x-auto"><code class="text-sm font-mono text-blue-300">{{ item.content }}</code></pre>
           </div>
         </div>
       </div>
@@ -361,17 +365,15 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
     <h1 class="mr-auto mb-0 leading-none pt-1">
       Vue Gallery
     </h1>
-    <button @click="openSetupModal" class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1 md:min-h-[3em]">Setup / Download</button>
+    <button @click="openSetupModal" class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1 md:min-h-[3em]">Setup / Download</button>
   </header>
 
   <main class="py-[var(--head)] PX" id="contents">
-
     <!-- FlexRatio Preview -->
-    <section class="mt-8">
+    <section class="mt-8" ref="flexRef">
       <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-        <h2 class="mr-auto mb-0 leading-none pt-1">FlexRatio
-        </h2>
-        <button @click="openSnippetModal($event, flexCss)" class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+        <h2 class="mr-auto mb-0 leading-none pt-1">FlexRatio</h2>
+        <button @click="openModal($event, flexCss)" class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
       </div>
       <div class="mt-6">
         <h3>1. class="flex55 mt-3"</h3>
@@ -397,11 +399,10 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
     </section>
 
     <!-- Accordion Preview -->
-    <section class="wrapper into bg-green-100 mt-12">
+    <section class="wrapper into bg-green-100 mt-12" ref="accordionRef">
       <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-        <h2 class="mr-auto mb-0 leading-none pt-1">Accordion
-        </h2>
-        <button @click="openSnippetModal($event, accordionCss)" class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+        <h2 class="mr-auto mb-0 leading-none pt-1">Accordion</h2>
+        <button @click="openModal($event, accordionCss)" class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
       </div>
       <div class="mt-6">
         <h3>1. class="accordion mt-3"</h3>
@@ -427,11 +428,10 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
     </section>
 
     <!-- Panel Preview -->
-    <section class="mt-12">
+    <section class="mt-12" ref="panelRef">
       <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-        <h2 class="mr-auto mb-0 leading-none pt-1">Panel
-        </h2>
-        <button @click="openSnippetModal($event, panelCss)" class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+        <h2 class="mr-auto mb-0 leading-none pt-1">Panel</h2>
+        <button @click="openModal($event, panelCss)" class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
       </div>
       <div class="mt-6">
         <h3>1. class="panel is_flow img20 mt-3"</h3>
@@ -451,11 +451,10 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
     </section>
 
     <!-- ImgText Preview -->
-    <section class="wrapper into bg-purple-100 mt-12">
+    <section class="wrapper into bg-purple-100 mt-12" ref="imgTextRef">
       <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-        <h2 class="mr-auto mb-0 leading-none pt-1">ImgText
-        </h2>
-        <button @click="openSnippetModal($event, imgTextCss)" class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+        <h2 class="mr-auto mb-0 leading-none pt-1">ImgText</h2>
+        <button @click="openModal($event, imgTextCss)" class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
       </div>
       <div class="mt-6">
         <ImgText class="bp-sm mt-3">
@@ -476,11 +475,10 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
     </section>
 
     <!-- Cards Preview -->
-    <section class="mt-12">
+    <section class="mt-12" ref="cardsRef">
       <div class="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-        <h2 class="mr-auto mb-0 leading-none pt-1">Cards
-        </h2>
-        <button @click="openSnippetModal($event, cardsCss)" class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
+        <h2 class="mr-auto mb-0 leading-none pt-1">Cards</h2>
+        <button @click="openModal($event, cardsCss)" class="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1">snippet</button>
       </div>
       <div class="mt-6">
         <h3>1. class="cards col3 justify-center mt-3"</h3>
@@ -488,7 +486,7 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
           <CardItem v-for="i in [1, 2, 3]" :key="i" class="sheet">
             <template #figure><img src="https://picsum.photos/id/10/400/250" alt="" /></template>
             <h4>Card {{ i }}</h4>
-            <p>col? でPCカラム数指定。max-mdで全種2カラム、max-xs(479px)で1カラムに</p>
+            <p>col? でPCカラム数指定. max-mdで全種2カラム, max-xs(479px)で1カラムに</p>
           </CardItem>
         </Cards>
       </div>
@@ -498,7 +496,7 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
           <CardItem v-for="i in [1, 2, 3, 4]" :key="i" class="board">
             <template #figure><img src="https://picsum.photos/id/20/400/250" alt="" /></template>
             <h4>Card {{ i }}</h4>
-            <p>min2指定によりスマホサイズでも2列を維持します</p>
+            <p>min2指定によりスマホサイズ電源列を維持します</p>
           </CardItem>
         </Cards>
       </div>
@@ -535,7 +533,6 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
     </section>
   </main>
 
-  <!-- Footer -->
   <footer class="bg-slate-900 text-white py-10 mt-20">
     <div class="wrapper into text-center">
       <p class="opacity-50 text-sm">&copy; 2026 RatioKit Project. All rights reserved.</p>
@@ -543,7 +540,3 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
     </div>
   </footer>
 </template>
-
-<style scoped>
-/* Vue 固有のスタイル */
-</style>

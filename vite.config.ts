@@ -21,6 +21,16 @@ export default defineConfig({
     port: 8080,
     open: false,
   },
+  optimizeDeps: {
+    esbuildOptions: {
+      target: 'esnext'
+    },
+    exclude: [
+      '@tailwindcss/oxide',
+      'lightningcss',
+      'fsevents'
+    ]
+  },
   build: {
     rollupOptions: {
       input: {

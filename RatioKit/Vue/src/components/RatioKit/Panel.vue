@@ -5,23 +5,20 @@
  */
 interface Props {
   /** モディファイアクラス (is_flow, img20, img30, bp-sm 等) */
-  className?: string;
+  class?: string;
   /** インラインスタイル */
   style?: any;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-  className: "mb-0"
+  class: "mb-0"
 });
 </script>
 
 <template>
-  <div :class="['panel', className]" :style="style">
+  <div :class="['panel', props.class]" :style="style">
     <slot></slot>
   </div>
 </template>
 
 
-<style scoped>
-/* このコンポーネント固有のスタイルが必要な場合はここに記述してください */
-</style>

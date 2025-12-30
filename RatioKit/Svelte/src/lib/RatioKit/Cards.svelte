@@ -21,11 +21,6 @@
 </script>
 
 <div class="cards {className}" {style}>
-  {#if children}
-    {@render children()}
-  {/if}
+  {@render children?.()}
 </div>
 
-<style>
-  /* 既存の RatioKit.scss で制御されます */
-</style>
