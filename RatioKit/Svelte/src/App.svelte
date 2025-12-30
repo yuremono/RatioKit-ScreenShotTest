@@ -122,7 +122,7 @@
         <h2 class="mr-auto mb-0 leading-none pt-1">ImgText</h2>
       </div>
       <div class="mt-6">
-        <ImgText class="img_text has_img bp-sm mt-3">
+        <ImgText class="has_img bp-sm mt-3">
           {#snippet figure()}
             <img src="https://picsum.photos/id/10/400/300" alt="" />
           {/snippet}
@@ -135,7 +135,7 @@
         </ImgText>
       </div>
       <div class="mt-6">
-        <ImgText class="img_text has_img bp-sm img30 is_rev mt-3">
+        <ImgText class="has_img bp-sm img30 is_rev mt-3">
           {#snippet figure()}
             <img src="https://picsum.photos/id/20/400/300" alt="" />
           {/snippet}
@@ -154,7 +154,7 @@
       </div>
       <div class="mt-6">
         <h3>1. className="cards col3 justify-center mt-3"</h3>
-        <Cards class="cards col3 justify-center mt-3">
+        <Cards class="col3 justify-center mt-3">
           {#each Array(3) as _, i}
             <CardItem class="has_img sheet" key={i}>
               {#snippet figure()}
@@ -171,7 +171,7 @@
 
       <div class="mt-6">
         <h3 class="">2. className="cards col4 min2 justify-center mt-3"</h3>
-        <Cards class="cards col4 min2 justify-center mt-3">
+        <Cards class="col4 min2 justify-center mt-3">
           {#each Array(4) as _, i}
             <CardItem class="has_img board" key={i}>
               {#snippet figure()}
@@ -188,7 +188,7 @@
 
       <div class="mt-6">
         <h3>3. className="cards col3 is_layer justify-center mt-3"</h3>
-        <Cards class="cards col3 is_layer justify-center mt-3">
+        <Cards class="col3 is_layer justify-center mt-3">
           {#each Array(3) as _, i}
             <CardItem class="has_img" key={i}>
               {#snippet figure()}
@@ -207,7 +207,7 @@
 
       <div class="mt-6">
         <h3>4. className="cards colflex mt-3"</h3>
-        <Cards class="cards colflex mt-3">
+        <Cards class="colflex mt-3">
           {#each Array(3) as _, i}
             <CardItem class="bg-gray-100 p-4 rounded" key={i}>
               {#snippet children()}
@@ -221,7 +221,7 @@
 
       <div class="mt-6">
         <h3>5. className="cards colfix" style="--itemW: 200px" </h3>
-        <Cards class="cards colfix mt-3 justify-center" style="--itemW: 200px">
+        <Cards class="colfix mt-3 justify-center" style="--itemW: 200px">
           {#each Array(4) as _, i}
             <CardItem class="bg-gray-100 p-4 rounded" key={i}>
               {#snippet children()}
