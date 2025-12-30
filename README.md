@@ -1,20 +1,34 @@
-# RatioKit-ScreenShotTest
+# RatioKit
 
-React コンポーネントと SCSS テンプレートの動作確認用プロジェクトです。
+RatioKit は、React、Vue、Svelte の各フレームワークに対応した、レスポンシブなデザインと比率（Ratio）を重視した UI コンポーネントライブラリおよび SCSS テンプレートのプロジェクトです。
 
-## プレビュー方法
+## 主な機能と構成
 
-以下のコマンドを実行して開発サーバーを起動してください。
+- **マルチフレームワーク対応**: React, Vue, Svelte 5 のそれぞれで利用可能な共通のコンポーネントセットを提供。
+- **Ratio-based Design**: 画像やレイアウトの比率を維持したまま柔軟にレスポンシブ対応が可能。
+- **Tailwind CSS v4 対応**: 最新の Tailwind CSS v4 環境での動作を想定した SCSS 設計。
+- **プレビュー機能**: Vite を使用して、各フレームワークのコンポーネントをブラウザ上で即座に確認可能。
+
+## ディレクトリ構造
+
+- `RatioKit/`: 各フレームワーク（React, Vue, Svelte）のコンポーネントソースおよび最新の SCSS ソース。
+- `css/`: 各環境で即座に利用可能なコンパイル済み CSS ファイル。
+- `scss/`: プロジェクト全体のベースとなる SCSS 構成ファイル群。
+
+## プレビューの実行方法
+
+Vite を使用して開発サーバーを起動し、各プレビューページにアクセスしてください。
 
 ```bash
+npm install
 npx vite
 ```
 
-サーバー起動後、以下の URL で React コンポーネントのプレビューを確認できます。
-[http://localhost:8080/ReactPreview.html](http://localhost:8080/ReactPreview.html)
+### プレビューページ一覧
+- [React プレビュー](http://localhost:8080/ReactPreview.html)
+- [Vue プレビュー](http://localhost:8080/VuePreview.html)
+- [Svelte プレビュー](http://localhost:8080/SveltePreview.html)
 
-## 主なディレクトリ
-- `RatioKit/`: React コンポーネントおよび最新の SCSS ソース
-- `css/`: コンパイル済みの CSS
-- `debug_css/`: 特定の挙動を確認するためのデバッグ用ファイル
+## Vercel デプロイについて
 
+このプロジェクトは Vercel へのデプロイを想定しており、GitHub と連携することで自動的にプレビュー環境が構築されます。
