@@ -6,6 +6,13 @@
     <title>React RatioKit Test</title>
     <!-- TailwindをReact経由ではなくCDNで読み込んでおく（SCSSの動作確認のため） -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        corePlugins: {
+          preflight: false,
+        }
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
