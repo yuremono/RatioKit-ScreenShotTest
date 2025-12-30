@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RatioKit Starter - HTML/CSS</title>
+    <!-- Tailwind v4 CDN (Demo purposes) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            corePlugins: {
+                preflight: false,
+            }
+        }
+    </script>
+    <!-- RatioKit Styles -->
+    <link rel="stylesheet" href="css/RatioKit.css">
+</head>
+<body class="bg-white text-gray-900 min-h-screen font-sans">
+    <!-- Header -->
+    <header class="into fixed w-full min-h-[var(--head)] py-4 left-0 top-0 z-50 bg-white/90 backdrop-blur-md border-b border-gray-100 flex items-center">
+        <div class="flex items-center justify-between w-full">
+            <h1 class="text-2xl font-black tracking-tighter m-0">RatioKit <span class="text-blue-600">Starter</span></h1>
+            <nav class="hidden md:flex gap-8 font-bold text-sm">
+                <a href="#features" class="hover:text-blue-600 transition-colors">Features</a>
+                <a href="#demo" class="hover:text-blue-600 transition-colors">Demo</a>
+                <a href="https://github.com/yuremono/RatioKit-ScreenShotTest" target="_blank" rel="noreferrer" class="hover:text-blue-600 transition-colors">GitHub</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main class="pt-[var(--head)]">
+        <section class="wrapper into py-20 bg-slate-50">
+            <div class="max-w-3xl">
+                <h2 class="text-5xl font-black mb-6 leading-tight">
+                    HTMLとCSSだけで、<br />
+                    比率ベースの美しいサイトを。
+                </h2>
+                <p class="text-xl text-gray-600 leading-relaxed mb-10">
+                    RatioKitはフレームワークなしでも真価を発揮します。
+                    用意されたCSSクラスをHTMLタグに付与するだけで、複雑なレスポンシブレイアウトが完成します。
+                </p>
+                <div class="flex gap-4">
+                    <a href="#demo" class="bg-blue-600 text-white px-8 py-4 rounded-full font-bold hover:bg-blue-700 transition-colors shadow-lg shadow-blue-200">
+                        デモを見る
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features - FlexRatio -->
+        <section id="features" class="wrapper into py-20">
+            <div class="mb-12">
+                <span class="text-blue-600 font-bold tracking-widest uppercase text-sm">FlexRatio</span>
+                <h2 class="text-3xl font-bold mt-2">柔軟な比率レイアウト</h2>
+            </div>
+            
+            <div class="flex64 gap-12 AIC">
+                <div>
+                    <h3 class="text-2xl font-bold mb-4">6:4 の黄金比レイアウト</h3>
+                    <p class="text-gray-600 leading-loose">
+                        <code>flex64</code> クラスを指定するだけで、デスクトップでは完璧な比率で配置され、
+                        モバイルでは自動的に最適化されたスタックレイアウトに切り替わります。
+                    </p>
+                </div>
+                <figure class="rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="https://picsum.photos/id/160/800/600" alt="Demo" />
+                </figure>
+            </div>
+        </section>
+
+        <!-- Components Demo - Cards -->
+        <section id="demo" class="wrapper into py-20 bg-gray-50 rounded-[3rem] my-20">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold">主要コンポーネント</h2>
+                <p class="text-gray-500 mt-4">HTML版は、クラス名のみで構築可能なシンプル設計です。</p>
+            </div>
+
+            <div class="cards col3 gap-8">
+                <div class="item sheet p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+                    <figure class="rounded-xl overflow-hidden mb-4">
+                        <img src="https://picsum.photos/id/101/400/300" alt="Card" />
+                    </figure>
+                    <h4 class="text-xl font-bold">Responsive Cards</h4>
+                    <p class="text-gray-600 text-sm"><code>col3</code> などのクラスを親に指定するだけで、グリッドが構成されます。</p>
+                </div>
+                <div class="item sheet p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+                    <figure class="rounded-xl overflow-hidden mb-4">
+                        <img src="https://picsum.photos/id/102/400/300" alt="Card" />
+                    </figure>
+                    <h4 class="text-xl font-bold">Ratio Control</h4>
+                    <p class="text-gray-600 text-sm">画像の比率を保ち、テキストとのバランスを自動調整します。</p>
+                </div>
+                <div class="item sheet p-6 bg-white rounded-2xl shadow-sm border border-gray-100">
+                    <figure class="rounded-xl overflow-hidden mb-4">
+                        <img src="https://picsum.photos/id/103/400/300" alt="Card" />
+                    </figure>
+                    <h4 class="text-xl font-bold">Pure CSS</h4>
+                    <p class="text-gray-600 text-sm">JavaScriptなしで動作するため、あらゆる環境で利用可能です。</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Accordion & Panel -->
+        <section class="wrapper into py-20">
+            <div class="flex55 gap-16">
+                <div>
+                    <h3 class="text-2xl font-bold mb-8">よくある質問</h3>
+                    <div class="space-y-4">
+                        <details class="accordion is_qa">
+                            <summary>HTML版のメリットは？</summary>
+                            <div>
+                                <p>軽量で依存関係がなく、どのようなCMSや静的サイトでもすぐに利用できる点です。</p>
+                            </div>
+                        </details>
+                        <details class="accordion is_qa">
+                            <summary>CSS変数のカスタマイズは？</summary>
+                            <div>
+                                <p><code>:root</code> 内の変数を上書きするだけで、全コンポーネントの色や余白を変更できます。</p>
+                            </div>
+                        </details>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold mb-8">導入の流れ</h3>
+                    <div class="panel is_flow img20">
+                        <div class="item">
+                            <div>
+                                <h4 class="font-bold"><span class="text-blue-600 mr-2">01</span>CSSの読込</h4>
+                                <p class="text-sm text-gray-500"><code>RatioKit.css</code> をHTMLのhead内で読み込みます。</p>
+                            </div>
+                            <figure><img src="https://picsum.photos/id/201/200/200" alt="Step" class="rounded-lg" /></figure>
+                        </div>
+                        <div class="item">
+                            <div>
+                                <h4 class="font-bold"><span class="text-blue-600 mr-2">02</span>HTMLの作成</h4>
+                                <p class="text-sm text-gray-500">定義済みのクラス名を使ってHTMLを記述します。</p>
+                            </div>
+                            <figure><img src="https://picsum.photos/id/202/200/200" alt="Step" class="rounded-lg" /></figure>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-white py-20 mt-20">
+        <div class="wrapper into text-center">
+            <h2 class="text-3xl font-bold mb-8">RatioKit Starter Kit (HTML)</h2>
+            <p class="opacity-50 text-sm">&copy; 2026 RatioKit Project. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
