@@ -68,40 +68,30 @@ RatioKit の基本スタイルは `RatioKit.scss` というグローバルな CS
 
 #### 原因と解決方法
 
-**原因**: Tailwind CSS v4 を Vite で使用する場合、CSS ファイル内で明示的にインポートする必要があります。
+**原因**: Tailwind CSS v4 を Vite で使用する場合、エントリーポイント（`main.tsx` や `main.ts`）で Tailwind を読み込む CSS ファイル（`style.css`）を明示的にインポートする必要があります。
 
-**解決方法**: `src/RatioKit.scss` の**先頭**（`@charset "utf-8";` の直後）に以下を追加してください：
+**解決方法**: `src/main.tsx`（または `main.ts`）の先頭付近で、`style.css` をインポートしてください。
 
-```scss
-@charset "utf-8";
-@import "tailwindcss";  // ← この行を追加
+```typescript
+import './style.css';      // Tailwind CSS v4 (@import "tailwindcss") を含む
+import './RatioKit.scss';  // RatioKit の独自スタイル
+```
 
-// ... 以下、既存のコード
+※ `style.css` の中身が以下のようになっていることを確認してください：
+```css
+@import "tailwindcss";
 ```
 
 #### 注意事項
-この変更により Tailwind の Preflight（CSSリセット）が有効になります。既存のスタイルと競合する場合は、プロジェクトルートに `tailwind.config.js` を作成して無効化できます：
+`RatioKit.scss` 内で `@import "tailwindcss";` を記述すると、Sass のコンパイルと競合して正しく動作しない場合があります。必ず CSS ファイル（`style.css`）側でインポートしてください。
 
-```javascript
-export default {
-  corePlugins: {
-    preflight: false
-  }
-}
-```
+### エントリーポイントでのインポート確認
 
-### エントリーポイントでのインポートエラー
-
-**React 環境**: `starter-main.tsx` または `main.tsx` で `RatioKit.scss` が正しくインポートされているか確認してください：
+各環境の `main.tsx` または `main.ts` で、以下の順序でインポートされているか確認してください：
 
 ```typescript
-import './RatioKit.scss';  // この行が必要
-```
-
-**Vue/Svelte 環境**: `main.ts` で同様に確認してください：
-
-```typescript
-import '../RatioKit.scss';  // パスはディレクトリ構造により異なります
+import './style.css';      // 1. Tailwind の読み込み
+import './RatioKit.scss';  // 2. RatioKit スタイルの読み込み
 ```
 
 ## 📂 ディレクトリ構造
