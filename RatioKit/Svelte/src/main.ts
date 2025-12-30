@@ -1,5 +1,4 @@
 import { mount } from 'svelte'
-import './style.css'
 import './RatioKit.scss'
 import App from './App.svelte'
 

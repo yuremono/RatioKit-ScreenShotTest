@@ -68,30 +68,29 @@ RatioKit の基本スタイルは `RatioKit.scss` というグローバルな CS
 
 #### 原因と解決方法
 
-**原因**: Tailwind CSS v4 を Vite で使用する場合、エントリーポイント（`main.tsx` や `main.ts`）で Tailwind を読み込む CSS ファイル（`style.css`）を明示的にインポートする必要があります。
+**原因**: Tailwind CSS v4 を Vite で使用する場合、Vite のプラグイン設定（`vite.config.ts`）が正しく行われている必要があります。
 
-**解決方法**: `src/main.tsx`（または `main.ts`）の先頭付近で、`style.css` をインポートしてください。
+**解決方法**: 各環境の `vite.config.ts` に `@tailwindcss/vite` プラグインが含まれているか確認してください。
 
 ```typescript
-import './style.css';      // Tailwind CSS v4 (@import "tailwindcss") を含む
-import './RatioKit.scss';  // RatioKit の独自スタイル
-```
+// vite.config.ts
+import { defineConfig } from 'vite';
+import tailwindcss from '@tailwindcss/vite';
 
-※ `style.css` の中身が以下のようになっていることを確認してください：
-```css
-@import "tailwindcss";
+export default defineConfig({
+  plugins: [
+    // ...
+    tailwindcss(),
+  ],
+});
 ```
-
-#### 注意事項
-`RatioKit.scss` 内で `@import "tailwindcss";` を記述すると、Sass のコンパイルと競合して正しく動作しない場合があります。必ず CSS ファイル（`style.css`）側でインポートしてください。
 
 ### エントリーポイントでのインポート確認
 
-各環境の `main.tsx` または `main.ts` で、以下の順序でインポートされているか確認してください：
+各環境の `main.tsx` または `main.ts` で、`RatioKit.scss` がインポートされているか確認してください：
 
 ```typescript
-import './style.css';      // 1. Tailwind の読み込み
-import './RatioKit.scss';  // 2. RatioKit スタイルの読み込み
+import './RatioKit.scss';  // RatioKit スタイルの読み込み
 ```
 
 ## 📂 ディレクトリ構造

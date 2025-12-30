@@ -357,14 +357,14 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
     </div>
   </div>
 
-  <header class="into fixed w-full min-h-[--head] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
+  <header class="into fixed w-full min-h-[var(--head)] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
     <h1 class="mr-auto mb-0 leading-none pt-1">
       Vue Gallery
     </h1>
     <button @click="openSetupModal" class="float-right text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-3 rounded transition-colors border border-gray-300 mt-1 md:min-h-[3em]">Setup / Download</button>
   </header>
 
-  <main class="py-[--head] PX" id="contents">
+  <main class="py-[var(--head)] PX" id="contents">
 
     <!-- FlexRatio Preview -->
     <section class="mt-8">
