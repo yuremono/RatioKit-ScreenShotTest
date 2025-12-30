@@ -1,4 +1,4 @@
-# Project Intelligence: ScreenShotTest
+# Project Intelligence: RatioKit-ScreenShotTest
 
 このファイルは、プロジェクトの全体像、目的、および AI エージェント（私）が遵守すべき「人格と記憶」を管理する管制塔です。技術的な「やり方（スキル）」は `.skills/` ディレクトリに分離されています。
 
