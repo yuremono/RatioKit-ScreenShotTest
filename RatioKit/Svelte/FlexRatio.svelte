@@ -1,17 +1,23 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+
   /**
-   * FlexRatio コンポーネント (Flex Ratio Component)
-   * 2つの要素を指定された比率 (flex55, flex46 等) で並べます。
+   * Props Definition
    */
+  interface Props {
+    /** クラス名 (flex55, flex46 等を指定) / Class name */
+    className?: string;
+    /** インラインスタイル / Inline styles */
+    style?: string | Record<string, any>;
+    /** 子要素 (2つの直系子要素を想定) / Child elements */
+    children?: Snippet;
+  }
+
   let { 
     className = "mb-0", 
-    style = {}, 
+    style = "", 
     children 
-  } = $props<{
-    className?: string;
-    style?: any;
-    children?: import('svelte').Snippet;
-  }>();
+  }: Props = $props();
 </script>
 
 <div class="{className}" {style}>
@@ -20,7 +26,6 @@
   {/if}
 </div>
 
-
 <style>
-  /* このコンポーネント固有のスタイルが必要な場合はここに記述してください */
+  /* 既存の RatioKit.scss で制御されるため、ここには最小限のスタイルのみ記述します */
 </style>

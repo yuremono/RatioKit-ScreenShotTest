@@ -1,25 +1,35 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+
   /**
-   * Accordion コンポーネント (Accordion)
-   * details/summary タグを使用した折りたたみ可能なコンテンツです。
+   * Props Definition
    */
+  interface Props {
+    /** タイトル (summary) / Accordion title */
+    title: string;
+    /** クラス名 (is_qa 等を指定) / Class name */
+    className?: string;
+    /** インラインスタイル / Inline styles */
+    style?: string | Record<string, any>;
+    /** 初期状態で開くかどうか / Whether to open by default */
+    open?: boolean;
+    /** タイトル横の画像 (Snippet) / Image next to title */
+    figureTitle?: Snippet;
+    /** コンテンツ内の画像 (Snippet) / Image inside content */
+    figure?: Snippet;
+    /** コンテンツ本体 (Snippet) / Main content */
+    children?: Snippet;
+  }
+
   let { 
     title, 
     className = "mb-0", 
-    style = {}, 
+    style = "", 
     open = false,
     figureTitle,
     figure,
     children 
-  } = $props<{
-    title: string;
-    className?: string;
-    style?: any;
-    open?: boolean;
-    figureTitle?: import('svelte').Snippet;
-    figure?: import('svelte').Snippet;
-    children?: import('svelte').Snippet;
-  }>();
+  }: Props = $props();
 </script>
 
 <details class="accordion {className}" {style} {open}>
@@ -49,7 +59,6 @@
   </div>
 </details>
 
-
 <style>
-  /* このコンポーネント固有のスタイルが必要な場合はここに記述してください */
+  /* 既存の RatioKit.scss で制御されます */
 </style>

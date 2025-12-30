@@ -94,11 +94,11 @@
         content: 'まず、上の「Download Zip」ボタンからファイルをダウンロードしてください。`Svelte/` フォルダに必要なファイルがすべて含まれています。',
         title: 'Step 1: Download'
       },
-      {
-        type: 'text',
-        content: '既存の Vite プロジェクトに導入する場合、まず Sass と Tailwind v4 プラグインをインストールします。',
-        title: 'Step 2: Install Dependencies'
-      },
+    {
+      type: 'text',
+      content: '既存の Vite プロジェクトに導入する場合、まず Sass と Tailwind v4 プラグインをインストールします。もし `npm run dev` でエラー（Pre-transform error 等）が発生した場合は、Vite のキャッシュクリア (`npx vite --force`) を試してください。',
+      title: 'Step 2: Install Dependencies'
+    },
       {
         type: 'code',
         content: 'npm install -D sass @tailwindcss/vite'

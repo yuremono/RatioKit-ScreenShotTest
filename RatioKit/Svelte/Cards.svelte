@@ -1,17 +1,23 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+
   /**
-   * Cards コンポーネント (Cards)
-   * カード状の要素をグリッド配置するための親コンポーネントです。
+   * Props Definition
    */
+  interface Props {
+    /** クラス名 (col3, colflex 等を指定) / Class name */
+    className?: string;
+    /** インラインスタイル / Inline styles */
+    style?: string | Record<string, any>;
+    /** カード要素群 (CardItem 等を想定) / Child card elements */
+    children?: Snippet;
+  }
+
   let { 
     className = "mb-0", 
-    style = {}, 
+    style = "", 
     children 
-  } = $props<{
-    className?: string;
-    style?: any;
-    children?: import('svelte').Snippet;
-  }>();
+  }: Props = $props();
 </script>
 
 <div class="cards {className}" {style}>
@@ -20,7 +26,6 @@
   {/if}
 </div>
 
-
 <style>
-  /* このコンポーネント固有のスタイルが必要な場合はここに記述してください */
+  /* 既存の RatioKit.scss で制御されます */
 </style>

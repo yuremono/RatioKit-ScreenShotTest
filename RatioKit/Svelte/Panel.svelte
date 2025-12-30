@@ -1,17 +1,23 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+
   /**
-   * Panel コンポーネント (Panel)
-   * 画像とテキストのセット（ステップ表示など）を管理する親コンポーネントです。
+   * Props Definition
    */
+  interface Props {
+    /** クラス名 (is_flow, img20 等を指定) / Class name */
+    className?: string;
+    /** インラインスタイル / Inline styles */
+    style?: string | Record<string, any>;
+    /** パネル要素群 (PanelItem 等を想定) / Child panel elements */
+    children?: Snippet;
+  }
+
   let { 
     className = "mb-0", 
-    style = {}, 
+    style = "", 
     children 
-  } = $props<{
-    className?: string;
-    style?: any;
-    children?: import('svelte').Snippet;
-  }>();
+  }: Props = $props();
 </script>
 
 <div class="panel {className}" {style}>
@@ -20,7 +26,6 @@
   {/if}
 </div>
 
-
 <style>
-  /* このコンポーネント固有のスタイルが必要な場合はここに記述してください */
+  /* 既存の RatioKit.scss で制御されます */
 </style>

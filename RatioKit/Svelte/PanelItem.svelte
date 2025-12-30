@@ -1,19 +1,26 @@
 <script lang="ts">
+  import type { Snippet } from 'svelte';
+
   /**
-   * PanelItem コンポーネント (Panel Item Component)
-   * Panel コンポーネントの子要素です。テキストの後に画像が来る構造を持ちます。
+   * Props Definition
    */
+  interface Props {
+    /** クラス名 (is_rev 等を指定) / Class name */
+    className?: string;
+    /** インラインスタイル / Inline styles */
+    style?: string | Record<string, any>;
+    /** 画像エリア (Snippet) / Image content */
+    figure?: Snippet;
+    /** コンテンツ本体 (Snippet) / Main content */
+    children?: Snippet;
+  }
+
   let { 
     className = "", 
-    style = {}, 
+    style = "", 
     figure, 
     children 
-  } = $props<{
-    className?: string;
-    style?: any;
-    figure?: import('svelte').Snippet;
-    children?: import('svelte').Snippet;
-  }>();
+  }: Props = $props();
 </script>
 
 <div class="item {figure ? 'has_img' : ''} {className}" {style}>
@@ -27,7 +34,6 @@
   {/if}
 </div>
 
-
 <style>
-  /* このコンポーネント固有のスタイルが必要な場合はここに記述してください */
+  /* 既存の RatioKit.scss で制御されます */
 </style>

@@ -95,7 +95,7 @@ const openSetupModal = () => {
     },
     {
       type: 'text',
-      content: '既存の Vite プロジェクトに導入する場合、まず Sass と Tailwind v4 プラグインをインストールします。',
+      content: '既存の Vite プロジェクトに導入する場合、まず Sass と Tailwind v4 プラグインをインストールします。もし `npm run dev` でエラー（Pre-transform error 等）が発生した場合は、Vite のキャッシュクリア (`npx vite --force`) を試してください。',
       title: 'Step 2: Install Dependencies'
     },
     {
