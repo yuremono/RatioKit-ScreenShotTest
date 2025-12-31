@@ -9,7 +9,6 @@ import {
   Cards, 
   CardItem 
 } from './components/RatioKit';
-import './RatioKit.scss';
 import './SnippetModal.css';
 
 interface ContentItem {

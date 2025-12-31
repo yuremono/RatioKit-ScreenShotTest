@@ -38,6 +38,13 @@ $menu: 834px;
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
 
 // styleタグで上書きされるためタイトルタグのみ@layerの外に出す
+
+span{display: inline-block;}  
+a{
+        text-decoration: none;
+    color: inherit; 
+}
+
 h1 { // --h1FZ
         font-size: var(--h1FZ);
 }
@@ -50,6 +57,12 @@ h3 { // --h3FZ
 h5,
 h4 { // --h3FZ
         font-size: var(--h3FZ);
+}
+
+
+.into { // --into
+        padding-inline: var(--into, calc(50vw - clamp(0px, 50vw - var(--PX, 20px), (var(--wid, 1080px) / 2))));
+        
 }
 
 
@@ -78,15 +91,7 @@ h4 { // --h3FZ
 
     // *********************************
 
-    *,
-    *::before,
-    *::after {
-            @include where {
-                    box-sizing: border-box;
-                    margin: 0;
-                    padding: 0;
-            }
-    }
+
 
     :root { //color 基本色設定はcommon.cssで設定 mc10~90で透明度指定
             --un: unset;
@@ -193,34 +198,52 @@ h4 { // --h3FZ
             font-style: normal;
             background-color: unset;
     }
-span{display: inline-block;}  
-a{
-        text-decoration: none;
-    color: inherit; 
+*,
+*::before,
+*::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
 }
 
+main { // --PX
+        padding-inline: var(--PX, 40px);
+        
+}
 
-    main { // --PX
-            padding-inline: var(--PX, 40px);
-            
-    }
+main>* { // --wid, --MY
+        @include where {//ページ内コンテンツ div の初期設定_
+                width: var(--wid, 1080px);
+                max-width: 100%;
+                margin-inline: auto; 
+                position: relative;
 
-    main>* { // --wid, --MY
-            @include where {//ページ内コンテンツ div の初期設定
-                    width: var(--wid, 1080px);
-                    max-width: 100%;
-                    margin-inline: auto;
-                    position: relative;
+                +* {
+                        margin-top: var(--MY, 60px);
+                }
 
-                    +* {
-                            margin-top: var(--MY, 60px);
-                    }
+                &:is(script, input[type="hidden"]) {
+                        margin-top: unset; 
+                }
+        }
+} 
+.wrapper { // --MY, --out
+        padding-block: var(--MY, 60px);
+        margin-inline: var(--out, calc(50% - 50vw));
+        max-width: unset;
+        width: unset;
+        position: relative;
+        @include where {
+                >* {
+                        margin-inline: auto;
+                        max-width: 100%;
+                }
+                >*+* {
+                        margin-top: var(--MY, 60px);
+                }
+        }
+}
 
-                    &:is(script, input[type="hidden"]) {
-                            margin-top: unset;
-                    }
-            }
-    }
 
 
     .wid { // --wid
@@ -233,26 +256,7 @@ a{
             margin-block: var(--MY, 60px);
     }
     // *****レイアウト ラッパー制御  主要変数クラス
-    .wrapper { // --MY, --out
-            padding-block: var(--MY, 60px);
-            margin-inline: var(--out, calc(50% - 50vw));
-            max-width: unset;
-            width: unset;
-            position: relative;
-            @include where {
-                    >* {
-                            margin-inline: auto;
-                            max-width: 100%;
-                    }
-                    >*+* {
-                            margin-top: var(--MY, 60px);
-                    }
-            }
-    }
-    .into { // --into
-            padding-inline: var(--into, calc(50vw - clamp(0px, 50vw - var(--PX, 20px), (var(--wid, 1080px) / 2))));
-            
-    }
+
     .intoL { // --into
             padding-left: var(--into, calc(50vw - clamp(0px, 50vw - var(--PX, 20px), (var(--wid, 1080px) / 2))));
             
@@ -821,7 +825,7 @@ a{
                                             order: unset;
                                     }
                             }
-                    }
+                    } 
 
 
             }

@@ -8,7 +8,6 @@
     Cards, 
     CardItem 
   } from './lib/RatioKit';
-  import './RatioKit.scss';
   import './lib/RatioKit/SnippetModal.css';
 
   interface ContentItem {

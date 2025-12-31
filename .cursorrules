@@ -1,0 +1,66 @@
+# RatioKit Project Rules
+
+## 最優先ルール（絶対遵守）
+
+### 1. 指示外行動の禁止
+- 依頼された作業の範囲を厳守する
+- 明示的な指示がない限り、周辺コードの改変や「良かれと思って」の追加機能実装を行わない
+- 不明点があれば、作業を強行せず必ずユーザーに確認する
+
+### 2. 既存構造の尊重
+- ユーザーが手動で編集した箇所や原型となるコード構造を最大限尊重する
+- 強引なリファクタリングで意図を破壊しない
+- 削除や大規模な変更は必ず提案し、承諾を得る
+
+### 3. スキルファイルの参照
+タスク実行前に該当する`.skills/`ディレクトリのスキルファイルを確認すること：
+- UI再現 → `.skills/ui-reproduction/SKILL.md`
+- Reactコンポーネント → `.skills/ui-library/SKILL.md`
+- Zip更新/デプロイ → `.skills/package-distribution/SKILL.md`
+
+## コーディング規約
+
+### React Component Rules
+- `className`は常に最初のプロップスとして配置
+- `className=""`または`className="mb-0"`をデフォルト値として持つ
+- Slot Pattern: 枠は固定、中身は自由
+
+### SCSS Rules
+- `!important` は絶対に使用しない
+#### RatioKit では
+- Desktop-First: `max-md` (767px), `max-sm` (639px), `max-xs` (479px)
+- CSS変数（`--gap`, `--imgW`, `--itemW`）による柔軟な設計
+- `@include where { ... }` を使用して詳細度を制御
+
+### Naming Conventions
+- ファイル名: PascalCase
+- コンポーネント名: PascalCase
+#### RatioKit では
+- CSS変数: camel-case（例: `--mainColor`）
+- クラス名: snake_case（例: `img_text`, `is_qa`）
+
+## 配布パッケージ更新（重要）
+
+「zipファイル更新」「配布パッケージ更新」等の依頼時は、以下のコマンドを実行：
+
+```bash
+bash rebuild_zip.sh && git add public/RatioKit.zip && git commit -m "Update zip with latest files" && git push origin main && vercel --yes --prod --force
+```
+
+**注意事項**:
+- スクリプトの内容を推測で変更しない
+- 完全削除→再作成のアプローチを維持する
+- 詳細は `.skills/package-distribution/SKILL.md` を参照
+
+## コミュニケーション
+
+- 日本語で応答する
+- 技術用語には必要に応じて解説を添える
+- 複数の実装方法がある場合は、選択肢を提示してユーザーに確認する
+
+## 参考文書
+
+- `AGENT.md`: プロジェクトの全体像と AI の人格
+- `DOWNLOAD_PACKAGE.md`: 配布パッケージの構造
+- `.skills/`: タスク固有の詳細な手順
+

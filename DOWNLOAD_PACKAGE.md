@@ -35,27 +35,48 @@ Zip ファイルの構築には、プロジェクト内の以下の最新ファ�
 
 ## 3. 作成・更新コマンド例
 
+### 推奨方法（自動スクリプト）
+
+プロジェクトには、確実に最新版を反映するための`rebuild_zip.sh`スクリプトが用意されています。
+
+```bash
+# 単一コマンドで完結（最も確実）
+bash rebuild_zip.sh && git add public/RatioKit.zip && git commit -m "Update zip with latest files" && git push origin main && vercel --yes --prod --force
+```
+
+このコマンドは以下を実行します：
+1. Zipファイルを完全に再作成（`temp_zip`を削除してから作成）
+2. 変更をGitにコミット・プッシュ
+3. Vercelに自動デプロイ
+
+**重要**: 過去の失敗から学んだ教訓として、「差分更新」ではなく「完全削除→再作成」のアプローチを採用しています。詳細は [Package Distribution Skill](./.skills/package-distribution/SKILL.md) を参照してください。
+
+### 手動方法（参考）
+
 以下のコマンド（または同等のスクリプト）によって、現在のプロジェクト状態が Zip に反映されます。
 
 ```bash
-# 1. 構造の準備
-mkdir -p temp_zip && unzip -o public/RatioKit.zip -d temp_zip
+# 1. 完全削除（重要！）
+rm -rf temp_zip
+rm -f public/RatioKit.zip
 
-# 2. 最新の SCSS とコンポーネントをコピー
-find temp_zip -name "RatioKit.scss" -exec cp RatioKit/RatioKit.scss {} \;
-find temp_zip -name "RatioKitSimple.scss" -exec cp RatioKit/RatioKitSimple.scss {} \;
-cp RatioKit/SnippetModal.css temp_zip/Dist/RatioKit/SnippetModal.css
+# 2. 新規作成
+mkdir -p temp_zip
 
-# 3. HTMLスターターキットの同期
-mkdir -p temp_zip/Dist/RatioKit/HTML/css
-cp RatioKit/HTML/starter-index.html temp_zip/Dist/RatioKit/HTML/index.html
-cp css/RatioKit.css temp_zip/Dist/RatioKit/HTML/css/RatioKit.css
+# 3. すべてをコピー
+cp -rv RatioKit/* temp_zip/
 
-# 4. 不要なバックアップファイルを削除
-find temp_zip -name "_10template.scss" -o -name "_mixin.scss" -exec rm {} +
+# 4. ギャラリーファイルを削除
+rm -rf temp_zip/React/src/App.tsx temp_zip/Vue/src/App.vue temp_zip/Svelte/src/App.svelte
+rm -rf temp_zip/*/SnippetModal.css temp_zip/*/src/SnippetModal.css
 
-# 4. Zip作成
-cd temp_zip && zip -r ../RatioKit.zip . && cd ..
+# 5. StarterAppをコピー
+cp RatioKit/React/src/components/RatioKit/StarterApp.tsx temp_zip/React/src/App.tsx
+cp RatioKit/Vue/src/components/RatioKit/StarterApp.vue temp_zip/Vue/src/App.vue
+cp RatioKit/Svelte/src/lib/RatioKit/StarterApp.svelte temp_zip/Svelte/src/App.svelte
+
+# 6. Zip作成
+cd temp_zip && zip -r ../RatioKit.zip . -q && cd ..
 mv RatioKit.zip public/RatioKit.zip
 rm -rf temp_zip
 ```
