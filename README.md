@@ -113,8 +113,104 @@ Vite を使用して開発サーバーを起動し、各プレビューページ
 
 ```bash
 npm install
+npm run dev
+# または
 npx vite
 ```
+
+開発サーバーは `http://localhost:8080` で起動します。
+
+## 📋 よく使うコマンド
+
+### 開発サーバーの起動
+
+```bash
+# npm scripts を使用（推奨）
+npm run dev
+
+# または直接コマンド
+npx vite
+```
+
+開発サーバーは `http://localhost:8080` で起動します。
+
+**停止方法**: 通常はターミナルで `Ctrl + C` を押すと停止します。
+
+### 開発サーバーの停止
+
+```bash
+# ポート8080で実行中の開発サーバーを停止
+npm run stop
+
+# すべてのViteプロセスを停止
+npm run stop:all
+
+# または直接コマンド（ポート8080を停止）
+lsof -ti:8080 | xargs kill
+
+# または直接コマンド（すべてのViteプロセスを停止）
+pkill -f vite
+```
+
+### ビルド
+
+```bash
+# プロジェクト全体をビルド
+npm run build
+
+# CSS のみビルド（Tailwind版）
+npm run build:css:tailwind
+
+# CSS のみビルド（Simple版）
+npm run build:css:simple
+```
+
+### 配布パッケージ（Zip）の更新
+
+```bash
+# Zipファイルを再作成してデプロイまで実行
+npm run deploy
+
+# Zipファイルのみ再作成
+npm run rebuild:zip
+```
+
+### Git操作
+
+```bash
+# 変更をコミットしてプッシュ
+git add .
+git commit -m "your commit message"
+git push origin main
+```
+
+### Vercelへのデプロイ
+
+```bash
+# npm scripts を使用（推奨）
+npm run deploy:vercel
+
+# または直接コマンド
+vercel --yes --prod --force
+```
+
+**注意**: Vercelは通常、GitHubにプッシュすると自動デプロイされますが、`--force`オプションで手動で強制デプロイできます。
+
+### よく使うコマンドの一覧（npm scripts）
+
+| コマンド | 説明 |
+|---------|------|
+| `npm run dev` | 開発サーバーを起動（ポート8080） |
+| `npm run stop` | ポート8080で実行中の開発サーバーを停止 |
+| `npm run stop:all` | すべてのViteプロセスを停止 |
+| `npm run build` | プロジェクト全体をビルド |
+| `npm run build:css:tailwind` | Tailwind版CSSをビルド |
+| `npm run build:css:simple` | Simple版CSSをビルド |
+| `npm run rebuild:zip` | 配布用Zipファイルを再作成 |
+| `npm run deploy` | Zip更新→Gitコミット→プッシュ→Vercelデプロイを一括実行 |
+| `npm run deploy:vercel` | Vercelに手動デプロイ |
+
+**ヒント**: `npm run` と入力すると、利用可能なコマンド一覧が表示されます。
 
 ## 🚀 コーディングエージェントを使ってバイブコーディングを行う時のサンプル
 
@@ -122,4 +218,4 @@ npx vite
 
 
 ---
-**RatioKit** - 比率でデザインする、次世代のUIテンプレート
+**2026 - RatioKit** 

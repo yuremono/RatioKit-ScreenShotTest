@@ -4,10 +4,16 @@
   "type": "module",
   "main": "index.js",
   "scripts": {
+    "dev": "vite",
+    "stop": "lsof -ti:8080 | xargs kill 2>/dev/null || echo 'No process running on port 8080'",
+    "stop:all": "pkill -f vite || echo 'No vite processes found'",
     "build": "vite build",
     "build:lib": "tsc",
     "build:css:tailwind": "sass RatioKit/RatioKit.scss:css/RatioKit.css --load-path=RatioKit",
     "build:css:simple": "sass RatioKit/RatioKitSimple.scss:css/RatioKitSimple.css --load-path=RatioKit",
+    "rebuild:zip": "bash rebuild_zip.sh",
+    "deploy": "bash deploy.sh",
+    "deploy:vercel": "vercel --yes --prod --force",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
