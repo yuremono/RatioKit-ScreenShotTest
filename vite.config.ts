@@ -39,7 +39,6 @@ export default defineConfig({
         vue: 'VuePreview.html',
         svelte: 'SveltePreview.html',
         html: 'HtmlPreview.html',
-        snipet: 'SnipetTest.html',
       },
     },
   },
