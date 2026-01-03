@@ -19,22 +19,22 @@
 
 ## 📦 主要コンポーネント一覧
 
-### 1️⃣ カードレイアウト（`.card*`）
+### 1️⃣ カードレイアウト（`.cards*`）
 
+**修飾子：**  `.img3-2`, `.imgCover`
 | 見た目 | クラス | 備考 |
 |--------|--------|------|
-| 2列の等幅カード | `.card2` | |
-| 3列の等幅カード | `.card3` | 最頻出 |
-| 4〜6列 | `.card4` `.card5` `.card6` | |
-| 可変幅（伸縮） | `.cardflex` | 何個でも1行 |
-| 固定幅 | `.cardfix` | `--w`変数で幅指定 |
+| 2列の等幅カード | `.col2` | |
+| 3列の等幅カード | `.col3` | 最頻出 |
+| 4〜6列 | `.col4` `.col5` `.col6` | |
+| 可変幅（伸縮） | `.colflex` | 何個でも1行 |
+| 固定幅 | `.colfix` | `--itenW`変数で幅指定 |
 
-**修飾子：** `.__icon`, `.__scrollX`, `.img3-2`, `.imgCover`
 
 **基本HTML：**
 ```html
-<div class="card3 __icon">
-  <div class="box">
+<div class="cards col3">
+  <div class="">
     <img src="..." alt="...">
     <h3>タイトル</h3>
     <div><p>説明</p></div>
@@ -45,19 +45,18 @@
 
 ---
 
-### 2️⃣ 画像テキスト横並び（`.it*` / `.ti*`）
+### 2️⃣ 画像テキスト横並び（`.img_text*` ）
 
 | 見た目 | クラス | 画像比率 |
 |--------|--------|----------|
 | 画像:テキスト = 3:7 | `.img_text .img30` | 30% |
 | 画像:テキスト = 4:6 | `.img_text .img40` | 40% |
-| テキスト:画像（逆） | `.img_text .img30` | 順序逆 |
+| テキスト:画像（逆） | `.img_text .is-rev` | 順序逆 |
 
-**修飾子：** `.AIC`（縦中央）, `.sheet`（背景付き）
 
 **基本HTML：**
 ```html
-<div class="ti01 img30 AIC">
+<div class="img_text img30 ">
   <img src="..." alt="">
   <div>
     <h2>タイトル</h2>
@@ -68,24 +67,30 @@
 
 ---
 
-### 3️⃣ Flexbox系（`.fb_*`）
+### 3️⃣ panel（`panel*`）
 
+
+**修飾子：** `.is_flow`
 | 見た目 | クラス | 用途 |
 |--------|--------|------|
-| Q&A形式 | `.fb_qa` | 質問と回答の繰り返し |
-| ステップ・フロー | `.fb_flow` | 番号付き手順 |
-| メニュー表 | `.fb_menu` | 料理名+価格等 |
+| ステップ・フロー | `.is_flow` | 番号付き手順 |
 
-**修飾子：** `.firstOpen`, `.noArrow`
+
 
 **基本HTML（Q&A）：**
+| Q&A形式 | `.fb_qa` | 質問と回答の繰り返し |
 ```html
-<div class="fb_qa">
-  <div class="box"><div>質問1</div></div>
-  <div class="box"><div>回答1</div></div>
-  <!-- 繰り返し -->
-</div>
+
 ```
+<div class="mt-6">
+        <h3>1. className="accordion mt-3"</h3>
+        <details class="accordion mt-3">
+                <summary>クリックして詳細を表示（基本形）</summary>
+                <div>
+                        <p>汎用的なアコーディオンですQ&A以外の用途（利用規約や補足説明など）に最適です</p>
+                </div>
+        </details>
+</div>
 
 ---
 
@@ -116,12 +121,12 @@
 
 | 見た目 | クラス | 比率 |
 |--------|--------|------|
-| 左右50:50 | `.fl50` | 均等 |
-| 左30:右70 | `.fl37` | 3:7 |
-| 左40:右60 | `.fl46` | 4:6 |
-| 左60:右40 | `.fl64` | 6:4 |
+| 左右50:50 | `.flex55` | 均等 |
+| 左30:右70 | `.flex37` | 3:7 |
+| 左40:右60 | `.flex46` | 4:6 |
+| 左60:右40 | `.flex64` | 6:4 |
 
-**修飾子：** `.__rev`（順序逆転）
+**修飾子：** `.is_rev`（順序逆転）
 
 **基本HTML：**
 ```html
@@ -184,25 +189,7 @@
 
 ---
 
-## 🔧 CMS固有の自動処理（function.js）
 
-以下の処理が自動実行される（知識として把握）：
-
-```javascript
-// 不要要素の削除
-$(".dis, .disnone").remove();
-
-// imgをfigureで囲む
-$('#contents img').wrap('<figure>');
-
-// .boxをarticleで囲む
-$('div>.box').wrapInner('<article>');
-
-// .img_text/.img_textをarticleで囲む
-$("[class*='it0'], [class*='ti0']").wrapInner("<article>");
-```
-
-スクリーンショット再現では、**最終的なDOM構造（JavaScript処理後）を想定してHTMLを書く**。
 
 ---
 
@@ -213,12 +200,6 @@ $("[class*='it0'], [class*='ti0']").wrapInner("<article>");
 - [ ] 画像テキスト → `.img_text` `.img_text`
 - [ ] Q&A/フロー → `.fb_qa` `.fb_flow`
 - [ ] 比率指定 → `.fl37` 等
-
-### 修飾子
-- [ ] アイコン配置 → `.__icon`
-- [ ] 横スクロール → `.__scrollX`
-- [ ] 背景付き → `.sheet`
-- [ ] 中央揃え → `.AIC`
 
 ### Tailwindで調整
 - [ ] 色（text/bg色）

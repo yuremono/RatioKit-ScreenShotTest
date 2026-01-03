@@ -535,7 +535,7 @@ const cardsCss = `.wrapper {padding-block: var(--MY, 60px);margin-inline: var(--
   <footer class="bg-slate-900 text-white py-10 mt-20">
     <div class="wrapper into text-center">
       <p class="opacity-50 text-sm">&copy; 2026 RatioKit Project. All rights reserved.</p>
-      <p class="opacity-30 text-[10px] mt-4">Build: 2025-12-31 19:15</p>
+      
     </div>
   </footer>
 </template>

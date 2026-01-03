@@ -316,292 +316,457 @@ function MyPage() {
 @media (max-width: 479px) { :where(.cards):not(.min2) > .item { width: 100%; } }`;
 
   return (
-    <>
-      {showModal && (
-        <div id="snippetModal" className="active" onClick={closeModal}>
-          <div
-            className={`code-editor ${isSetup ? "setup-mode" : ""}`}
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="code-header text-sm flex items-center gap-2">
-              {isSetup ? (
-                <button
-                  className="download-btn bg-green-600 hover:bg-green-700 text-white border-none mr-auto text-sm py-1 px-4 rounded"
-                  onClick={handleDownload}
-                >
-                  Download Zip
-                </button>
-              ) : (
-                <span className="text-gray-400 mr-auto">
-                  フレームワークを使用しないhtml,cssの使用例です。シングルクラスの詳細度で上書きできます
-                </span>
-              )}
-              {!isSetup && modalItems.length > 0 && (
-                <button
-                  className="copy-btn"
-                  onClick={() => handleCopy(0, modalItems[0].content)}
-                >
-                  {copyStates[0] || "Copy"}
-                </button>
-              )}
-              <button className="close-btn" onClick={closeModal}>
-                Close
-              </button>
-            </div>
-            <div className="code-content px-10 py-8 overflow-y-auto">
-              {modalItems.map((item, index) => (
-                <div
-                  key={index}
-                  className={item.type === "text" ? "mb-6" : "mb-8 relative group"}
-                >
-                  {item.title && (
-                    <h3 className="text-xl mb-4 text-white">
-                      {item.title}
-                    </h3>
-                  )}
-                  {item.type === "text" ? (
-                    <p className="text-gray-300 leading-relaxed whitespace-pre-wrap">
-                      {item.content}
-                    </p>
-                  ) : (
-                    <div className="relative">
-                      {isSetup && !item.noCopy && (
-                        <button
-                          className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 px-2 rounded z-10"
-                          onClick={() => handleCopy(index, item.content)}
-                        >
-                          {copyStates[index] || "Copy"}
-                        </button>
-                      )}
-                      <pre className="bg-black/50 p-6 rounded border border-gray-700 overflow-x-auto">
-                        <code className="text-sm font-mono text-blue-300">
-                          {item.content}
-                        </code>
-                      </pre>
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )}
+		<>
+			{showModal && (
+				<div id="snippetModal" className="active" onClick={closeModal}>
+					<div
+						className={`code-editor ${isSetup ? "setup-mode" : ""}`}
+						onClick={(e) => e.stopPropagation()}
+					>
+						<div className="code-header text-sm flex items-center gap-2">
+							{isSetup ? (
+								<button
+									className="download-btn bg-green-600 hover:bg-green-700 text-white border-none mr-auto text-sm py-1 px-4 rounded"
+									onClick={handleDownload}
+								>
+									Download Zip
+								</button>
+							) : (
+								<span className="text-gray-400 mr-auto">
+									フレームワークを使用しないhtml,cssの使用例です。シングルクラスの詳細度で上書きできます
+								</span>
+							)}
+							{!isSetup && modalItems.length > 0 && (
+								<button
+									className="copy-btn"
+									onClick={() =>
+										handleCopy(0, modalItems[0].content)
+									}
+								>
+									{copyStates[0] || "Copy"}
+								</button>
+							)}
+							<button className="close-btn" onClick={closeModal}>
+								Close
+							</button>
+						</div>
+						<div className="code-content px-10 py-8 overflow-y-auto">
+							{modalItems.map((item, index) => (
+								<div
+									key={index}
+									className={
+										item.type === "text"
+											? "mb-6"
+											: "mb-8 relative group"
+									}
+								>
+									{item.title && (
+										<h3 className="text-xl mb-4 text-white">
+											{item.title}
+										</h3>
+									)}
+									{item.type === "text" ? (
+										<p className="text-gray-300 leading-relaxed whitespace-pre-wrap">
+											{item.content}
+										</p>
+									) : (
+										<div className="relative">
+											{isSetup && !item.noCopy && (
+												<button
+													className="absolute right-2 top-2 opacity-0 group-hover:opacity-100 transition-opacity bg-blue-600 hover:bg-blue-700 text-white text-xs py-1 px-2 rounded z-10"
+													onClick={() =>
+														handleCopy(
+															index,
+															item.content
+														)
+													}
+												>
+													{copyStates[index] ||
+														"Copy"}
+												</button>
+											)}
+											<pre className="bg-black/50 p-6 rounded border border-gray-700 overflow-x-auto">
+												<code className="text-sm font-mono text-blue-300">
+													{item.content}
+												</code>
+											</pre>
+										</div>
+									)}
+								</div>
+							))}
+						</div>
+					</div>
+				</div>
+			)}
 
-      <header className="into fixed w-full min-h-[var(--head)] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
-        <h1 className="mr-auto mb-0 leading-none pt-1">
-          React Gallery
-        </h1>
-        <button
-          onClick={openSetupModal}
-          className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1 md:min-h-[3em]"
-        >
-          Setup / Download
-        </button>
-      </header>
+			<header className="into fixed w-full min-h-[var(--head)] py-2 left-0 top-0 z-50 bg-white border-b-[1px] border-gray-200 border-solid flex items-center justify-end flex-wrap gap-2">
+				<h1 className="mr-auto mb-0 leading-none pt-1">
+					React Gallery
+				</h1>
+				<button
+					onClick={openSetupModal}
+					className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1 md:min-h-[3em]"
+				>
+					Setup / Download
+				</button>
+			</header>
 
-      <main className="py-[var(--head)] PX" id="contents">
-        {/* FlexRatio Preview */}
-        <section className="mt-8" ref={flexRef}>
-          <div className="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-            <h2 className="mr-auto mb-0 leading-none pt-1">FlexRatio</h2>
-            <button
-              onClick={() => openModal(flexRef, flexCss)}
-              className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1"
-            >
-              snippet
-            </button>
-          </div>
-          <div className="mt-6">
-            <h3>1. className="flex55 mt-3"</h3>
-            <FlexRatio className="flex55 mt-3">
-              <div className="p-4 bg-gray-200">Left Content (50%)</div>
-              <div className="p-4 bg-gray-300">Right Content (50%)</div>
-            </FlexRatio>
-          </div>
-          <div className="mt-6">
-            <h3>2. className="flex46 mt-3"</h3>
-            <FlexRatio className="flex46 mt-3">
-              <div className="p-4 bg-blue-200">Left Content (40%)</div>
-              <div className="p-4 bg-blue-300">Right Content (60%)</div>
-            </FlexRatio>
-          </div>
-          <div className="mt-6">
-            <h3>3. className="flex73 bp-sm mt-3"</h3>
-            <FlexRatio className="flex73 bp-sm mt-3">
-              <div className="p-4 bg-green-100">Left Content(70%)</div>
-              <div className="p-4 bg-green-200">Right Content(30%)</div>
-            </FlexRatio>
-          </div>
-        </section>
+			<main className="py-[var(--head)] PX" id="contents">
+				{/* FlexRatio Preview */}
+				<section className="mt-8" ref={flexRef}>
+					<div className="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+						<h2 className="mr-auto mb-0 leading-none pt-1">
+							FlexRatio
+						</h2>
+						<button
+							onClick={() => openModal(flexRef, flexCss)}
+							className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1"
+						>
+							snippet
+						</button>
+					</div>
+					<div className="mt-6">
+						<h3>1. className="flex55 mt-3"</h3>
+						<FlexRatio className="flex55 mt-3">
+							<div className="p-4 bg-gray-200">
+								Left Content (50%)
+							</div>
+							<div className="p-4 bg-gray-300">
+								Right Content (50%)
+							</div>
+						</FlexRatio>
+					</div>
+					<div className="mt-6">
+						<h3>2. className="flex46 mt-3"</h3>
+						<FlexRatio className="flex46 mt-3">
+							<div className="p-4 bg-blue-200">
+								Left Content (40%)
+							</div>
+							<div className="p-4 bg-blue-300">
+								Right Content (60%)
+							</div>
+						</FlexRatio>
+					</div>
+					<div className="mt-6">
+						<h3>3. className="flex73 bp-sm mt-3"</h3>
+						<FlexRatio className="flex73 bp-sm mt-3">
+							<div className="p-4 bg-green-100">
+								Left Content(70%)
+							</div>
+							<div className="p-4 bg-green-200">
+								Right Content(30%)
+							</div>
+						</FlexRatio>
+					</div>
+				</section>
 
-        {/* Accordion Preview */}
-        <section className="wrapper into bg-green-100 mt-12" ref={accordionRef}>
-          <div className="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-            <h2 className="mr-auto mb-0 leading-none pt-1">Accordion</h2>
-            <button
-              onClick={() => openModal(accordionRef, accordionCss)}
-              className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1"
-            >
-              snippet
-            </button>
-          </div>
-          <div className="mt-6">
-            <h3>1. className="accordion mt-3"</h3>
-            <Accordion className="mt-3" title="クリックして詳細を表示（基本形）">
-              <p>汎用的なアコーディオンですQ&A以外の用途（利用規約や補足説明など）に最適です</p>
-            </Accordion>
-          </div>
-          <div className="mt-6">
-            <h3>2. className="accordion is_qa mt-3"</h3>
-            <Accordion className="is_qa mt-3" title="Q&Aスタイルの質問テキストです">
-              <p>is_qaクラスを付与することで、Q&Aのアイコンが表示されます</p>
-            </Accordion>
-          </div>
-          <div className="mt-6">
-            <h3>3. className="accordion is_qa mt-3"</h3>
-            <Accordion className="is_qa mt-3" title="画像付きの質問です" 
-              figure={<img src="https://picsum.photos/id/60/400/300" alt="" />}>
-              <p>回答部分に画像を表示する例ですPCでは横並び、スマホでは縦並びになります</p>
-            </Accordion>
-          </div>
-        </section>
+				{/* Accordion Preview */}
+				<section
+					className="wrapper into bg-green-100 mt-12"
+					ref={accordionRef}
+				>
+					<div className="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+						<h2 className="mr-auto mb-0 leading-none pt-1">
+							Accordion
+						</h2>
+						<button
+							onClick={() =>
+								openModal(accordionRef, accordionCss)
+							}
+							className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1"
+						>
+							snippet
+						</button>
+					</div>
+					<div className="mt-6">
+						<h3>1. className="accordion mt-3"</h3>
+						<Accordion
+							className="mt-3"
+							title="クリックして詳細を表示（基本形）"
+						>
+							<p>
+								汎用的なアコーディオンですQ&A以外の用途（利用規約や補足説明など）に最適です
+							</p>
+						</Accordion>
+					</div>
+					<div className="mt-6">
+						<h3>2. className="accordion is_qa mt-3"</h3>
+						<Accordion
+							className="is_qa mt-3"
+							title="Q&Aスタイルの質問テキストです"
+						>
+							<p>
+								is_qaクラスを付与することで、Q&Aのアイコンが表示されます
+							</p>
+						</Accordion>
+					</div>
+					<div className="mt-6">
+						<h3>3. className="accordion is_qa mt-3"</h3>
+						<Accordion
+							className="is_qa mt-3"
+							title="画像付きの質問です"
+							figure={
+								<img
+									src="https://picsum.photos/id/60/400/300"
+									alt=""
+								/>
+							}
+						>
+							<p>
+								回答部分に画像を表示する例ですPCでは横並び、スマホでは縦並びになります
+							</p>
+						</Accordion>
+					</div>
+				</section>
 
-        {/* Panel Preview */}
-        <section className="mt-12" ref={panelRef}>
-          <div className="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-            <h2 className="mr-auto mb-0 leading-none pt-1">Panel</h2>
-            <button
-              onClick={() => openModal(panelRef, panelCss)}
-              className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1"
-            >
-              snippet
-            </button>
-          </div>
-          <div className="mt-6">
-            <h3>1. className="panel is_flow img20 mt-3"</h3>
-            <Panel className="is_flow img20 mt-3">
-              <PanelItem figure={<img src="https://picsum.photos/id/103/400/300" alt="" />}>
-                <h4><span className="sub text-[--sc]">STEP 01</span>お問い合わせ</h4>
-                <p>is_flowクラスとimg20クラスを付与した例です</p>
-              </PanelItem>
-              <PanelItem className="is_rev" figure={<img src="https://picsum.photos/id/104/400/300" alt="" />}>
-                <h4><span className="sub text-[--sc]">STEP 02</span>ヒアリング</h4>
-                <p>お客様のご要望を詳しくお伺いし、最適なプランをご提案いたします</p>
-              </PanelItem>
-            </Panel>
-          </div>
-        </section>
+				{/* Panel Preview */}
+				<section className="mt-12" ref={panelRef}>
+					<div className="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+						<h2 className="mr-auto mb-0 leading-none pt-1">
+							Panel
+						</h2>
+						<button
+							onClick={() => openModal(panelRef, panelCss)}
+							className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1"
+						>
+							snippet
+						</button>
+					</div>
+					<div className="mt-6">
+						<h3>1. className="panel is_flow img20 mt-3"</h3>
+						<Panel className="is_flow img20 mt-3">
+							<PanelItem
+								figure={
+									<img
+										src="https://picsum.photos/id/103/400/300"
+										alt=""
+									/>
+								}
+							>
+								<h4>
+									<span className="sub text-[--sc]">
+										STEP 01
+									</span>
+									お問い合わせ
+								</h4>
+								<p>
+									is_flowクラスとimg20クラスを付与した例です
+								</p>
+							</PanelItem>
+							<PanelItem
+								className="is_rev"
+								figure={
+									<img
+										src="https://picsum.photos/id/104/400/300"
+										alt=""
+									/>
+								}
+							>
+								<h4>
+									<span className="sub text-[--sc]">
+										STEP 02
+									</span>
+									ヒアリング
+								</h4>
+								<p>
+									お客様のご要望を詳しくお伺いし、最適なプランをご提案いたします
+								</p>
+							</PanelItem>
+						</Panel>
+					</div>
+				</section>
 
-        {/* ImgText Preview */}
-        <section className="wrapper into bg-purple-100 mt-12" ref={imgTextRef}>
-          <div className="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-            <h2 className="mr-auto mb-0 leading-none pt-1">ImgText</h2>
-            <button
-              onClick={() => openModal(imgTextRef, imgTextCss)}
-              className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1"
-            >
-              snippet
-            </button>
-          </div>
-          <div className="mt-6">
-            <ImgText className="bp-sm mt-3" figure={<img src="https://picsum.photos/id/10/400/300" alt="" />}>
-              <h3>1. className="img_text bp-sm mt-3"</h3>
-              <p>基本ブレイクポイントはTailwindのmax-md(767px)<br />
-                 bp-smクラスでmax-sm(639px)に変更できます
-              </p>
-            </ImgText>
-          </div>
-          <div className="mt-6">
-            <ImgText className="bp-sm img30 is_rev mt-3" figure={<img src="https://picsum.photos/id/20/400/300" alt="" />}>
-              <h3>2. className="img_text bp-sm img30 is_rev mt-3"</h3>
-              <p>画像30%指定かつ左右反転</p>
-            </ImgText>
-          </div>
-        </section>
+				{/* ImgText Preview */}
+				<section
+					className="wrapper into bg-purple-100 mt-12"
+					ref={imgTextRef}
+				>
+					<div className="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+						<h2 className="mr-auto mb-0 leading-none pt-1">
+							ImgText
+						</h2>
+						<button
+							onClick={() => openModal(imgTextRef, imgTextCss)}
+							className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1"
+						>
+							snippet
+						</button>
+					</div>
+					<div className="mt-6">
+						<ImgText
+							className="bp-sm mt-3"
+							figure={
+								<img
+									src="https://picsum.photos/id/10/400/300"
+									alt=""
+								/>
+							}
+						>
+							<h3>1. className="img_text bp-sm mt-3"</h3>
+							<p>
+								基本ブレイクポイントはTailwindのmax-md(767px)
+								<br />
+								bp-smクラスでmax-sm(639px)に変更できます
+							</p>
+						</ImgText>
+					</div>
+					<div className="mt-6">
+						<ImgText
+							className="bp-sm img30 is_rev mt-3"
+							figure={
+								<img
+									src="https://picsum.photos/id/20/400/300"
+									alt=""
+								/>
+							}
+						>
+							<h3>
+								2. className="img_text bp-sm img30 is_rev mt-3"
+							</h3>
+							<p>画像30%指定かつ左右反転</p>
+						</ImgText>
+					</div>
+				</section>
 
-        {/* Cards Preview */}
-        <section className="mt-12" ref={cardsRef}>
-          <div className="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
-            <h2 className="mr-auto mb-0 leading-none pt-1">Cards</h2>
-            <button
-              onClick={() => openModal(cardsRef, cardsCss)}
-              className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1"
-            >
-              snippet
-            </button>
-          </div>
-          <div className="mt-6">
-            <h3>1. className="cards col3 justify-center mt-3"</h3>
-            <Cards className="col3 justify-center mt-3">
-              {[1, 2, 3].map(i => (
-                <CardItem key={i} className="sheet" figure={<img src="https://picsum.photos/id/10/400/250" alt="" />}>
-                  <h4>Card {i}</h4>
-                  <p>col? でPCカラム数指定. max-mdで全種2カラム, max-xs(479px)で1カラムに</p>
-                </CardItem>
-              ))}
-            </Cards>
-          </div>
-          <div className="mt-6">
-            <h3>2. className="cards col4 min2 justify-center mt-3"</h3>
-            <Cards className="col4 min2 justify-center mt-3">
-              {[1, 2, 3, 4].map(i => (
-                <CardItem key={i} className="board" figure={<img src="https://picsum.photos/id/20/400/250" alt="" />}>
-                  <h4>Card {i}</h4>
-                  <p>min2指定によりスマホサイズ電源列を維持します</p>
-                </CardItem>
-              ))}
-            </Cards>
-          </div>
-          <div className="mt-6">
-            <h3>3. className="cards col3 is_layer justify-center mt-3"</h3>
-            <Cards className="col3 is_layer justify-center mt-3">
-              {[
-                { pos: 'items-center', self: '' },
-                { pos: 'items-center', self: 'self-center' },
-                { pos: 'items-center', self: 'self-end' }
-              ].map((item, i) => (
-                <CardItem key={i} figure={<img src="https://picsum.photos/id/30/600/600" alt="" />}>
-                  <div className={`bg-black/50 text-white p-5 flex flex-col justify-center ${item.pos} ${item.self}`}>
-                    <h4 className="text-white">Layer</h4>
-                    <p>画像の上に重なるレイヤー構造です</p>
-                  </div>
-                </CardItem>
-              ))}
-            </Cards>
-          </div>
-          <div className="mt-6">
-            <h3>4. className="cards colflex mt-3"</h3>
-            <Cards className="colflex mt-3">
-              {[1, 2, 3].map(i => (
-                <CardItem key={i} className="bg-gray-100 p-4 rounded">
-                  <h4>Flexible {i}</h4>
-                  <p>均等に広がります</p>
-                </CardItem>
-              ))}
-            </Cards>
-          </div>
-          <div className="mt-6">
-            <h3>5. className="cards colfix" style={"{{ '--itemW': '200px' }}"}</h3>
-            <Cards className="colfix mt-3 justify-center" style={{ '--itemW': '200px' } as React.CSSProperties}>
-              {[1, 2, 3, 4].map(i => (
-                <CardItem key={i} className="bg-gray-100 p-4 rounded">
-                  <h4>Fixed {i}</h4>
-                  <p>--itemW:固定幅</p>
-                </CardItem>
-              ))}
-            </Cards>
-          </div>
-        </section>
-      </main>
+				{/* Cards Preview */}
+				<section className="mt-12" ref={cardsRef}>
+					<div className="py-2 flex justify-end flex-wrap gap-3 border-0 border-b-4 border-gray-400 border-solid">
+						<h2 className="mr-auto mb-0 leading-none pt-1">
+							Cards
+						</h2>
+						<button
+							onClick={() => openModal(cardsRef, cardsCss)}
+							className="text-sm bg-gray-100 hover:bg-gray-200 text-gray-600 py-1 px-2 md:px-3 rounded transition-colors border border-gray-300 mt-1"
+						>
+							snippet
+						</button>
+					</div>
+					<div className="mt-6">
+						<h3>1. className="cards col3 justify-center mt-3"</h3>
+						<Cards className="col3 justify-center mt-3">
+							{[1, 2, 3].map((i) => (
+								<CardItem
+									key={i}
+									className="sheet"
+									figure={
+										<img
+											src="https://picsum.photos/id/10/400/250"
+											alt=""
+										/>
+									}
+								>
+									<h4>Card {i}</h4>
+									<p>
+										col? でPCカラム数指定.
+										max-mdで全種2カラム,
+										max-xs(479px)で1カラムに
+									</p>
+								</CardItem>
+							))}
+						</Cards>
+					</div>
+					<div className="mt-6">
+						<h3>
+							2. className="cards col4 min2 justify-center mt-3"
+						</h3>
+						<Cards className="col4 min2 justify-center mt-3">
+							{[1, 2, 3, 4].map((i) => (
+								<CardItem
+									key={i}
+									className="board"
+									figure={
+										<img
+											src="https://picsum.photos/id/20/400/250"
+											alt=""
+										/>
+									}
+								>
+									<h4>Card {i}</h4>
+									<p>
+										min2指定によりスマホサイズ電源列を維持します
+									</p>
+								</CardItem>
+							))}
+						</Cards>
+					</div>
+					<div className="mt-6">
+						<h3>
+							3. className="cards col3 is_layer justify-center
+							mt-3"
+						</h3>
+						<Cards className="col3 is_layer justify-center mt-3">
+							{[
+								{ pos: "items-center", self: "" },
+								{ pos: "items-center", self: "self-center" },
+								{ pos: "items-center", self: "self-end" },
+							].map((item, i) => (
+								<CardItem
+									key={i}
+									figure={
+										<img
+											src="https://picsum.photos/id/30/600/600"
+											alt=""
+										/>
+									}
+								>
+									<div
+										className={`bg-black/50 text-white p-5 flex flex-col justify-center ${item.pos} ${item.self}`}
+									>
+										<h4 className="text-white">Layer</h4>
+										<p>画像の上に重なるレイヤー構造です</p>
+									</div>
+								</CardItem>
+							))}
+						</Cards>
+					</div>
+					<div className="mt-6">
+						<h3>4. className="cards colflex mt-3"</h3>
+						<Cards className="colflex mt-3">
+							{[1, 2, 3].map((i) => (
+								<CardItem
+									key={i}
+									className="bg-gray-100 p-4 rounded"
+								>
+									<h4>Flexible {i}</h4>
+									<p>均等に広がります</p>
+								</CardItem>
+							))}
+						</Cards>
+					</div>
+					<div className="mt-6">
+						<h3>
+							5. className="cards colfix" style=
+							{"{{ '--itemW': '200px' }}"}
+						</h3>
+						<Cards
+							className="colfix mt-3 justify-center"
+							style={
+								{ "--itemW": "200px" } as React.CSSProperties
+							}
+						>
+							{[1, 2, 3, 4].map((i) => (
+								<CardItem
+									key={i}
+									className="bg-gray-100 p-4 rounded"
+								>
+									<h4>Fixed {i}</h4>
+									<p>--itemW:固定幅</p>
+								</CardItem>
+							))}
+						</Cards>
+					</div>
+				</section>
+			</main>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 text-white py-10 mt-20">
-        <div className="wrapper into text-center">
-          <p className="opacity-50 text-sm">&copy; 2026 RatioKit Project. All rights reserved.</p>
-          <p className="opacity-30 text-[10px] mt-4">Build: 2025-12-31 19:15</p>
-        </div>
-      </footer>
-    </>
+			{/* Footer */}
+			<footer className="bg-slate-900 text-white py-10 mt-20">
+				<div className="wrapper into text-center">
+					<p className="opacity-50 text-sm">
+						&copy; 2026 RatioKit Project. All rights reserved.
+					</p>
+				</div>
+			</footer>
+		</>
   );
 };
 

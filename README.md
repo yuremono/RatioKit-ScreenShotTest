@@ -2,7 +2,9 @@
 
 RatioKit は、React、Vue、Svelte の各フレームワークに対応した、レスポンシブなデザインと比率（Ratio）を重視した UI コンポーネントライブラリおよび SCSS テンプレートのプロジェクトです。
 
+[**Live Demo (https://ratiokit.vercel.app/)**](https://ratiokit.vercel.app/)
 
+※本プロジェクトは個人開発であり、開発効率を優先するためプルリクエストを経由せず、メインブランチへの直接コミットを中心に構築しています。
 
 ## 主な機能と構成
 
